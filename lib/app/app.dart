@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pokedex_f/app/routes/router.dart';
 import 'package:pokedex_f/app/styles/theme.dart';
 import 'package:pokedex_f/app/widgets/remove_focus_node.dart';
 
@@ -17,6 +18,9 @@ class PokedexApp extends StatelessWidget {
           title: 'PokedexF',
           debugShowCheckedModeBanner: false,
           theme: getPokedexTheme(),
+          darkTheme: getPokedexTheme(isDarkMode: true),
+          themeMode: ThemeMode.system,
+          routerConfig: router,
           builder: (context, child) {
             return ScrollConfiguration(
               behavior: const CupertinoScrollBehavior(),

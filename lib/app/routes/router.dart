@@ -8,7 +8,7 @@ import 'package:pokedex_f/app/routes/route_name.dart';
 import 'package:pokedex_f/app/routes/route_path.dart';
 
 final router = GoRouter(
-  initialLocation: RouteName.splashScreen,
+  initialLocation: RoutePath.splashScreen,
   debugLogDiagnostics: !kReleaseMode,
   routes: [
     GoRoute(
