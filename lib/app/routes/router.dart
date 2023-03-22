@@ -1,4 +1,6 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pokedex_f/app/pages/pokeball/pokeball_screen.dart';
 import 'package:pokedex_f/app/pages/pokedex_detail/pokedex_detail_screen.dart';
@@ -19,13 +21,27 @@ final router = GoRouter(
     GoRoute(
       path: RoutePath.pokedexScreen,
       name: RouteName.pokedexScreen,
-      builder: (context, state) => const PokedexListScreen(),
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: const PokedexListScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeThroughTransition(
+              fillColor: Theme.of(context).colorScheme.background,
+              animation: animation,
+              secondaryAnimation: secondaryAnimation,
+              child: child,
+            );
+          },
+        );
+      },
       routes: [
         GoRoute(
           path: RoutePath.pokedexDetailScreen,
           name: RouteName.pokedexDetailScreen,
           builder: (context, state) => PokedexDetailScreen(
             pokemonName: "${state.params['pokemonName']}",
+            dominantColor: state.extra as Color,
           ),
         ),
       ],

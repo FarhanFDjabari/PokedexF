@@ -44,17 +44,20 @@ class PokemonListItem extends Equatable {
   PokemonListItemEntity toEntity() {
     int number = 0;
     if (url?.endsWith('/') == true) {
-      String? subs = url?.substring(0, (url?.length ?? 0) - 1);
+      String? subs = url?.substring(26, (url?.length ?? 0) - 1);
       String? stringNum = subs?.replaceAll(RegExp(r'[^0-9]'), '');
       number = int.tryParse(stringNum ?? "") ?? 0;
     } else {
-      String? stringNum = url?.replaceAll(RegExp(r'[^0-9]'), '');
+      String? subs = url?.substring(26, url?.length);
+      String? stringNum = subs?.replaceAll(RegExp(r'[^0-9]'), '');
       number = int.tryParse(stringNum ?? "") ?? 0;
     }
+    String imageUrl =
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$number.png";
     return PokemonListItemEntity(
       number,
       "$name",
-      "$url",
+      imageUrl,
       number,
     );
   }

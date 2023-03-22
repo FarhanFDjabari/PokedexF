@@ -14,17 +14,17 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<SplashBloc>(
       create: (_) => getIt<SplashBloc>()..add(SplashStart()),
-      child: BlocConsumer<SplashBloc, SplashState>(
-        listener: (blocContext, state) {
-          if (state is SplashLoading) {
-            blocContext.read<SplashBloc>().add(SplashEnd());
-          }
-          if (state is SplashFinished) {
-            context.goNamed(RouteName.pokedexScreen);
-          }
-        },
-        builder: (context, state) {
-          return Container(
+      child: Builder(builder: (context) {
+        return BlocListener<SplashBloc, SplashState>(
+          listener: (_, state) {
+            if (state is SplashLoading) {
+              context.read<SplashBloc>().add(SplashEnd());
+            }
+            if (state is SplashFinished) {
+              context.goNamed(RouteName.pokedexScreen);
+            }
+          },
+          child: Container(
             padding: const EdgeInsets.all(16),
             color: Theme.of(context).colorScheme.background,
             child: Column(
@@ -44,9 +44,9 @@ class SplashScreen extends StatelessWidget {
                 ),
               ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      }),
     );
   }
 }

@@ -9,7 +9,7 @@ void main() async {
   Bloc.observer = PokedexBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
 
-  configureDependencies();
+  await configureDependencies();
 
   if (kReleaseMode) {
     debugPrint = (String? message, {int? wrapWidth}) {};
