@@ -18,7 +18,7 @@ class Pokemon extends Equatable {
   final int? baseExperience;
   final List<Form>? forms;
   final List<GameIndex>? gameIndices;
-  final int? height;
+  final double? height;
   final List<HeldItem>? heldItems;
   final int? id;
   final bool? isDefault;
@@ -31,7 +31,7 @@ class Pokemon extends Equatable {
   final Sprites? sprites;
   final List<Stat>? stats;
   final List<Type>? types;
-  final int? weight;
+  final double? weight;
 
   const Pokemon({
     this.abilities,
@@ -65,7 +65,9 @@ class Pokemon extends Equatable {
         gameIndices: (data['game_indices'] as List<dynamic>?)
             ?.map((e) => GameIndex.fromMap(e as Map<String, dynamic>))
             .toList(),
-        height: data['height'] as int?,
+        height: data['height'] is int
+            ? (data['height'] as int?)?.toDouble()
+            : data['height'] as double?,
         heldItems: (data['held_items'] as List<dynamic>?)
             ?.map((e) => HeldItem.fromMap(e as Map<String, dynamic>))
             .toList(),
@@ -90,7 +92,9 @@ class Pokemon extends Equatable {
         types: (data['types'] as List<dynamic>?)
             ?.map((e) => Type.fromMap(e as Map<String, dynamic>))
             .toList(),
-        weight: data['weight'] as int?,
+        weight: data['weight'] is int
+            ? (data['weight'] as int?)?.toDouble()
+            : data['weight'] as double?,
       );
 
   Map<String, dynamic> toMap() => {
@@ -128,7 +132,7 @@ class Pokemon extends Equatable {
     int? baseExperience,
     List<Form>? forms,
     List<GameIndex>? gameIndices,
-    int? height,
+    double? height,
     List<HeldItem>? heldItems,
     int? id,
     bool? isDefault,
@@ -141,7 +145,7 @@ class Pokemon extends Equatable {
     Sprites? sprites,
     List<Stat>? stats,
     List<Type>? types,
-    int? weight,
+    double? weight,
   }) {
     return Pokemon(
       abilities: abilities ?? this.abilities,

@@ -15,7 +15,7 @@ class PokemonEntity extends Equatable {
   final int? baseExperience;
   final List<Form>? forms;
   final List<GameIndex>? gameIndices;
-  final int? height;
+  final double? height;
   final List<HeldItem>? heldItems;
   final int? id;
   final bool? isDefault;
@@ -28,7 +28,7 @@ class PokemonEntity extends Equatable {
   final Sprites? sprites;
   final List<Stat>? stats;
   final List<Type>? types;
-  final int? weight;
+  final double? weight;
 
   const PokemonEntity(
     this.abilities,

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:floor/floor.dart';
 
-@entity
+@Entity(tableName: "pokedex")
 class PokemonListItemEntity extends Equatable {
   @primaryKey
   final int id;

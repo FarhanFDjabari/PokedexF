@@ -78,8 +78,12 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i16.GetPokemonByName(gh<_i9.PokedexRepository>()));
     gh.factory<_i17.PokeballBloc>(
         () => _i17.PokeballBloc(gh<_i9.PokedexRepository>()));
-    gh.factory<_i18.PokedexDetailBloc>(
-        () => _i18.PokedexDetailBloc(gh<_i9.PokedexRepository>()));
+    gh.factory<_i18.PokedexDetailBloc>(() => _i18.PokedexDetailBloc(
+          gh<_i12.CatchPokemon>(),
+          gh<_i16.GetPokemonByName>(),
+          gh<_i15.GetCapturedPokemonByName>(),
+          gh<_i11.ReleasePokemon>(),
+        ));
     gh.factory<_i19.PokedexListBloc>(
         () => _i19.PokedexListBloc(gh<_i13.GetAllPokemon>()));
     return this;

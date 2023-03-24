@@ -5,12 +5,12 @@ const lightGrey = Color(0xFFAAAAAA);
 const darkPrimary = Color(0xFFF4AC1C);
 const kGreyColor = Color.fromARGB(255, 212, 212, 212);
 
-const hpColor = Color(0xFFF5FF00);
-const atkColor = Color.fromARGB(255, 0, 0, 66);
-const defColor = Color.fromARGB(0, 0, 255, 44);
-const spAtkColor = Color.fromARGB(67, 0, 255, 57);
-const spDefColor = Color.fromARGB(255, 0, 80, 70);
-const spdColor = Color.fromARGB(0, 255, 6, 55);
+const hpColor = Color(0xFFF42A28);
+const atkColor = Colors.orange;
+const defColor = Colors.blue;
+const spAtkColor = Colors.brown;
+const spDefColor = Colors.purple;
+final spdColor = Colors.cyan.shade400;
 
 const typeNormal = Color(0xFFA8A77A);
 const typeFire = Color(0xFFEE8130);

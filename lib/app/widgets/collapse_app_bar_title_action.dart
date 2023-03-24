@@ -8,6 +8,7 @@ class CollapseAppBarTitleAction extends StatelessWidget
   final ScrollController controller;
   final bool isCollapse;
   final bool autoImplyLeading;
+  final bool isCenterTitle;
   final String title;
   final List<Widget> actions;
   final Color? dominantColor;
@@ -19,6 +20,7 @@ class CollapseAppBarTitleAction extends StatelessWidget
     required this.title,
     required this.actions,
     this.autoImplyLeading = true,
+    this.isCenterTitle = false,
     this.dominantColor,
     super.key,
   });
@@ -61,16 +63,20 @@ class CollapseAppBarTitleAction extends StatelessWidget
                       color: foregroundColor,
                     ),
                   ),
-                SizedBox(
-                  child: Text(
-                    title,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: foregroundColor,
-                        ),
+                Expanded(
+                  child: Align(
+                    alignment:
+                        isCenterTitle ? Alignment.center : Alignment.centerLeft,
+                    child: Text(
+                      title,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: foregroundColor,
+                          ),
+                    ),
                   ),
                 ),
-                const Spacer(),
                 ...actions,
+                const SizedBox(width: 16),
               ],
             ),
           ),

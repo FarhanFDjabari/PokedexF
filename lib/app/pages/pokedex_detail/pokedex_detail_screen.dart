@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:pokedex_f/app/pages/pokedex_detail/bloc/pokedex_detail_bloc.dart';
+import 'package:pokedex_f/app/pages/pokedex_detail/widgets/pokemon_size_view.dart';
+import 'package:pokedex_f/app/pages/pokedex_detail/widgets/pokemon_stats_view.dart';
+import 'package:pokedex_f/app/pages/pokedex_detail/widgets/pokemon_type_view.dart';
 import 'package:pokedex_f/app/widgets/collapse_app_bar_title_action.dart';
 import 'package:pokedex_f/app/widgets/collapse_mixin.dart';
 import 'package:pokedex_f/app/widgets/ui_helper.dart';
 import 'package:pokedex_f/injection.dart';
+import 'package:sprintf/sprintf.dart';
 
 class PokedexDetailScreen extends StatefulWidget {
   final String pokemonName;
@@ -23,6 +28,7 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
     with CollapseMixin {
   late final ScrollController _scrollController;
   Color get _dominantColor => widget.dominantColor;
+  String get _pokemonName => widget.pokemonName;
 
   @override
   void initState() {
@@ -40,7 +46,8 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<PokedexDetailBloc>(),
+      create: (context) => getIt<PokedexDetailBloc>()
+        ..add(PokedexDetailEvent.getPokemon(_pokemonName)),
       child: BlocListener<PokedexDetailBloc, PokedexDetailState>(
         listener: (context, state) {
           // TODO: implement listener
@@ -58,43 +65,180 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                 BlocBuilder<PokedexDetailBloc, PokedexDetailState>(
                   builder: (context, state) {
                     return Text(
-                      '#001',
-                      style: Theme.of(context).textTheme.titleMedium,
+                      state.isRefreshed
+                          ? sprintf("#%03d", [state.pokemon?.id])
+                          : '',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: isCollapse
+                                ? Theme.of(context).colorScheme.onBackground
+                                : Colors.white,
+                          ),
                     );
                   },
                 ),
               ],
             ),
             extendBodyBehindAppBar: true,
-            body: CustomScrollView(
-              controller: _scrollController,
-              physics: const ClampingScrollPhysics(),
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Container(
-                    height: 250,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(
-                        bottom: Radius.circular(20),
+            body: BlocBuilder<PokedexDetailBloc, PokedexDetailState>(
+                builder: (context, state) {
+              return CustomScrollView(
+                controller: _scrollController,
+                physics: const ClampingScrollPhysics(),
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 250),
+                      height: 250,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.vertical(
+                          bottom: Radius.circular(20),
+                        ),
+                        gradient: LinearGradient(
+                          colors: [
+                            _dominantColor,
+                            !state.isLoading
+                                ? Theme.of(context)
+                                    .colorScheme
+                                    .onBackground
+                                    .withOpacity(0.75)
+                                : _dominantColor,
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          stops: const [0.5, 1.0],
+                        ),
                       ),
-                      gradient: LinearGradient(
-                        colors: [
-                          _dominantColor,
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                    ),
-                    child: Center(
-                      child: Image.network(
-                        "src",
-                        scale: 0.5,
+                      child: Center(
+                        child: !state.isLoading
+                            ? Image.network(
+                                "${state.pokemon?.sprites?.frontDefault}",
+                                scale: 0.5,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: Image.asset(
+                                      "assets/images/pikachu_placeholder_icon.png",
+                                    ),
+                                  );
+                                },
+                              )
+                            : UIHelper.pokeballLoading(
+                                height: 25,
+                                width: 25,
+                              ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
+                  SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: state.isLoading
+                        ? Center(
+                            child: SizedBox(
+                              width: 25,
+                              height: 25,
+                              child: UIHelper.pokeballLoading(),
+                            ),
+                          )
+                        : state.message != null
+                            ? Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 32,
+                                  ),
+                                  child: Text(
+                                    "${state.message}",
+                                    softWrap: true,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                        ),
+                                  ),
+                                ),
+                              )
+                            : Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "${toBeginningOfSentenceCase(state.pokemon?.name)}",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
+                                    ),
+                                    const SizedBox(height: 15),
+                                    PokemonTypeView(
+                                      types: state.pokemon?.types,
+                                    ),
+                                    const SizedBox(height: 25),
+                                    PokemonSizeView(
+                                      weight: state.pokemon?.weight,
+                                      height: state.pokemon?.height,
+                                    ),
+                                    const SizedBox(height: 25),
+                                    Text(
+                                      'Base Stats',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium
+                                          ?.copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground,
+                                          ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    PokemonStatsView(
+                                      stats: state.pokemon?.stats,
+                                    ),
+                                    const SizedBox(height: 15),
+                                    ElevatedButton.icon(
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
+                                        backgroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                      ),
+                                      onPressed: () {},
+                                      icon: Image.asset(
+                                        state.isAlreadyCaught
+                                            ? 'assets/images/open_pokeball_icon.png'
+                                            : 'assets/images/pokeball_overlay_bg_frame.png',
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background,
+                                        width: 25,
+                                        height: 25,
+                                      ),
+                                      label: Text(
+                                        state.isAlreadyCaught
+                                            ? 'Release Pokemon'
+                                            : 'Capture Pokemon',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge
+                                            ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .background,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                  ),
+                ],
+              );
+            }),
           );
         }),
       ),

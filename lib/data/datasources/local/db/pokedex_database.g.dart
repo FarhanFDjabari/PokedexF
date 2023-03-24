@@ -85,7 +85,7 @@ class _$PokedexDatabase extends PokedexDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `PokemonListItemEntity` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `url` TEXT NOT NULL, `number` INTEGER NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `pokedex` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `url` TEXT NOT NULL, `number` INTEGER NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -107,7 +107,7 @@ class _$PokemonListItemDao extends PokemonListItemDao {
   )   : _queryAdapter = QueryAdapter(database),
         _pokemonListItemEntityInsertionAdapter = InsertionAdapter(
             database,
-            'PokemonListItemEntity',
+            'pokedex',
             (PokemonListItemEntity item) => <String, Object?>{
                   'id': item.id,
                   'name': item.name,
@@ -116,7 +116,7 @@ class _$PokemonListItemDao extends PokemonListItemDao {
                 }),
         _pokemonListItemEntityDeletionAdapter = DeletionAdapter(
             database,
-            'PokemonListItemEntity',
+            'pokedex',
             ['id'],
             (PokemonListItemEntity item) => <String, Object?>{
                   'id': item.id,

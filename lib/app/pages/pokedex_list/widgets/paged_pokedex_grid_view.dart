@@ -1,8 +1,10 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:palette_generator/palette_generator.dart';
+import 'package:pokedex_f/app/pages/pokedex_detail/pokedex_detail_screen.dart';
 import 'package:pokedex_f/app/pages/pokedex_list/bloc/pokedex_list_bloc.dart';
 import 'package:pokedex_f/app/pages/pokedex_list/widgets/pokedex_item.dart';
 import 'package:pokedex_f/app/routes/route_name.dart';
@@ -92,15 +94,32 @@ class _PagePokedexGridViewState extends State<PagePokedexGridView> {
             ),
             itemBuilder: (context, item, index) => FutureBuilder<Color>(
               future: _getDominantColor(item.url),
-              builder: (context, snapshot) => PokedexItem(
-                dominantColor: snapshot.data,
-                pokedexData: item,
-                isConnectionStateWaiting:
-                    snapshot.connectionState == ConnectionState.waiting,
-                onTap: () {
-                  context.go(
-                    "${RoutePath.pokedexScreen}/${item.id}",
-                    extra:
+              builder: (context, snapshot) => OpenContainer(
+                closedColor:
+                    snapshot.data ?? Theme.of(context).colorScheme.primary,
+                closedShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                closedElevation: 0,
+                closedBuilder: (context, action) {
+                  return PokedexItem(
+                    dominantColor: snapshot.data,
+                    pokedexData: item,
+                    isConnectionStateWaiting:
+                        snapshot.connectionState == ConnectionState.waiting,
+                    onTap: () {
+                      // context.go(
+                      //   "${RoutePath.pokedexScreen}/${item.name}",
+                      //   extra:
+                      //       snapshot.data ?? Theme.of(context).colorScheme.primary,
+                      // );
+                    },
+                  );
+                },
+                openBuilder: (context, action) {
+                  return PokedexDetailScreen(
+                    pokemonName: item.name,
+                    dominantColor:
                         snapshot.data ?? Theme.of(context).colorScheme.primary,
                   );
                 },

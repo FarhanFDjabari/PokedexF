@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-import 'type.dart';
+import 'type_x.dart';
 
 class Type extends Equatable {
   final int? slot;
-  final Type? type;
+  final TypeX? type;
 
   const Type({this.slot, this.type});
 
@@ -14,12 +14,12 @@ class Type extends Equatable {
         slot: data['slot'] as int?,
         type: data['type'] == null
             ? null
-            : Type.fromMap(data['type'] as Map<String, dynamic>),
+            : TypeX.fromJson(data['type'] as Map<String, dynamic>),
       );
 
   Map<String, dynamic> toMap() => {
         'slot': slot,
-        'type': type?.toMap(),
+        'type': type?.toJson(),
       };
 
   /// `dart:convert`
@@ -36,7 +36,7 @@ class Type extends Equatable {
 
   Type copyWith({
     int? slot,
-    Type? type,
+    TypeX? type,
   }) {
     return Type(
       slot: slot ?? this.slot,

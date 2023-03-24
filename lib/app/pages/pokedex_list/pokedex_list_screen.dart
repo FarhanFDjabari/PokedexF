@@ -1,10 +1,14 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pokedex_f/app/pages/pokeball/pokeball_screen.dart';
 import 'package:pokedex_f/app/pages/pokedex_list/bloc/pokedex_list_bloc.dart';
 import 'package:pokedex_f/app/pages/pokedex_list/widgets/paged_pokedex_grid_view.dart';
-import 'package:pokedex_f/app/styles/colors.dart';
+import 'package:pokedex_f/app/routes/route_name.dart';
 import 'package:pokedex_f/app/widgets/collapse_app_bar.dart';
 import 'package:pokedex_f/app/widgets/collapse_mixin.dart';
+import 'package:pokedex_f/app/widgets/pokedex_scroll_view_header.dart';
 import 'package:pokedex_f/app/widgets/ui_helper.dart';
 import 'package:pokedex_f/injection.dart';
 
@@ -48,76 +52,59 @@ class _PokedexListScreenState extends State<PokedexListScreen>
           body: CustomScrollView(
             controller: _scrollController,
             physics: const ClampingScrollPhysics(),
-            slivers: [
-              SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 280,
-                  width: UIHelper.mediaWidth(context, 1),
-                  child: Stack(
-                    alignment: Alignment.topCenter,
-                    children: [
-                      Positioned.fill(
-                        bottom: 0,
-                        child: ColoredBox(
-                          color: Theme.of(context).colorScheme.primary,
-                          child: ColorFiltered(
-                            colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.2),
-                              BlendMode.darken,
-                            ),
-                            child: Image.asset(
-                              "assets/images/pokemon_field_bg.jpg",
-                              alignment: Alignment.center,
-                              height: 260,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        child: SizedBox(
-                          height: 30,
-                          width: UIHelper.mediaWidth(context, 1),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.vertical(
-                                top: Radius.circular(10),
-                              ),
-                              color: Theme.of(context).colorScheme.background,
-                            ),
-                            child: Center(
-                              child: SizedBox(
-                                height: 5,
-                                width: UIHelper.mediaWidth(context, 1) * 0.25,
-                                child: DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: kGreyColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+            slivers: const [
+              PokedexScrollViewHeader(
+                bgImageUri: "assets/images/pokemon_field_bg.jpg",
               ),
-              const SliverPadding(
+              SliverPadding(
                 padding: EdgeInsets.all(16),
                 sliver: PagePokedexGridView(),
               ),
             ],
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {},
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            foregroundColor: Theme.of(context).colorScheme.onPrimary,
-            child: Image.asset(
-              "assets/images/open_pokeball_icon_png",
-            ),
+          // floatingActionButton: FloatingActionButton(
+          //   onPressed: () {
+          //     context.pushNamed(RouteName.pokeballScreen);
+          //   },
+          //   backgroundColor: Theme.of(context).colorScheme.primary,
+          //   foregroundColor: Theme.of(context).colorScheme.onPrimary,
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(8.0),
+          //     child: Image.asset(
+          //       "assets/images/open_pokeball_icon.png",
+          //       color: Theme.of(context).colorScheme.background,
+          //     ),
+          //   ),
+          // ),
+          floatingActionButton: OpenContainer(
+            closedElevation: 6,
+            openColor: Theme.of(context).colorScheme.background,
+            closedColor: Theme.of(context).colorScheme.primary,
+            closedShape: const CircleBorder(),
+            closedBuilder: (context, action) {
+              return InkWell(
+                customBorder: const CircleBorder(),
+                onTap: () {
+                  action();
+                },
+                child: SizedBox(
+                  height: 56,
+                  width: 56,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Image.asset(
+                        "assets/images/open_pokeball_icon.png",
+                        color: Theme.of(context).colorScheme.background,
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+            openBuilder: (context, action) {
+              return const PokeballScreen();
+            },
           ),
         );
       }),

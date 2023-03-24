@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-import 'stat.dart';
+import 'stat_x.dart';
 
 class Stat extends Equatable {
   final int? baseStat;
   final int? effort;
-  final Stat? stat;
+  final StatX? stat;
 
   const Stat({this.baseStat, this.effort, this.stat});
 
@@ -16,13 +16,13 @@ class Stat extends Equatable {
         effort: data['effort'] as int?,
         stat: data['stat'] == null
             ? null
-            : Stat.fromMap(data['stat'] as Map<String, dynamic>),
+            : StatX.fromJson(data['stat'] as Map<String, dynamic>),
       );
 
   Map<String, dynamic> toMap() => {
         'base_stat': baseStat,
         'effort': effort,
-        'stat': stat?.toMap(),
+        'stat': stat?.toJson(),
       };
 
   /// `dart:convert`
@@ -40,7 +40,7 @@ class Stat extends Equatable {
   Stat copyWith({
     int? baseStat,
     int? effort,
-    Stat? stat,
+    StatX? stat,
   }) {
     return Stat(
       baseStat: baseStat ?? this.baseStat,
