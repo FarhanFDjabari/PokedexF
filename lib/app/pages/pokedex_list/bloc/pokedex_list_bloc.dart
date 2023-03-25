@@ -14,7 +14,10 @@ class PokedexListBloc extends Bloc<PokedexListEvent, PokedexListState> {
 
   PokedexListBloc(this._getAllPokemon) : super(PokedexListState.initial()) {
     on<_PokedexListEventGetPokemons>((event, emit) async {
-      emit(state.copyWith(isLoading: true));
+      emit(state.copyWith(
+        isLoading: true,
+        isRefreshed: false,
+      ));
       final response = await _getAllPokemon.invoke(20, event.page * 20);
       response.fold(
         (l) => emit(
@@ -23,6 +26,7 @@ class PokedexListBloc extends Bloc<PokedexListEvent, PokedexListState> {
             isRefreshed: false,
             isFirstPage: false,
             message: l,
+            pokemons: [],
             currentPage: event.page,
           ),
         ),

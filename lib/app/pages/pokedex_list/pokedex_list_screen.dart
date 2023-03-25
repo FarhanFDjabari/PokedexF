@@ -1,11 +1,9 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:pokedex_f/app/pages/pokeball/pokeball_screen.dart';
 import 'package:pokedex_f/app/pages/pokedex_list/bloc/pokedex_list_bloc.dart';
 import 'package:pokedex_f/app/pages/pokedex_list/widgets/paged_pokedex_grid_view.dart';
-import 'package:pokedex_f/app/routes/route_name.dart';
 import 'package:pokedex_f/app/widgets/collapse_app_bar.dart';
 import 'package:pokedex_f/app/widgets/collapse_mixin.dart';
 import 'package:pokedex_f/app/widgets/pokedex_scroll_view_header.dart';
@@ -62,20 +60,6 @@ class _PokedexListScreenState extends State<PokedexListScreen>
               ),
             ],
           ),
-          // floatingActionButton: FloatingActionButton(
-          //   onPressed: () {
-          //     context.pushNamed(RouteName.pokeballScreen);
-          //   },
-          //   backgroundColor: Theme.of(context).colorScheme.primary,
-          //   foregroundColor: Theme.of(context).colorScheme.onPrimary,
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(8.0),
-          //     child: Image.asset(
-          //       "assets/images/open_pokeball_icon.png",
-          //       color: Theme.of(context).colorScheme.background,
-          //     ),
-          //   ),
-          // ),
           floatingActionButton: OpenContainer(
             closedElevation: 6,
             openColor: Theme.of(context).colorScheme.background,

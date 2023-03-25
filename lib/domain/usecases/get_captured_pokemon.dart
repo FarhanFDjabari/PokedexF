@@ -9,7 +9,7 @@ class GetCapturedPokemon {
 
   GetCapturedPokemon(this._repository);
 
-  Future<Either<String, List<PokemonListItemEntity>>> invoke() {
+  Stream<List<PokemonListItemEntity>> invoke() {
     return _repository.getCapturedPokemon();
   }
 }

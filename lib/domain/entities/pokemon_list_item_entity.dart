@@ -6,14 +6,16 @@ class PokemonListItemEntity extends Equatable {
   @primaryKey
   final int id;
   final String name;
-  final String url;
+  final String artworkUrl;
+  final String spriteUrl;
   final int number;
 
-  const PokemonListItemEntity(this.id, this.name, this.url, this.number);
+  const PokemonListItemEntity(
+      this.id, this.name, this.artworkUrl, this.spriteUrl, this.number);
 
   @override
   bool get stringify => true;
 
   @override
-  List<Object?> get props => [id, name, url, number];
+  List<Object?> get props => [id, name, artworkUrl, spriteUrl, number];
 }

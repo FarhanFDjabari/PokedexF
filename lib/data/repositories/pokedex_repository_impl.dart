@@ -42,14 +42,9 @@ class PokedexRepositoryImpl extends PokedexRepository {
   }
 
   @override
-  Future<Either<String, List<PokemonListItemEntity>>>
-      getCapturedPokemon() async {
-    try {
-      final result = await localDatasource.getCaughtPokemon();
-      return Right(result);
-    } catch (e) {
-      return Left(e.toString());
-    }
+  Stream<List<PokemonListItemEntity>> getCapturedPokemon() {
+    final result = localDatasource.getCaughtPokemon();
+    return result;
   }
 
   @override

@@ -1,8 +1,8 @@
 part of 'pokeball_bloc.dart';
 
-abstract class PokeballEvent extends Equatable {
-  const PokeballEvent();
-
-  @override
-  List<Object> get props => [];
+@freezed
+class PokeballEvent with _$PokeballEvent {
+  const factory PokeballEvent.initial() = _PokeballEventInitial;
+  const factory PokeballEvent.getCaughtPokemon(
+      List<PokemonListItemEntity> pokemons) = _PokeballEventGetCaughtPokemon;
 }

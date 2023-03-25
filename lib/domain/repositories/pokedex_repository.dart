@@ -6,7 +6,7 @@ import 'package:pokedex_f/domain/entities/pokemon_list_item_entity.dart';
 abstract class PokedexRepository {
   Future<Either<String, PokemonList>> getAllPokemon(int limit, int offset);
   Future<Either<String, PokemonEntity>> getPokemonByName(String pokemonName);
-  Future<Either<String, List<PokemonListItemEntity>>> getCapturedPokemon();
+  Stream<List<PokemonListItemEntity>> getCapturedPokemon();
   Future<Either<String, PokemonListItemEntity?>> getCapturedPokemonByName(
       String name);
   Future<Either<String, String>> catchPokemon(PokemonListItemEntity pokemon);

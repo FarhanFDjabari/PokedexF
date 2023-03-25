@@ -8,7 +8,7 @@ class PokedexLocalDatasource {
 
   PokedexLocalDatasource(this._dao);
 
-  Future<List<PokemonListItemEntity>> getCaughtPokemon() {
+  Stream<List<PokemonListItemEntity>> getCaughtPokemon() {
     return _dao.findAllPokemon();
   }
 

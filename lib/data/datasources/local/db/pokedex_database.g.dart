@@ -85,7 +85,7 @@ class _$PokedexDatabase extends PokedexDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `pokedex` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `url` TEXT NOT NULL, `number` INTEGER NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `pokedex` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `artworkUrl` TEXT NOT NULL, `spriteUrl` TEXT NOT NULL, `number` INTEGER NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -104,16 +104,18 @@ class _$PokemonListItemDao extends PokemonListItemDao {
   _$PokemonListItemDao(
     this.database,
     this.changeListener,
-  )   : _queryAdapter = QueryAdapter(database),
+  )   : _queryAdapter = QueryAdapter(database, changeListener),
         _pokemonListItemEntityInsertionAdapter = InsertionAdapter(
             database,
             'pokedex',
             (PokemonListItemEntity item) => <String, Object?>{
                   'id': item.id,
                   'name': item.name,
-                  'url': item.url,
+                  'artworkUrl': item.artworkUrl,
+                  'spriteUrl': item.spriteUrl,
                   'number': item.number
-                }),
+                },
+            changeListener),
         _pokemonListItemEntityDeletionAdapter = DeletionAdapter(
             database,
             'pokedex',
@@ -121,9 +123,11 @@ class _$PokemonListItemDao extends PokemonListItemDao {
             (PokemonListItemEntity item) => <String, Object?>{
                   'id': item.id,
                   'name': item.name,
-                  'url': item.url,
+                  'artworkUrl': item.artworkUrl,
+                  'spriteUrl': item.spriteUrl,
                   'number': item.number
-                });
+                },
+            changeListener);
 
   final sqflite.DatabaseExecutor database;
 
@@ -138,13 +142,16 @@ class _$PokemonListItemDao extends PokemonListItemDao {
       _pokemonListItemEntityDeletionAdapter;
 
   @override
-  Future<List<PokemonListItemEntity>> findAllPokemon() async {
-    return _queryAdapter.queryList('SELECT * FROM pokedex',
+  Stream<List<PokemonListItemEntity>> findAllPokemon() {
+    return _queryAdapter.queryListStream('SELECT * FROM pokedex',
         mapper: (Map<String, Object?> row) => PokemonListItemEntity(
             row['id'] as int,
             row['name'] as String,
-            row['url'] as String,
-            row['number'] as int));
+            row['artworkUrl'] as String,
+            row['spriteUrl'] as String,
+            row['number'] as int),
+        queryableName: 'pokedex',
+        isView: false);
   }
 
   @override
@@ -153,7 +160,8 @@ class _$PokemonListItemDao extends PokemonListItemDao {
         mapper: (Map<String, Object?> row) => PokemonListItemEntity(
             row['id'] as int,
             row['name'] as String,
-            row['url'] as String,
+            row['artworkUrl'] as String,
+            row['spriteUrl'] as String,
             row['number'] as int),
         arguments: [name]);
   }

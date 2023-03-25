@@ -55,6 +55,7 @@ class PokemonEntity extends Equatable {
     return PokemonListItemEntity(
       id ?? 0,
       "$name",
+      "${sprites?.other?.officialArtwork?.frontDefault}",
       "${sprites?.frontDefault}",
       id ?? 0,
     );

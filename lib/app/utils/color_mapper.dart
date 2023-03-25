@@ -1,4 +1,5 @@
-import 'package:flutter/painting.dart';
+import 'package:flutter/material.dart';
+import 'package:palette_generator/palette_generator.dart';
 import 'package:pokedex_f/app/styles/colors.dart';
 import 'package:pokedex_f/data/models/stat.dart';
 import 'package:pokedex_f/data/models/type.dart' as t;
@@ -92,5 +93,21 @@ class ColorMapper {
         parsedColor = const Color(0xFFFFFFFF);
     }
     return parsedColor;
+  }
+
+  static Future<Color> getDominantColor(String imageUrl) async {
+    try {
+      final paletteData = await PaletteGenerator.fromImageProvider(
+        Image.network(
+          imageUrl,
+          errorBuilder: (context, error, stackTrace) =>
+              const ColoredBox(color: kGreyColor),
+        ).image,
+      );
+
+      return paletteData.lightVibrantColor?.color ?? kGreyColor;
+    } catch (e) {
+      return kGreyColor;
+    }
   }
 }

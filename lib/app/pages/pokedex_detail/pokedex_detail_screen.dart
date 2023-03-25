@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:pokedex_f/app/pages/pokedex_detail/bloc/pokedex_detail_bloc.dart';
+import 'package:pokedex_f/app/pages/pokedex_detail/widgets/capture_release_pokemon_dialog.dart';
 import 'package:pokedex_f/app/pages/pokedex_detail/widgets/pokemon_size_view.dart';
 import 'package:pokedex_f/app/pages/pokedex_detail/widgets/pokemon_stats_view.dart';
 import 'package:pokedex_f/app/pages/pokedex_detail/widgets/pokemon_type_view.dart';
@@ -48,12 +50,35 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
     return BlocProvider(
       create: (context) => getIt<PokedexDetailBloc>()
         ..add(PokedexDetailEvent.getPokemon(_pokemonName)),
-      child: BlocListener<PokedexDetailBloc, PokedexDetailState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
-        child: Builder(builder: (context) {
-          return Scaffold(
+      child: Builder(builder: (context) {
+        return BlocListener<PokedexDetailBloc, PokedexDetailState>(
+          listener: (context, state) async {
+            if (state.isCatching) {
+              await showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => CaptureReleasePokemonDialog(
+                  imageUrl: '${state.pokemon?.sprites?.frontDefault}',
+                  name: '${state.pokemon?.name}',
+                  isCapture: true,
+                ),
+              );
+            } else if (state.isReleasing) {
+              await showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => CaptureReleasePokemonDialog(
+                  imageUrl: '${state.pokemon?.sprites?.frontDefault}',
+                  name: '${state.pokemon?.name}',
+                  isCapture: false,
+                  durationInSeconds: 1,
+                ),
+              );
+            } else if (state.isCatchOrReleaseSuccess) {
+              context.pop();
+            }
+          },
+          child: Scaffold(
             backgroundColor: Theme.of(context).colorScheme.background,
             appBar: CollapseAppBarTitleAction(
               controller: _scrollController,
@@ -111,8 +136,24 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                       child: Center(
                         child: !state.isLoading
                             ? Image.network(
-                                "${state.pokemon?.sprites?.frontDefault}",
-                                scale: 0.5,
+                                "${state.pokemon?.sprites?.other?.officialArtwork?.frontDefault}",
+                                scale: 2.5,
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                  if (loadingProgress == null) {
+                                    return child;
+                                  }
+
+                                  return Center(
+                                    child: CircularProgressIndicator.adaptive(
+                                      strokeWidth: 3,
+                                      value: loadingProgress
+                                              .cumulativeBytesLoaded /
+                                          (loadingProgress.expectedTotalBytes ??
+                                              1),
+                                    ),
+                                  );
+                                },
                                 errorBuilder: (context, error, stackTrace) {
                                   return SizedBox(
                                     width: 20,
@@ -207,7 +248,22 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                                             .colorScheme
                                             .primary,
                                       ),
-                                      onPressed: () {},
+                                      onPressed: () async {
+                                        if (state.isAlreadyCaught) {
+                                          context.read<PokedexDetailBloc>().add(
+                                                PokedexDetailEvent
+                                                    .releasePokemon(
+                                                  state.pokemon,
+                                                ),
+                                              );
+                                        } else {
+                                          context.read<PokedexDetailBloc>().add(
+                                                PokedexDetailEvent.catchPokemon(
+                                                  state.pokemon,
+                                                ),
+                                              );
+                                        }
+                                      },
                                       icon: Image.asset(
                                         state.isAlreadyCaught
                                             ? 'assets/images/open_pokeball_icon.png'
@@ -239,9 +295,9 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                 ],
               );
             }),
-          );
-        }),
-      ),
+          ),
+        );
+      }),
     );
   }
 }

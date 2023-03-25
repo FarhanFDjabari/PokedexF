@@ -77,7 +77,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i16.GetPokemonByName>(
         () => _i16.GetPokemonByName(gh<_i9.PokedexRepository>()));
     gh.factory<_i17.PokeballBloc>(
-        () => _i17.PokeballBloc(gh<_i9.PokedexRepository>()));
+        () => _i17.PokeballBloc(gh<_i14.GetCapturedPokemon>()));
     gh.factory<_i18.PokedexDetailBloc>(() => _i18.PokedexDetailBloc(
           gh<_i12.CatchPokemon>(),
           gh<_i16.GetPokemonByName>(),

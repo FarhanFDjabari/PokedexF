@@ -20,24 +20,24 @@ mixin _$PokedexDetailEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String name) getPokemon,
-    required TResult Function(PokemonEntity pokemon) catchPokemon,
-    required TResult Function(PokemonEntity pokemon) releasePokemon,
+    required TResult Function(PokemonEntity? pokemon) catchPokemon,
+    required TResult Function(PokemonEntity? pokemon) releasePokemon,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String name)? getPokemon,
-    TResult? Function(PokemonEntity pokemon)? catchPokemon,
-    TResult? Function(PokemonEntity pokemon)? releasePokemon,
+    TResult? Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult? Function(PokemonEntity? pokemon)? releasePokemon,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String name)? getPokemon,
-    TResult Function(PokemonEntity pokemon)? catchPokemon,
-    TResult Function(PokemonEntity pokemon)? releasePokemon,
+    TResult Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult Function(PokemonEntity? pokemon)? releasePokemon,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -131,8 +131,8 @@ class _$_PokedexDetailEventInitial implements _PokedexDetailEventInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String name) getPokemon,
-    required TResult Function(PokemonEntity pokemon) catchPokemon,
-    required TResult Function(PokemonEntity pokemon) releasePokemon,
+    required TResult Function(PokemonEntity? pokemon) catchPokemon,
+    required TResult Function(PokemonEntity? pokemon) releasePokemon,
   }) {
     return initial();
   }
@@ -142,8 +142,8 @@ class _$_PokedexDetailEventInitial implements _PokedexDetailEventInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String name)? getPokemon,
-    TResult? Function(PokemonEntity pokemon)? catchPokemon,
-    TResult? Function(PokemonEntity pokemon)? releasePokemon,
+    TResult? Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult? Function(PokemonEntity? pokemon)? releasePokemon,
   }) {
     return initial?.call();
   }
@@ -153,8 +153,8 @@ class _$_PokedexDetailEventInitial implements _PokedexDetailEventInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String name)? getPokemon,
-    TResult Function(PokemonEntity pokemon)? catchPokemon,
-    TResult Function(PokemonEntity pokemon)? releasePokemon,
+    TResult Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult Function(PokemonEntity? pokemon)? releasePokemon,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -277,8 +277,8 @@ class _$_PokedexDetailEventGetPokemon implements _PokedexDetailEventGetPokemon {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String name) getPokemon,
-    required TResult Function(PokemonEntity pokemon) catchPokemon,
-    required TResult Function(PokemonEntity pokemon) releasePokemon,
+    required TResult Function(PokemonEntity? pokemon) catchPokemon,
+    required TResult Function(PokemonEntity? pokemon) releasePokemon,
   }) {
     return getPokemon(name);
   }
@@ -288,8 +288,8 @@ class _$_PokedexDetailEventGetPokemon implements _PokedexDetailEventGetPokemon {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String name)? getPokemon,
-    TResult? Function(PokemonEntity pokemon)? catchPokemon,
-    TResult? Function(PokemonEntity pokemon)? releasePokemon,
+    TResult? Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult? Function(PokemonEntity? pokemon)? releasePokemon,
   }) {
     return getPokemon?.call(name);
   }
@@ -299,8 +299,8 @@ class _$_PokedexDetailEventGetPokemon implements _PokedexDetailEventGetPokemon {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String name)? getPokemon,
-    TResult Function(PokemonEntity pokemon)? catchPokemon,
-    TResult Function(PokemonEntity pokemon)? releasePokemon,
+    TResult Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult Function(PokemonEntity? pokemon)? releasePokemon,
     required TResult orElse(),
   }) {
     if (getPokemon != null) {
@@ -366,7 +366,7 @@ abstract class _$$_PokedexDetailEventCatchPokemonCopyWith<$Res> {
           $Res Function(_$_PokedexDetailEventCatchPokemon) then) =
       __$$_PokedexDetailEventCatchPokemonCopyWithImpl<$Res>;
   @useResult
-  $Res call({PokemonEntity pokemon});
+  $Res call({PokemonEntity? pokemon});
 }
 
 /// @nodoc
@@ -382,13 +382,13 @@ class __$$_PokedexDetailEventCatchPokemonCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pokemon = null,
+    Object? pokemon = freezed,
   }) {
     return _then(_$_PokedexDetailEventCatchPokemon(
-      null == pokemon
+      freezed == pokemon
           ? _value.pokemon
           : pokemon // ignore: cast_nullable_to_non_nullable
-              as PokemonEntity,
+              as PokemonEntity?,
     ));
   }
 }
@@ -400,7 +400,7 @@ class _$_PokedexDetailEventCatchPokemon
   const _$_PokedexDetailEventCatchPokemon(this.pokemon);
 
   @override
-  final PokemonEntity pokemon;
+  final PokemonEntity? pokemon;
 
   @override
   String toString() {
@@ -430,8 +430,8 @@ class _$_PokedexDetailEventCatchPokemon
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String name) getPokemon,
-    required TResult Function(PokemonEntity pokemon) catchPokemon,
-    required TResult Function(PokemonEntity pokemon) releasePokemon,
+    required TResult Function(PokemonEntity? pokemon) catchPokemon,
+    required TResult Function(PokemonEntity? pokemon) releasePokemon,
   }) {
     return catchPokemon(pokemon);
   }
@@ -441,8 +441,8 @@ class _$_PokedexDetailEventCatchPokemon
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String name)? getPokemon,
-    TResult? Function(PokemonEntity pokemon)? catchPokemon,
-    TResult? Function(PokemonEntity pokemon)? releasePokemon,
+    TResult? Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult? Function(PokemonEntity? pokemon)? releasePokemon,
   }) {
     return catchPokemon?.call(pokemon);
   }
@@ -452,8 +452,8 @@ class _$_PokedexDetailEventCatchPokemon
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String name)? getPokemon,
-    TResult Function(PokemonEntity pokemon)? catchPokemon,
-    TResult Function(PokemonEntity pokemon)? releasePokemon,
+    TResult Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult Function(PokemonEntity? pokemon)? releasePokemon,
     required TResult orElse(),
   }) {
     if (catchPokemon != null) {
@@ -503,10 +503,10 @@ class _$_PokedexDetailEventCatchPokemon
 }
 
 abstract class _PokedexDetailEventCatchPokemon implements PokedexDetailEvent {
-  const factory _PokedexDetailEventCatchPokemon(final PokemonEntity pokemon) =
+  const factory _PokedexDetailEventCatchPokemon(final PokemonEntity? pokemon) =
       _$_PokedexDetailEventCatchPokemon;
 
-  PokemonEntity get pokemon;
+  PokemonEntity? get pokemon;
   @JsonKey(ignore: true)
   _$$_PokedexDetailEventCatchPokemonCopyWith<_$_PokedexDetailEventCatchPokemon>
       get copyWith => throw _privateConstructorUsedError;
@@ -519,7 +519,7 @@ abstract class _$$_PokedexDetailEventReleasePokemonCopyWith<$Res> {
           $Res Function(_$_PokedexDetailEventReleasePokemon) then) =
       __$$_PokedexDetailEventReleasePokemonCopyWithImpl<$Res>;
   @useResult
-  $Res call({PokemonEntity pokemon});
+  $Res call({PokemonEntity? pokemon});
 }
 
 /// @nodoc
@@ -535,13 +535,13 @@ class __$$_PokedexDetailEventReleasePokemonCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pokemon = null,
+    Object? pokemon = freezed,
   }) {
     return _then(_$_PokedexDetailEventReleasePokemon(
-      null == pokemon
+      freezed == pokemon
           ? _value.pokemon
           : pokemon // ignore: cast_nullable_to_non_nullable
-              as PokemonEntity,
+              as PokemonEntity?,
     ));
   }
 }
@@ -553,7 +553,7 @@ class _$_PokedexDetailEventReleasePokemon
   const _$_PokedexDetailEventReleasePokemon(this.pokemon);
 
   @override
-  final PokemonEntity pokemon;
+  final PokemonEntity? pokemon;
 
   @override
   String toString() {
@@ -584,8 +584,8 @@ class _$_PokedexDetailEventReleasePokemon
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String name) getPokemon,
-    required TResult Function(PokemonEntity pokemon) catchPokemon,
-    required TResult Function(PokemonEntity pokemon) releasePokemon,
+    required TResult Function(PokemonEntity? pokemon) catchPokemon,
+    required TResult Function(PokemonEntity? pokemon) releasePokemon,
   }) {
     return releasePokemon(pokemon);
   }
@@ -595,8 +595,8 @@ class _$_PokedexDetailEventReleasePokemon
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String name)? getPokemon,
-    TResult? Function(PokemonEntity pokemon)? catchPokemon,
-    TResult? Function(PokemonEntity pokemon)? releasePokemon,
+    TResult? Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult? Function(PokemonEntity? pokemon)? releasePokemon,
   }) {
     return releasePokemon?.call(pokemon);
   }
@@ -606,8 +606,8 @@ class _$_PokedexDetailEventReleasePokemon
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String name)? getPokemon,
-    TResult Function(PokemonEntity pokemon)? catchPokemon,
-    TResult Function(PokemonEntity pokemon)? releasePokemon,
+    TResult Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult Function(PokemonEntity? pokemon)? releasePokemon,
     required TResult orElse(),
   }) {
     if (releasePokemon != null) {
@@ -657,10 +657,10 @@ class _$_PokedexDetailEventReleasePokemon
 }
 
 abstract class _PokedexDetailEventReleasePokemon implements PokedexDetailEvent {
-  const factory _PokedexDetailEventReleasePokemon(final PokemonEntity pokemon) =
-      _$_PokedexDetailEventReleasePokemon;
+  const factory _PokedexDetailEventReleasePokemon(
+      final PokemonEntity? pokemon) = _$_PokedexDetailEventReleasePokemon;
 
-  PokemonEntity get pokemon;
+  PokemonEntity? get pokemon;
   @JsonKey(ignore: true)
   _$$_PokedexDetailEventReleasePokemonCopyWith<
           _$_PokedexDetailEventReleasePokemon>
@@ -673,6 +673,7 @@ mixin _$PokedexDetailState {
   bool get isRefreshed => throw _privateConstructorUsedError;
   bool get isAlreadyCaught => throw _privateConstructorUsedError;
   bool get isCatching => throw _privateConstructorUsedError;
+  bool get isCatchOrReleaseSuccess => throw _privateConstructorUsedError;
   bool get isReleasing => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
   PokemonEntity? get pokemon => throw _privateConstructorUsedError;
@@ -693,6 +694,7 @@ abstract class $PokedexDetailStateCopyWith<$Res> {
       bool isRefreshed,
       bool isAlreadyCaught,
       bool isCatching,
+      bool isCatchOrReleaseSuccess,
       bool isReleasing,
       String? message,
       PokemonEntity? pokemon});
@@ -715,6 +717,7 @@ class _$PokedexDetailStateCopyWithImpl<$Res, $Val extends PokedexDetailState>
     Object? isRefreshed = null,
     Object? isAlreadyCaught = null,
     Object? isCatching = null,
+    Object? isCatchOrReleaseSuccess = null,
     Object? isReleasing = null,
     Object? message = freezed,
     Object? pokemon = freezed,
@@ -735,6 +738,10 @@ class _$PokedexDetailStateCopyWithImpl<$Res, $Val extends PokedexDetailState>
       isCatching: null == isCatching
           ? _value.isCatching
           : isCatching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isCatchOrReleaseSuccess: null == isCatchOrReleaseSuccess
+          ? _value.isCatchOrReleaseSuccess
+          : isCatchOrReleaseSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
       isReleasing: null == isReleasing
           ? _value.isReleasing
@@ -765,6 +772,7 @@ abstract class _$$_PokedexDetailStateCopyWith<$Res>
       bool isRefreshed,
       bool isAlreadyCaught,
       bool isCatching,
+      bool isCatchOrReleaseSuccess,
       bool isReleasing,
       String? message,
       PokemonEntity? pokemon});
@@ -785,6 +793,7 @@ class __$$_PokedexDetailStateCopyWithImpl<$Res>
     Object? isRefreshed = null,
     Object? isAlreadyCaught = null,
     Object? isCatching = null,
+    Object? isCatchOrReleaseSuccess = null,
     Object? isReleasing = null,
     Object? message = freezed,
     Object? pokemon = freezed,
@@ -805,6 +814,10 @@ class __$$_PokedexDetailStateCopyWithImpl<$Res>
       isCatching: null == isCatching
           ? _value.isCatching
           : isCatching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isCatchOrReleaseSuccess: null == isCatchOrReleaseSuccess
+          ? _value.isCatchOrReleaseSuccess
+          : isCatchOrReleaseSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
       isReleasing: null == isReleasing
           ? _value.isReleasing
@@ -830,6 +843,7 @@ class _$_PokedexDetailState extends _PokedexDetailState {
       required this.isRefreshed,
       required this.isAlreadyCaught,
       required this.isCatching,
+      required this.isCatchOrReleaseSuccess,
       required this.isReleasing,
       required this.message,
       this.pokemon})
@@ -844,6 +858,8 @@ class _$_PokedexDetailState extends _PokedexDetailState {
   @override
   final bool isCatching;
   @override
+  final bool isCatchOrReleaseSuccess;
+  @override
   final bool isReleasing;
   @override
   final String? message;
@@ -852,7 +868,7 @@ class _$_PokedexDetailState extends _PokedexDetailState {
 
   @override
   String toString() {
-    return 'PokedexDetailState(isLoading: $isLoading, isRefreshed: $isRefreshed, isAlreadyCaught: $isAlreadyCaught, isCatching: $isCatching, isReleasing: $isReleasing, message: $message, pokemon: $pokemon)';
+    return 'PokedexDetailState(isLoading: $isLoading, isRefreshed: $isRefreshed, isAlreadyCaught: $isAlreadyCaught, isCatching: $isCatching, isCatchOrReleaseSuccess: $isCatchOrReleaseSuccess, isReleasing: $isReleasing, message: $message, pokemon: $pokemon)';
   }
 
   @override
@@ -868,6 +884,9 @@ class _$_PokedexDetailState extends _PokedexDetailState {
                 other.isAlreadyCaught == isAlreadyCaught) &&
             (identical(other.isCatching, isCatching) ||
                 other.isCatching == isCatching) &&
+            (identical(
+                    other.isCatchOrReleaseSuccess, isCatchOrReleaseSuccess) ||
+                other.isCatchOrReleaseSuccess == isCatchOrReleaseSuccess) &&
             (identical(other.isReleasing, isReleasing) ||
                 other.isReleasing == isReleasing) &&
             (identical(other.message, message) || other.message == message) &&
@@ -875,8 +894,16 @@ class _$_PokedexDetailState extends _PokedexDetailState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isRefreshed,
-      isAlreadyCaught, isCatching, isReleasing, message, pokemon);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isRefreshed,
+      isAlreadyCaught,
+      isCatching,
+      isCatchOrReleaseSuccess,
+      isReleasing,
+      message,
+      pokemon);
 
   @JsonKey(ignore: true)
   @override
@@ -892,6 +919,7 @@ abstract class _PokedexDetailState extends PokedexDetailState {
       required final bool isRefreshed,
       required final bool isAlreadyCaught,
       required final bool isCatching,
+      required final bool isCatchOrReleaseSuccess,
       required final bool isReleasing,
       required final String? message,
       final PokemonEntity? pokemon}) = _$_PokedexDetailState;
@@ -905,6 +933,8 @@ abstract class _PokedexDetailState extends PokedexDetailState {
   bool get isAlreadyCaught;
   @override
   bool get isCatching;
+  @override
+  bool get isCatchOrReleaseSuccess;
   @override
   bool get isReleasing;
   @override

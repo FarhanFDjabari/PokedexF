@@ -52,12 +52,15 @@ class PokemonListItem extends Equatable {
       String? stringNum = subs?.replaceAll(RegExp(r'[^0-9]'), '');
       number = int.tryParse(stringNum ?? "") ?? 0;
     }
-    String imageUrl =
+    String artworkUrl =
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$number.png";
+    String spriteUrl =
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$number.png";
     return PokemonListItemEntity(
       number,
       "$name",
-      imageUrl,
+      artworkUrl,
+      spriteUrl,
       number,
     );
   }
