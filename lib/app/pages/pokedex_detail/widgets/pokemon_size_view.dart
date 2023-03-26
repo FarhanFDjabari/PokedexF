@@ -5,10 +5,12 @@ class PokemonSizeView extends StatelessWidget {
     super.key,
     required this.weight,
     required this.height,
+    required this.theme,
   });
 
   final double? weight;
   final double? height;
+  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +24,17 @@ class PokemonSizeView extends StatelessWidget {
           children: [
             Text(
               "$weight KG",
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
+              style: theme.textTheme.headlineSmall?.copyWith(
+                color: theme.colorScheme.onBackground,
+              ),
               textScaleFactor: 0.95,
             ),
             const SizedBox(height: 5),
             Text(
               "Weight",
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onBackground,
+              ),
             ),
           ],
         ),
@@ -42,17 +44,17 @@ class PokemonSizeView extends StatelessWidget {
           children: [
             Text(
               "$height M",
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
+              style: theme.textTheme.headlineSmall?.copyWith(
+                color: theme.colorScheme.onBackground,
+              ),
               textScaleFactor: 0.95,
             ),
             const SizedBox(height: 5),
             Text(
               "Height",
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onBackground,
+              ),
             ),
           ],
         ),

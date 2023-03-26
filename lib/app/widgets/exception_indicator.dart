@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ExceptionIndicator extends StatelessWidget {
   const ExceptionIndicator({
     required this.title,
+    required this.theme,
     this.asset,
     this.message,
     this.onTryAgain,
@@ -12,6 +13,7 @@ class ExceptionIndicator extends StatelessWidget {
   final String? message;
   final Widget? asset;
   final VoidCallback? onTryAgain;
+  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) => Center(
@@ -26,7 +28,7 @@ class ExceptionIndicator extends StatelessWidget {
               Text(
                 title,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: theme.textTheme.titleLarge,
               ),
               if (message != null)
                 const SizedBox(

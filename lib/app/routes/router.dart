@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pokedex_f/app/pages/pokeball/pokeball_screen.dart';
 import 'package:pokedex_f/app/pages/pokedex_detail/pokedex_detail_screen.dart';
 import 'package:pokedex_f/app/pages/pokedex_list/pokedex_list_screen.dart';
+import 'package:pokedex_f/app/pages/pokedex_search/pokedex_search_screen.dart';
 import 'package:pokedex_f/app/pages/splash/splash_screen.dart';
 import 'package:pokedex_f/app/routes/route_name.dart';
 import 'package:pokedex_f/app/routes/route_path.dart';
@@ -26,10 +27,12 @@ final router = GoRouter(
           key: state.pageKey,
           child: const PokedexListScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeThroughTransition(
-              fillColor: Theme.of(context).colorScheme.background,
+            final theme = Theme.of(context);
+            return SharedAxisTransition(
               animation: animation,
               secondaryAnimation: secondaryAnimation,
+              fillColor: theme.colorScheme.background,
+              transitionType: SharedAxisTransitionType.scaled,
               child: child,
             );
           },
@@ -37,12 +40,48 @@ final router = GoRouter(
       },
       routes: [
         GoRoute(
-          path: RoutePath.pokedexDetailScreen,
-          name: RouteName.pokedexDetailScreen,
-          builder: (context, state) => PokedexDetailScreen(
-            pokemonName: "${state.params['pokemonName']}",
-            dominantColor: state.extra as Color,
-          ),
+            path: RoutePath.pokedexDetailScreen,
+            name: RouteName.pokedexDetailScreen,
+            pageBuilder: (context, state) {
+              final theme = Theme.of(context);
+              return CustomTransitionPage(
+                key: state.pageKey,
+                child: PokedexDetailScreen(
+                  pokemonName: "${state.params['pokemonName']}",
+                  dominantColor: state.extra as Color,
+                ),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  return SharedAxisTransition(
+                    animation: animation,
+                    secondaryAnimation: secondaryAnimation,
+                    fillColor: theme.colorScheme.background,
+                    transitionType: SharedAxisTransitionType.scaled,
+                    child: child,
+                  );
+                },
+              );
+            }),
+        GoRoute(
+          path: RoutePath.pokedexSearchScreen,
+          name: RouteName.pokedexSearchScreen,
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: const PokedexSearchScreen(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                final theme = Theme.of(context);
+                return SharedAxisTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  fillColor: theme.colorScheme.background,
+                  transitionType: SharedAxisTransitionType.scaled,
+                  child: child,
+                );
+              },
+            );
+          },
         ),
       ],
     ),

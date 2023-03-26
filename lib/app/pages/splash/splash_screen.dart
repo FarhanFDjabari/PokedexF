@@ -7,13 +7,33 @@ import 'package:pokedex_f/app/pages/splash/bloc/splash_bloc.dart';
 import 'package:pokedex_f/app/routes/route_name.dart';
 import 'package:pokedex_f/injection.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  late final SplashBloc _splashBloc;
+
+  @override
+  void initState() {
+    _splashBloc = getIt<SplashBloc>();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _splashBloc.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return BlocProvider<SplashBloc>(
-      create: (_) => getIt<SplashBloc>()..add(SplashStart()),
+      create: (_) => _splashBloc..add(SplashStart()),
       child: Builder(builder: (context) {
         return BlocListener<SplashBloc, SplashState>(
           listener: (_, state) {
@@ -26,7 +46,7 @@ class SplashScreen extends StatelessWidget {
           },
           child: Container(
             padding: const EdgeInsets.all(16),
-            color: Theme.of(context).colorScheme.background,
+            color: theme.colorScheme.background,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

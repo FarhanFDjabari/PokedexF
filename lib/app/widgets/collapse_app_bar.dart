@@ -5,11 +5,13 @@ class CollapseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Size size;
   final ScrollController controller;
   final bool isCollapse;
+  final ThemeData theme;
 
   const CollapseAppBar({
     required this.size,
     required this.controller,
     required this.isCollapse,
+    required this.theme,
     super.key,
   });
 
@@ -29,7 +31,7 @@ class CollapseAppBar extends StatelessWidget implements PreferredSizeWidget {
                 : 0.0;
 
             return ColoredBox(
-              color: Theme.of(context).colorScheme.primary.withOpacity(opacity),
+              color: theme.colorScheme.primary.withOpacity(opacity),
               child: child,
             );
           },
@@ -38,12 +40,14 @@ class CollapseAppBar extends StatelessWidget implements PreferredSizeWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: double.maxFinite,
-                  child: Image.asset(
-                    'assets/images/pokemon_logo.png',
-                    height: 50,
-                    filterQuality: FilterQuality.high,
+                Expanded(
+                  child: SizedBox(
+                    height: double.maxFinite,
+                    child: Image.asset(
+                      'assets/images/pokemon_logo.png',
+                      height: 50,
+                      filterQuality: FilterQuality.high,
+                    ),
                   ),
                 ),
               ],

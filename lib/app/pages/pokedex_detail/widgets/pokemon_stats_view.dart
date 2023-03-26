@@ -6,8 +6,9 @@ import 'package:pokedex_f/app/utils/string_mapper.dart';
 import 'package:pokedex_f/data/models/stat.dart';
 
 class PokemonStatsView extends StatelessWidget {
-  const PokemonStatsView({required this.stats, super.key});
+  const PokemonStatsView({required this.stats, required this.theme, super.key});
   final List<Stat>? stats;
+  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class PokemonStatsView extends StatelessWidget {
                       width: 40,
                       child: Text(
                         StringMapper.mapStatNameToAbr(e),
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: theme.textTheme.bodySmall,
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -36,15 +37,12 @@ class PokemonStatsView extends StatelessWidget {
                         progressColor: ColorMapper.mapStatToColor(e),
                         maxValue: 100,
                         currentValue: e.baseStat?.toDouble() ?? 0.0,
-                        displayText: ' / 100',
-                        displayTextStyle:
-                            Theme.of(context).textTheme.labelSmall?.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground,
-                                    ) ??
-                                const TextStyle(
-                                    color: Color(0xFFFFFFFF), fontSize: 12),
+                        displayText: '',
+                        displayTextStyle: theme.textTheme.labelMedium?.copyWith(
+                              color: theme.colorScheme.onBackground,
+                            ) ??
+                            const TextStyle(
+                                color: Color(0xFFFFFFFF), fontSize: 12),
                         borderRadius: BorderRadius.circular(50),
                       ),
                     ),

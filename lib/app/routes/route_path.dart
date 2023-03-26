@@ -3,6 +3,7 @@ class RoutePath {
 
   static const splashScreen = "/";
   static const pokedexScreen = "/pokedex";
-  static const pokedexDetailScreen = ":pokemonName";
+  static const pokedexDetailScreen = "pokemon/:pokemonName";
+  static const pokedexSearchScreen = "search";
   static const pokeballScreen = "/pokeball";
 }

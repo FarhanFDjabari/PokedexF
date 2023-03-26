@@ -7,9 +7,11 @@ import 'package:pokedex_f/app/pages/pokedex_detail/widgets/capture_release_pokem
 import 'package:pokedex_f/app/pages/pokedex_detail/widgets/pokemon_size_view.dart';
 import 'package:pokedex_f/app/pages/pokedex_detail/widgets/pokemon_stats_view.dart';
 import 'package:pokedex_f/app/pages/pokedex_detail/widgets/pokemon_type_view.dart';
+import 'package:pokedex_f/app/utils/color_brightness_ext.dart';
 import 'package:pokedex_f/app/widgets/collapse_app_bar_title_action.dart';
 import 'package:pokedex_f/app/widgets/collapse_mixin.dart';
 import 'package:pokedex_f/app/widgets/ui_helper.dart';
+import 'package:pokedex_f/domain/entities/pokemon_entity.dart';
 import 'package:pokedex_f/injection.dart';
 import 'package:sprintf/sprintf.dart';
 
@@ -29,27 +31,70 @@ class PokedexDetailScreen extends StatefulWidget {
 class _PokedexDetailScreenState extends State<PokedexDetailScreen>
     with CollapseMixin {
   late final ScrollController _scrollController;
+  late final PokedexDetailBloc _pokedexDetailBloc;
   Color get _dominantColor => widget.dominantColor;
   String get _pokemonName => widget.pokemonName;
 
   @override
   void initState() {
     super.initState();
+    _pokedexDetailBloc = getIt<PokedexDetailBloc>();
     _scrollController = ScrollController();
     listenCollapse(controller: _scrollController);
   }
 
   @override
   void dispose() {
+    _pokedexDetailBloc.close();
     _scrollController.dispose();
     super.dispose();
   }
 
+  void showSnackbar(BuildContext context, PokemonEntity? pokemon,
+      bool isAlreadyCaught, ThemeData theme) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+            side: BorderSide(
+              color: theme.colorScheme.primary,
+            )),
+        content: Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(
+                text: isAlreadyCaught ? 'You catched ' : 'Bye, ',
+                style: theme.textTheme.titleSmall?.copyWith(
+                  color: theme.colorScheme.onBackground,
+                ),
+              ),
+              TextSpan(
+                text: '${toBeginningOfSentenceCase(pokemon?.name)}',
+                style: theme.textTheme.titleSmall?.copyWith(
+                  color: _dominantColor.darken(0.4),
+                ),
+              ),
+              TextSpan(
+                text: '!',
+                style: theme.textTheme.titleSmall?.copyWith(
+                  color: theme.colorScheme.onBackground,
+                ),
+              ),
+            ],
+          ),
+        ),
+        backgroundColor: theme.colorScheme.background,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return BlocProvider(
-      create: (context) => getIt<PokedexDetailBloc>()
-        ..add(PokedexDetailEvent.getPokemon(_pokemonName)),
+      create: (context) =>
+          _pokedexDetailBloc..add(PokedexDetailEvent.getPokemon(_pokemonName)),
       child: Builder(builder: (context) {
         return BlocListener<PokedexDetailBloc, PokedexDetailState>(
           listener: (context, state) async {
@@ -76,16 +121,19 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
               );
             } else if (state.isCatchOrReleaseSuccess) {
               context.pop();
+              showSnackbar(
+                  context, state.pokemon, state.isAlreadyCaught, theme);
             }
           },
           child: Scaffold(
-            backgroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: theme.colorScheme.background,
             appBar: CollapseAppBarTitleAction(
               controller: _scrollController,
               isCollapse: isCollapse,
               dominantColor: _dominantColor,
               size: UIHelper.appBarSize(context),
               title: "Pokedex",
+              theme: theme,
               actions: [
                 BlocBuilder<PokedexDetailBloc, PokedexDetailState>(
                   builder: (context, state) {
@@ -93,11 +141,11 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                       state.isRefreshed
                           ? sprintf("#%03d", [state.pokemon?.id])
                           : '',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: isCollapse
-                                ? Theme.of(context).colorScheme.onBackground
-                                : Colors.white,
-                          ),
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: isCollapse
+                            ? theme.colorScheme.onBackground
+                            : Colors.white,
+                      ),
                     );
                   },
                 ),
@@ -122,9 +170,7 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                           colors: [
                             _dominantColor,
                             !state.isLoading
-                                ? Theme.of(context)
-                                    .colorScheme
-                                    .onBackground
+                                ? theme.colorScheme.onBackground
                                     .withOpacity(0.75)
                                 : _dominantColor,
                           ],
@@ -190,14 +236,9 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                                   child: Text(
                                     "${state.message}",
                                     softWrap: true,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onBackground,
-                                        ),
+                                    style: theme.textTheme.bodyMedium?.copyWith(
+                                      color: theme.colorScheme.onBackground,
+                                    ),
                                   ),
                                 ),
                               )
@@ -207,34 +248,31 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                                   children: [
                                     Text(
                                       "${toBeginningOfSentenceCase(state.pokemon?.name)}",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
+                                      style: theme.textTheme.titleLarge,
                                     ),
                                     const SizedBox(height: 15),
                                     PokemonTypeView(
                                       types: state.pokemon?.types,
+                                      theme: theme,
                                     ),
                                     const SizedBox(height: 25),
                                     PokemonSizeView(
                                       weight: state.pokemon?.weight,
                                       height: state.pokemon?.height,
+                                      theme: theme,
                                     ),
                                     const SizedBox(height: 25),
                                     Text(
                                       'Base Stats',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onBackground,
-                                          ),
+                                      style:
+                                          theme.textTheme.titleMedium?.copyWith(
+                                        color: theme.colorScheme.onBackground,
+                                      ),
                                     ),
                                     const SizedBox(height: 5),
                                     PokemonStatsView(
                                       stats: state.pokemon?.stats,
+                                      theme: theme,
                                     ),
                                     const SizedBox(height: 15),
                                     ElevatedButton.icon(
@@ -244,9 +282,8 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                                           borderRadius:
                                               BorderRadius.circular(50),
                                         ),
-                                        backgroundColor: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
+                                        backgroundColor:
+                                            theme.colorScheme.primary,
                                       ),
                                       onPressed: () async {
                                         if (state.isAlreadyCaught) {
@@ -268,9 +305,7 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                                         state.isAlreadyCaught
                                             ? 'assets/images/open_pokeball_icon.png'
                                             : 'assets/images/pokeball_overlay_bg_frame.png',
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .background,
+                                        color: theme.colorScheme.background,
                                         width: 25,
                                         height: 25,
                                       ),
@@ -278,14 +313,10 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                                         state.isAlreadyCaught
                                             ? 'Release Pokemon'
                                             : 'Capture Pokemon',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge
+                                        style: theme.textTheme.labelLarge
                                             ?.copyWith(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .background,
-                                            ),
+                                          color: theme.colorScheme.background,
+                                        ),
                                       ),
                                     ),
                                   ],

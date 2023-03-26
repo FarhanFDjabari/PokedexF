@@ -7,9 +7,11 @@ class PokemonTypeView extends StatelessWidget {
   const PokemonTypeView({
     super.key,
     required this.types,
+    required this.theme,
   });
 
   final List<Type>? types;
+  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +32,9 @@ class PokemonTypeView extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "${toBeginningOfSentenceCase(e.type?.name)}",
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: Theme.of(context).colorScheme.onBackground,
-                          ),
+                      style: theme.textTheme.labelLarge?.copyWith(
+                        color: theme.colorScheme.onBackground,
+                      ),
                     ),
                   ),
                 ),

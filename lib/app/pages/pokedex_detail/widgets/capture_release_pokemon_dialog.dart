@@ -49,11 +49,12 @@ class _CaptureReleasePokemonDialogState
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: theme.colorScheme.surface,
       child: SizedBox(
         width: UIHelper.mediaWidth(context, 1),
         height: UIHelper.mediaHeight(context, 0.45),
@@ -65,7 +66,8 @@ class _CaptureReleasePokemonDialogState
               alignment: Alignment.center,
               children: [
                 if (!_isCapture)
-                  Expanded(
+                  SizedBox(
+                    height: 150,
                     child: FadeTransition(
                       opacity: CurvedAnimation(
                         parent: _animationController,
@@ -93,7 +95,8 @@ class _CaptureReleasePokemonDialogState
                     ),
                   ),
                 if (_isCapture)
-                  Expanded(
+                  SizedBox(
+                    height: 150,
                     child: Image.network(
                       _imageUrl,
                       scale: 0.5,
@@ -123,9 +126,9 @@ class _CaptureReleasePokemonDialogState
             ),
             Text(
               '${_isCapture ? 'Capturing' : 'Releasing'} ${toBeginningOfSentenceCase(_name)}',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+              style: theme.textTheme.titleLarge?.copyWith(
+                color: theme.colorScheme.onSurface,
+              ),
             ),
           ],
         ),

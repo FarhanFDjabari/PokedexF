@@ -6,9 +6,11 @@ class PokedexScrollViewHeader extends StatelessWidget {
   const PokedexScrollViewHeader({
     super.key,
     required this.bgImageUri,
+    required this.theme,
   });
 
   final String bgImageUri;
+  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class PokedexScrollViewHeader extends StatelessWidget {
             Positioned.fill(
               bottom: 0,
               child: ColoredBox(
-                color: Theme.of(context).colorScheme.primary,
+                color: theme.colorScheme.primary,
                 child: ColorFiltered(
                   colorFilter: ColorFilter.mode(
                     Colors.black.withOpacity(0.2),
@@ -47,7 +49,7 @@ class PokedexScrollViewHeader extends StatelessWidget {
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(10),
                     ),
-                    color: Theme.of(context).colorScheme.background,
+                    color: theme.colorScheme.background,
                   ),
                   child: Center(
                     child: SizedBox(

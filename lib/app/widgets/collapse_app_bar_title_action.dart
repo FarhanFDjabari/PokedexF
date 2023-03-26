@@ -12,6 +12,7 @@ class CollapseAppBarTitleAction extends StatelessWidget
   final String title;
   final List<Widget> actions;
   final Color? dominantColor;
+  final ThemeData theme;
 
   const CollapseAppBarTitleAction({
     required this.size,
@@ -19,6 +20,7 @@ class CollapseAppBarTitleAction extends StatelessWidget
     required this.isCollapse,
     required this.title,
     required this.actions,
+    required this.theme,
     this.autoImplyLeading = true,
     this.isCenterTitle = false,
     this.dominantColor,
@@ -28,7 +30,7 @@ class CollapseAppBarTitleAction extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     final foregroundColor =
-        isCollapse ? Theme.of(context).colorScheme.onBackground : Colors.white;
+        isCollapse ? theme.colorScheme.onBackground : Colors.white;
     return AnnotatedRegion(
       value:
           isCollapse ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
@@ -43,7 +45,7 @@ class CollapseAppBarTitleAction extends StatelessWidget
                 : 0.0;
 
             return ColoredBox(
-              color: (dominantColor ?? Theme.of(context).colorScheme.primary)
+              color: (dominantColor ?? theme.colorScheme.primary)
                   .withOpacity(opacity),
               child: child,
             );
@@ -54,14 +56,11 @@ class CollapseAppBarTitleAction extends StatelessWidget
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 if (autoImplyLeading)
-                  IconButton(
+                  BackButton(
                     onPressed: () {
                       if (context.canPop()) context.pop();
                     },
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: foregroundColor,
-                    ),
+                    color: foregroundColor,
                   ),
                 Expanded(
                   child: Align(
@@ -69,9 +68,9 @@ class CollapseAppBarTitleAction extends StatelessWidget
                         isCenterTitle ? Alignment.center : Alignment.centerLeft,
                     child: Text(
                       title,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: foregroundColor,
-                          ),
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: foregroundColor,
+                      ),
                     ),
                   ),
                 ),

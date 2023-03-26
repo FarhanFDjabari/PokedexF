@@ -10,6 +10,7 @@ dependencies:
     sdk: flutter
 
   animations: ^2.0.7
+  bloc_concurrency: ^0.2.1
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   dio: ^5.0.0
@@ -25,6 +26,7 @@ dependencies:
   infinite_scroll_pagination: ^3.2.0
   injectable: ^2.1.0
   intl: ^0.18.0
+  leak_tracker: ^2.0.1
   lottie: ^2.2.0
   palette_generator: ^0.3.3+2
   path_provider: ^2.0.0
@@ -47,9 +49,12 @@ dev_dependencies:
   retrofit_generator: '>=5.0.0 <6.0.0'
 
 flutter_icons:
-  android: "launcher_icon"
+  android: true
   ios: true
   image_path: "assets/images/pokeball_loading_light.png"
+  adaptive_icon_foreground: "assets/images/pokeball_loading_light.png"
+  adaptive_icon_background: "#F0F2F6"
+  remove_alpha_ios: true
   min_sdk_android: 16 # android min sdk min:16, default 21
   web:
     generate: true

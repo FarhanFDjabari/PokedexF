@@ -12,6 +12,8 @@ import 'package:pokedex_f/app/pages/pokedex_detail/bloc/pokedex_detail_bloc.dart
     as _i18;
 import 'package:pokedex_f/app/pages/pokedex_list/bloc/pokedex_list_bloc.dart'
     as _i19;
+import 'package:pokedex_f/app/pages/pokedex_search/bloc/pokedex_search_bloc.dart'
+    as _i20;
 import 'package:pokedex_f/app/pages/splash/bloc/splash_bloc.dart' as _i7;
 import 'package:pokedex_f/data/datasources/local/dao/pokemon_list_item_dao.dart'
     as _i6;
@@ -24,7 +26,7 @@ import 'package:pokedex_f/data/datasources/remote/pokedex_remote_datasource.dart
     as _i5;
 import 'package:pokedex_f/data/repositories/pokedex_repository_impl.dart'
     as _i10;
-import 'package:pokedex_f/di/app_module.dart' as _i20;
+import 'package:pokedex_f/di/app_module.dart' as _i21;
 import 'package:pokedex_f/domain/repositories/pokedex_repository.dart' as _i9;
 import 'package:pokedex_f/domain/usecases/catch_pokemon.dart' as _i12;
 import 'package:pokedex_f/domain/usecases/get_all_pokemon.dart' as _i13;
@@ -86,8 +88,10 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i19.PokedexListBloc>(
         () => _i19.PokedexListBloc(gh<_i13.GetAllPokemon>()));
+    gh.factory<_i20.PokedexSearchBloc>(
+        () => _i20.PokedexSearchBloc(gh<_i13.GetAllPokemon>()));
     return this;
   }
 }
 
-class _$AppModule extends _i20.AppModule {}
+class _$AppModule extends _i21.AppModule {}

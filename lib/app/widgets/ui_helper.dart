@@ -82,7 +82,7 @@ class UIHelper {
   }
 
   static Widget emptyCaseWidget(BuildContext context,
-      {required String emptyText, double? height}) {
+      {required String emptyText, double? height, required ThemeData theme}) {
     return Container(
       padding: UIHelper.padSymmetric(vertical: 50, horizontal: 30),
       height: height,
@@ -93,7 +93,7 @@ class UIHelper {
             Text(
               emptyText,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: theme.textTheme.bodyMedium,
             ),
             UIHelper.verticalSpace(40),
           ],

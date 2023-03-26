@@ -12,14 +12,16 @@ import 'package:pokedex_f/domain/entities/pokemon_list_item_entity.dart';
 import 'package:pokedex_f/injection.dart';
 
 class PagePokedexGridView extends StatefulWidget {
-  const PagePokedexGridView({super.key});
+  const PagePokedexGridView({required this.theme, super.key});
+  final ThemeData theme;
 
   @override
   State<PagePokedexGridView> createState() => _PagePokedexGridViewState();
 }
 
 class _PagePokedexGridViewState extends State<PagePokedexGridView> {
-  late final _pokedexListBloc = getIt<PokedexListBloc>();
+  late final PokedexListBloc _pokedexListBloc;
+  ThemeData get _theme => widget.theme;
 
   final _pagingController = PagingController<int, PokemonListItemEntity>(
     firstPageKey: 0,
@@ -27,6 +29,7 @@ class _PagePokedexGridViewState extends State<PagePokedexGridView> {
 
   @override
   void initState() {
+    _pokedexListBloc = getIt<PokedexListBloc>();
     super.initState();
     _pagingController.addPageRequestListener((pageKey) {
       _getNextPage(pageKey);
@@ -78,8 +81,7 @@ class _PagePokedexGridViewState extends State<PagePokedexGridView> {
             itemBuilder: (context, item, index) => FutureBuilder<Color>(
               future: ColorMapper.getDominantColor(item.spriteUrl),
               builder: (context, snapshot) => OpenContainer(
-                closedColor:
-                    snapshot.data ?? Theme.of(context).colorScheme.primary,
+                closedColor: snapshot.data ?? _theme.colorScheme.primary,
                 closedShape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -90,13 +92,13 @@ class _PagePokedexGridViewState extends State<PagePokedexGridView> {
                     pokedexData: item,
                     isConnectionStateWaiting:
                         snapshot.connectionState == ConnectionState.waiting,
+                    theme: _theme,
                   );
                 },
                 openBuilder: (context, action) {
                   return PokedexDetailScreen(
                     pokemonName: item.name,
-                    dominantColor:
-                        snapshot.data ?? Theme.of(context).colorScheme.primary,
+                    dominantColor: snapshot.data ?? _theme.colorScheme.primary,
                   );
                 },
               ),
@@ -113,6 +115,7 @@ class _PagePokedexGridViewState extends State<PagePokedexGridView> {
               title: "Error",
               message: _pagingController.error,
               onTryAgain: () => _pagingController.refresh(),
+              theme: _theme,
             ),
             newPageErrorIndicatorBuilder: (context) => Container(
               width: UIHelper.mediaWidth(context, 1),
@@ -124,17 +127,17 @@ class _PagePokedexGridViewState extends State<PagePokedexGridView> {
                 children: [
                   Text(
                     "Connection error, try again later",
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.onBackground,
-                        ),
+                    style: _theme.textTheme.titleLarge?.copyWith(
+                      color: _theme.colorScheme.onBackground,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 5),
                   ElevatedButton.icon(
                     onPressed: () => _pagingController.refresh(),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      foregroundColor: Theme.of(context).colorScheme.background,
+                      backgroundColor: _theme.colorScheme.primary,
+                      foregroundColor: _theme.colorScheme.background,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
@@ -143,9 +146,9 @@ class _PagePokedexGridViewState extends State<PagePokedexGridView> {
                     icon: const Icon(Icons.refresh_outlined),
                     label: Text(
                       'Try Again',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: Theme.of(context).colorScheme.background,
-                          ),
+                      style: _theme.textTheme.labelLarge?.copyWith(
+                        color: _theme.colorScheme.background,
+                      ),
                     ),
                   ),
                 ],
@@ -155,6 +158,7 @@ class _PagePokedexGridViewState extends State<PagePokedexGridView> {
               title: "Empty",
               message: "Pokemon list empty, try again later",
               onTryAgain: () => _pagingController.refresh(),
+              theme: _theme,
             ),
           ),
         ),

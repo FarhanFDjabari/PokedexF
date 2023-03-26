@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:pokedex_f/app/widgets/ui_helper.dart';
 import 'package:pokedex_f/domain/entities/pokemon_list_item_entity.dart';
 
 class PokedexItem extends StatelessWidget {
@@ -9,11 +8,13 @@ class PokedexItem extends StatelessWidget {
     this.dominantColor,
     this.isConnectionStateWaiting = false,
     required this.pokedexData,
+    required this.theme,
   });
 
   final bool isConnectionStateWaiting;
   final Color? dominantColor;
   final PokemonListItemEntity pokedexData;
+  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +26,7 @@ class PokedexItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         color: !isConnectionStateWaiting
             ? dominantColor
-            : Theme.of(context).colorScheme.surface,
-        // image: DecorationImage(
-        //   image: const AssetImage(
-        //     'assets/images/pokeball_overlay_bg_frame.png',
-        //   ),
-        //   opacity: 0.5,
-        //   scale: 0.5,
-        //   fit: BoxFit.cover,
-        //   colorFilter: ColorFilter.mode(
-        //     dominantColor ?? Colors.transparent,
-        //     BlendMode.colorBurn,
-        //   ),
-        // ),
+            : theme.colorScheme.surface,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -93,9 +82,9 @@ class PokedexItem extends StatelessWidget {
               child: Text(
                 toBeginningOfSentenceCase(pokedexData.name) ?? "",
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
+                style: theme.textTheme.titleSmall?.copyWith(
+                  color: theme.colorScheme.onPrimary,
+                ),
               ),
             ),
         ],

@@ -21,10 +21,12 @@ class PokeballScreen extends StatefulWidget {
 
 class _PokeballScreenState extends State<PokeballScreen> with CollapseMixin {
   late final ScrollController _scrollController;
+  late final PokeballBloc _pokeballBloc;
 
   @override
   void initState() {
     super.initState();
+    _pokeballBloc = getIt<PokeballBloc>();
     _scrollController = ScrollController();
     listenCollapse(controller: _scrollController);
   }
@@ -32,19 +34,20 @@ class _PokeballScreenState extends State<PokeballScreen> with CollapseMixin {
   @override
   void dispose() {
     _scrollController.dispose();
+    _pokeballBloc.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return BlocProvider(
-      create: (context) =>
-          getIt<PokeballBloc>()..add(const PokeballEvent.initial()),
+      create: (context) => _pokeballBloc..add(const PokeballEvent.initial()),
       child: Builder(builder: (context) {
         return BlocListener<PokeballBloc, PokeballState>(
           listener: (context, state) {},
           child: Scaffold(
-            backgroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: theme.colorScheme.background,
             extendBodyBehindAppBar: true,
             appBar: CollapseAppBarTitleAction(
               size: UIHelper.appBarSize(context),
@@ -53,13 +56,15 @@ class _PokeballScreenState extends State<PokeballScreen> with CollapseMixin {
               isCenterTitle: false,
               actions: const [],
               isCollapse: isCollapse,
+              theme: theme,
             ),
             body: CustomScrollView(
               controller: _scrollController,
               physics: const ClampingScrollPhysics(),
               slivers: [
-                const PokedexScrollViewHeader(
+                PokedexScrollViewHeader(
                   bgImageUri: "assets/images/pokeball_overlay.png",
+                  theme: theme,
                 ),
                 BlocBuilder<PokeballBloc, PokeballState>(
                     builder: (context, state) {
@@ -69,13 +74,9 @@ class _PokeballScreenState extends State<PokeballScreen> with CollapseMixin {
                         padding: const EdgeInsets.all(16),
                         child: Text(
                           "${state.message}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge
-                              ?.copyWith(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground,
-                              ),
+                          style: theme.textTheme.titleLarge?.copyWith(
+                            color: theme.colorScheme.onBackground,
+                          ),
                         ),
                       ),
                     );
@@ -89,21 +90,14 @@ class _PokeballScreenState extends State<PokeballScreen> with CollapseMixin {
                                 children: [
                                   Image.asset(
                                     "assets/images/pikachu_placeholder_icon.png",
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onBackground,
+                                    color: theme.colorScheme.onBackground,
                                   ),
                                   const SizedBox(height: 10),
                                   Text(
                                     "No Pokemon Captured Yet",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge
-                                        ?.copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onBackground,
-                                        ),
+                                    style: theme.textTheme.titleLarge?.copyWith(
+                                      color: theme.colorScheme.onBackground,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -128,6 +122,7 @@ class _PokeballScreenState extends State<PokeballScreen> with CollapseMixin {
                                           state.dominantColors[index],
                                       pokedexData: state.pokemons[index],
                                       isConnectionStateWaiting: false,
+                                      theme: theme,
                                     );
                                   },
                                   openBuilder: (context, action) {
