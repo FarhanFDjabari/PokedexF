@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class PokedexSearchResultHeader extends StatelessWidget {
   const PokedexSearchResultHeader(
-      {required this.title, required this.theme, Key? key})
+      {required this.title, this.textStyle, Key? key})
       : super(key: key);
   final String title;
-  final ThemeData theme;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class PokedexSearchResultHeader extends StatelessWidget {
       ),
       child: Text(
         title,
-        style: theme.textTheme.labelMedium,
+        style: textStyle,
       ),
     );
   }

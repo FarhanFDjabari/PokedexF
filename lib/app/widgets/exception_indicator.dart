@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_f/app/widgets/ui_helper.dart';
 
 class ExceptionIndicator extends StatelessWidget {
   const ExceptionIndicator({
     required this.title,
-    required this.theme,
+    this.titleTextStyle,
     this.asset,
     this.message,
     this.onTryAgain,
@@ -13,12 +14,12 @@ class ExceptionIndicator extends StatelessWidget {
   final String? message;
   final Widget? asset;
   final VoidCallback? onTryAgain;
-  final ThemeData theme;
+  final TextStyle? titleTextStyle;
 
   @override
   Widget build(BuildContext context) => Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+          padding: UIHelper.padSymmetric(vertical: 32, horizontal: 16),
           child: Column(
             children: [
               asset ?? Container(),
@@ -28,7 +29,7 @@ class ExceptionIndicator extends StatelessWidget {
               Text(
                 title,
                 textAlign: TextAlign.center,
-                style: theme.textTheme.titleLarge,
+                style: titleTextStyle,
               ),
               if (message != null)
                 const SizedBox(

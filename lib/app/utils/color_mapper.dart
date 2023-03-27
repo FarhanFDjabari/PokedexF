@@ -110,4 +110,14 @@ class ColorMapper {
       return kGreyColor;
     }
   }
+
+  static Future<List<Color>> getDominantColors(List<String> imageUrls) async {
+    final result = await Future.wait(
+      imageUrls.map((e) async {
+        return await getDominantColor(e);
+      }),
+    );
+
+    return result;
+  }
 }

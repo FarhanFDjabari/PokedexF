@@ -25,7 +25,7 @@ class PokeballBloc extends Bloc<PokeballEvent, PokeballState> {
       });
     });
     on<_PokeballEventGetCaughtPokemon>((event, emit) async {
-      final dominantColors = await _getDominantColors(
+      final dominantColors = await ColorMapper.getDominantColors(
         event.pokemons.map((e) => e.spriteUrl).toList(),
       );
       emit(
@@ -37,16 +37,6 @@ class PokeballBloc extends Bloc<PokeballEvent, PokeballState> {
         ),
       );
     });
-  }
-
-  Future<List<Color>> _getDominantColors(List<String> imageUrls) async {
-    final result = await Future.wait(
-      imageUrls.map((e) async {
-        return await ColorMapper.getDominantColor(e);
-      }),
-    );
-
-    return result;
   }
 
   @override

@@ -3,12 +3,15 @@ import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.da
 import 'package:pokedex_f/app/styles/colors.dart';
 import 'package:pokedex_f/app/utils/color_mapper.dart';
 import 'package:pokedex_f/app/utils/string_mapper.dart';
+import 'package:pokedex_f/app/widgets/ui_helper.dart';
 import 'package:pokedex_f/data/models/stat.dart';
 
 class PokemonStatsView extends StatelessWidget {
-  const PokemonStatsView({required this.stats, required this.theme, super.key});
+  const PokemonStatsView(
+      {required this.stats, this.textStyle, this.statAbrTextStyle, super.key});
   final List<Stat>? stats;
-  final ThemeData theme;
+  final TextStyle? textStyle;
+  final TextStyle? statAbrTextStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class PokemonStatsView extends StatelessWidget {
       children: stats?.map(
             (e) {
               return Container(
-                margin: const EdgeInsets.symmetric(vertical: 5),
+                margin: UIHelper.padSymmetric(vertical: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -27,7 +30,7 @@ class PokemonStatsView extends StatelessWidget {
                       width: 40,
                       child: Text(
                         StringMapper.mapStatNameToAbr(e),
-                        style: theme.textTheme.bodySmall,
+                        style: statAbrTextStyle,
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -38,9 +41,7 @@ class PokemonStatsView extends StatelessWidget {
                         maxValue: 100,
                         currentValue: e.baseStat?.toDouble() ?? 0.0,
                         displayText: '',
-                        displayTextStyle: theme.textTheme.labelMedium?.copyWith(
-                              color: theme.colorScheme.onBackground,
-                            ) ??
+                        displayTextStyle: textStyle ??
                             const TextStyle(
                                 color: Color(0xFFFFFFFF), fontSize: 12),
                         borderRadius: BorderRadius.circular(50),

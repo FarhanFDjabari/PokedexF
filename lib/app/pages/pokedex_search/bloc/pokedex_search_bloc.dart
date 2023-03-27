@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pokedex_f/app/utils/color_mapper.dart';
 import 'package:pokedex_f/domain/entities/pokemon_list_item_entity.dart';
 import 'package:pokedex_f/domain/usecases/get_all_pokemon.dart';
 // ignore: depend_on_referenced_packages
@@ -33,6 +34,9 @@ class PokedexSearchBloc extends Bloc<PokedexSearchEvent, PokedexSearchState> {
     });
     on<_PokedexSearchEventToDetail>((event, emit) async {
       emit(state.copyWith(
+        goToDetail: false,
+      ));
+      emit(state.copyWith(
         goToDetail: true,
         dominantColor: event.dominantColor,
         pokemonName: event.pokemonName,
@@ -40,23 +44,37 @@ class PokedexSearchBloc extends Bloc<PokedexSearchEvent, PokedexSearchState> {
     });
     on<_PokedexSearchEventSearchPokemon>(
       (event, emit) async {
-        // emit loading state
-        emit(state.copyWith(isLoading: true, isRefreshed: false));
         // get query from event params
         final searchQuery = event.query.toLowerCase();
+        // check if query is not empty
+        if (searchQuery.isEmpty) {
+          emit(state.copyWith(
+            isLoading: false,
+            goToDetail: false,
+          ));
+          return;
+        }
+        // emit loading state
+        emit(state.copyWith(
+          isLoading: true,
+          isRefreshed: false,
+          goToDetail: false,
+        ));
         // search for query inside list of pokemons on state
         final result = state.pokemonsList
             .where(
               (element) => element.name.contains(searchQuery),
             )
             .toList();
-        // add delay for 1 - 2 seconds
-        await Future.delayed(const Duration(milliseconds: 1500));
+        final dominantColors = await ColorMapper.getDominantColors(
+          result.map((e) => e.spriteUrl).toList(),
+        );
         // return filtered list contained query items
         emit(state.copyWith(
           isLoading: false,
           isRefreshed: true,
           queryResult: result,
+          dominantColorsData: dominantColors,
         ));
       },
       transformer: (events, mapper) {

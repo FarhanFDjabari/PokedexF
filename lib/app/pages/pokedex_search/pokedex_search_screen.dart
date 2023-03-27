@@ -6,7 +6,6 @@ import 'package:pokedex_f/app/pages/pokedex_search/widgets/pokedex_search_result
 import 'package:pokedex_f/app/pages/pokedex_search/widgets/pokedex_search_result_tile.dart';
 import 'package:pokedex_f/app/routes/route_path.dart';
 import 'package:pokedex_f/app/styles/colors.dart';
-import 'package:pokedex_f/app/utils/color_mapper.dart';
 import 'package:pokedex_f/app/widgets/ui_helper.dart';
 import 'package:pokedex_f/injection.dart';
 
@@ -52,6 +51,7 @@ class _PokedexSearchScreenState extends State<PokedexSearchScreen> {
             }
           },
           child: Scaffold(
+            backgroundColor: theme.colorScheme.background,
             body: SafeArea(
               child: Material(
                 color: theme.colorScheme.background,
@@ -60,7 +60,7 @@ class _PokedexSearchScreenState extends State<PokedexSearchScreen> {
                     return Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8),
+                          padding: UIHelper.padAll(8),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,7 +107,7 @@ class _PokedexSearchScreenState extends State<PokedexSearchScreen> {
                                 if (state.queryResult.isNotEmpty)
                                   PokedexSearchResultHeader(
                                     title: 'SEARCH RESULTS',
-                                    theme: theme,
+                                    textStyle: theme.textTheme.labelMedium,
                                   ),
                                 if (state.queryResult.isEmpty)
                                   Expanded(
@@ -115,10 +115,11 @@ class _PokedexSearchScreenState extends State<PokedexSearchScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Image.asset(
-                                          "assets/images/pokedex_icon_placeholder.png",
-                                          width: 100,
-                                          height: 100,
+                                        UIHelper.assetImageLoader(
+                                          assetUri:
+                                              "assets/images/pokedex_icon_placeholder.png",
+                                          width: 150,
+                                          height: 150,
                                           color: theme.colorScheme.onBackground,
                                         ),
                                         const SizedBox(height: 10),
@@ -136,37 +137,41 @@ class _PokedexSearchScreenState extends State<PokedexSearchScreen> {
                                 if (state.queryResult.isNotEmpty)
                                   Expanded(
                                     child: ListView.separated(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          16.0, 0, 16.0, 16.0),
+                                      padding: UIHelper.padLTRB(
+                                        16.0,
+                                        0,
+                                        16.0,
+                                        16.0,
+                                        cwRight: 16.0,
+                                        cwLeft: 16.0,
+                                      ),
                                       itemBuilder: (context, index) {
                                         final pokemon =
                                             state.queryResult[index];
-                                        return FutureBuilder<Color>(
-                                            future:
-                                                ColorMapper.getDominantColor(
-                                              pokemon.spriteUrl,
-                                            ),
-                                            builder: (context, snapshot) {
-                                              return PokedexSearchResultTile(
-                                                title: pokemon.name,
-                                                imageUrl: pokemon.artworkUrl,
-                                                number: pokemon.number,
-                                                dominantColor: kGreyColor,
-                                                theme: theme,
-                                                onTap: () {
-                                                  context
-                                                      .read<PokedexSearchBloc>()
-                                                      .add(
-                                                        PokedexSearchEvent
-                                                            .toDetail(
-                                                          pokemon.name,
-                                                          snapshot.data ??
-                                                              kGreyColor,
-                                                        ),
-                                                      );
-                                                },
-                                              );
-                                            });
+                                        return PokedexSearchResultTile(
+                                          title: pokemon.name,
+                                          imageUrl: pokemon.artworkUrl,
+                                          number: pokemon.number,
+                                          dominantColor:
+                                              state.dominantColorsData[index],
+                                          defaultColor: kGreyColor,
+                                          textStyle: theme.textTheme.labelLarge
+                                              ?.copyWith(
+                                            color:
+                                                theme.colorScheme.onBackground,
+                                          ),
+                                          onTap: () {
+                                            context
+                                                .read<PokedexSearchBloc>()
+                                                .add(
+                                                  PokedexSearchEvent.toDetail(
+                                                    pokemon.name,
+                                                    state.dominantColorsData[
+                                                        index],
+                                                  ),
+                                                );
+                                          },
+                                        );
                                       },
                                       itemCount: state.queryResult.length,
                                       separatorBuilder: (context, index) =>

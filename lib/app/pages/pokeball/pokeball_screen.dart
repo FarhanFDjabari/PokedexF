@@ -56,7 +56,9 @@ class _PokeballScreenState extends State<PokeballScreen> with CollapseMixin {
               isCenterTitle: false,
               actions: const [],
               isCollapse: isCollapse,
-              theme: theme,
+              backgroundColor: theme.colorScheme.background,
+              titleTextStyle: theme.textTheme.titleMedium,
+              defaultColor: theme.colorScheme.primary,
             ),
             body: CustomScrollView(
               controller: _scrollController,
@@ -64,14 +66,14 @@ class _PokeballScreenState extends State<PokeballScreen> with CollapseMixin {
               slivers: [
                 PokedexScrollViewHeader(
                   bgImageUri: "assets/images/pokeball_overlay.png",
-                  theme: theme,
+                  backgroundColor: theme.colorScheme.background,
                 ),
                 BlocBuilder<PokeballBloc, PokeballState>(
                     builder: (context, state) {
                   if (state.message != null) {
                     return SliverFillRemaining(
                       child: Container(
-                        padding: const EdgeInsets.all(16),
+                        padding: UIHelper.padAll(16),
                         child: Text(
                           "${state.message}",
                           style: theme.textTheme.titleLarge?.copyWith(
@@ -82,14 +84,19 @@ class _PokeballScreenState extends State<PokeballScreen> with CollapseMixin {
                     );
                   } else if (state.isRefreshed) {
                     return SliverPadding(
-                      padding: const EdgeInsets.all(16),
+                      padding: UIHelper.padAll(
+                        16,
+                        cwLeft: 16,
+                        cwRight: 16,
+                      ),
                       sliver: state.pokemons.isEmpty
                           ? SliverFillRemaining(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Image.asset(
-                                    "assets/images/pikachu_placeholder_icon.png",
+                                  UIHelper.assetImageLoader(
+                                    assetUri:
+                                        "assets/images/pikachu_placeholder_icon.png",
                                     color: theme.colorScheme.onBackground,
                                   ),
                                   const SizedBox(height: 10),
@@ -121,8 +128,12 @@ class _PokeballScreenState extends State<PokeballScreen> with CollapseMixin {
                                       dominantColor:
                                           state.dominantColors[index],
                                       pokedexData: state.pokemons[index],
-                                      isConnectionStateWaiting: false,
-                                      theme: theme,
+                                      backgroundColor:
+                                          theme.colorScheme.background,
+                                      textStyle:
+                                          theme.textTheme.titleSmall?.copyWith(
+                                        color: theme.colorScheme.onBackground,
+                                      ),
                                     );
                                   },
                                   openBuilder: (context, action) {

@@ -5,12 +5,14 @@ class PokemonSizeView extends StatelessWidget {
     super.key,
     required this.weight,
     required this.height,
-    required this.theme,
+    this.valueTextStyle,
+    this.titleTextStyle,
   });
 
   final double? weight;
   final double? height;
-  final ThemeData theme;
+  final TextStyle? valueTextStyle;
+  final TextStyle? titleTextStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +26,13 @@ class PokemonSizeView extends StatelessWidget {
           children: [
             Text(
               "$weight KG",
-              style: theme.textTheme.headlineSmall?.copyWith(
-                color: theme.colorScheme.onBackground,
-              ),
+              style: valueTextStyle,
               textScaleFactor: 0.95,
             ),
             const SizedBox(height: 5),
             Text(
               "Weight",
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onBackground,
-              ),
+              style: titleTextStyle,
             ),
           ],
         ),
@@ -44,17 +42,13 @@ class PokemonSizeView extends StatelessWidget {
           children: [
             Text(
               "$height M",
-              style: theme.textTheme.headlineSmall?.copyWith(
-                color: theme.colorScheme.onBackground,
-              ),
+              style: valueTextStyle,
               textScaleFactor: 0.95,
             ),
             const SizedBox(height: 5),
             Text(
               "Height",
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onBackground,
-              ),
+              style: titleTextStyle,
             ),
           ],
         ),

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pokedex_f/app/widgets/ui_helper.dart';
 
 class CollapseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Size size;
   final ScrollController controller;
   final bool isCollapse;
-  final ThemeData theme;
+  final Color backgroundColor;
 
   const CollapseAppBar({
     required this.size,
     required this.controller,
     required this.isCollapse,
-    required this.theme,
+    required this.backgroundColor,
     super.key,
   });
 
@@ -30,10 +31,12 @@ class CollapseAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ? (controller.offset / 100.0).clamp(0.0, 1.0)
                 : 0.0;
 
-            return ColoredBox(
-              color: theme.colorScheme.primary.withOpacity(opacity),
-              child: child,
-            );
+            return opacity > 0
+                ? ColoredBox(
+                    color: backgroundColor.withOpacity(opacity),
+                    child: child,
+                  )
+                : ColoredBox(color: Colors.transparent, child: child);
           },
           child: SafeArea(
             child: Row(
@@ -43,8 +46,8 @@ class CollapseAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Expanded(
                   child: SizedBox(
                     height: double.maxFinite,
-                    child: Image.asset(
-                      'assets/images/pokemon_logo.png',
+                    child: UIHelper.assetImageLoader(
+                      assetUri: 'assets/images/pokemon_logo_800_size.png',
                       height: 50,
                       filterQuality: FilterQuality.high,
                     ),

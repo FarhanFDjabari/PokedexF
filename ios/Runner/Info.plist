@@ -49,5 +49,7 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<true/>
+		<key>FLTEnableImpeller</key>
+  		<true/>
 	</dict>
 </plist>

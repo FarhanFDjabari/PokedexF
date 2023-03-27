@@ -507,6 +507,7 @@ mixin _$PokedexSearchState {
       throw _privateConstructorUsedError;
   List<PokemonListItemEntity> get pokemonsList =>
       throw _privateConstructorUsedError;
+  List<Color> get dominantColorsData => throw _privateConstructorUsedError;
   bool get goToDetail => throw _privateConstructorUsedError;
   String? get pokemonName => throw _privateConstructorUsedError;
   Color? get dominantColor => throw _privateConstructorUsedError;
@@ -528,6 +529,7 @@ abstract class $PokedexSearchStateCopyWith<$Res> {
       String? message,
       List<PokemonListItemEntity> queryResult,
       List<PokemonListItemEntity> pokemonsList,
+      List<Color> dominantColorsData,
       bool goToDetail,
       String? pokemonName,
       Color? dominantColor});
@@ -551,6 +553,7 @@ class _$PokedexSearchStateCopyWithImpl<$Res, $Val extends PokedexSearchState>
     Object? message = freezed,
     Object? queryResult = null,
     Object? pokemonsList = null,
+    Object? dominantColorsData = null,
     Object? goToDetail = null,
     Object? pokemonName = freezed,
     Object? dominantColor = freezed,
@@ -576,6 +579,10 @@ class _$PokedexSearchStateCopyWithImpl<$Res, $Val extends PokedexSearchState>
           ? _value.pokemonsList
           : pokemonsList // ignore: cast_nullable_to_non_nullable
               as List<PokemonListItemEntity>,
+      dominantColorsData: null == dominantColorsData
+          ? _value.dominantColorsData
+          : dominantColorsData // ignore: cast_nullable_to_non_nullable
+              as List<Color>,
       goToDetail: null == goToDetail
           ? _value.goToDetail
           : goToDetail // ignore: cast_nullable_to_non_nullable
@@ -606,6 +613,7 @@ abstract class _$$_PokedexSearchStateCopyWith<$Res>
       String? message,
       List<PokemonListItemEntity> queryResult,
       List<PokemonListItemEntity> pokemonsList,
+      List<Color> dominantColorsData,
       bool goToDetail,
       String? pokemonName,
       Color? dominantColor});
@@ -627,6 +635,7 @@ class __$$_PokedexSearchStateCopyWithImpl<$Res>
     Object? message = freezed,
     Object? queryResult = null,
     Object? pokemonsList = null,
+    Object? dominantColorsData = null,
     Object? goToDetail = null,
     Object? pokemonName = freezed,
     Object? dominantColor = freezed,
@@ -652,6 +661,10 @@ class __$$_PokedexSearchStateCopyWithImpl<$Res>
           ? _value._pokemonsList
           : pokemonsList // ignore: cast_nullable_to_non_nullable
               as List<PokemonListItemEntity>,
+      dominantColorsData: null == dominantColorsData
+          ? _value._dominantColorsData
+          : dominantColorsData // ignore: cast_nullable_to_non_nullable
+              as List<Color>,
       goToDetail: null == goToDetail
           ? _value.goToDetail
           : goToDetail // ignore: cast_nullable_to_non_nullable
@@ -677,11 +690,13 @@ class _$_PokedexSearchState extends _PokedexSearchState {
       required this.message,
       required final List<PokemonListItemEntity> queryResult,
       required final List<PokemonListItemEntity> pokemonsList,
+      required final List<Color> dominantColorsData,
       required this.goToDetail,
       required this.pokemonName,
       required this.dominantColor})
       : _queryResult = queryResult,
         _pokemonsList = pokemonsList,
+        _dominantColorsData = dominantColorsData,
         super._();
 
   @override
@@ -706,6 +721,15 @@ class _$_PokedexSearchState extends _PokedexSearchState {
     return EqualUnmodifiableListView(_pokemonsList);
   }
 
+  final List<Color> _dominantColorsData;
+  @override
+  List<Color> get dominantColorsData {
+    if (_dominantColorsData is EqualUnmodifiableListView)
+      return _dominantColorsData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_dominantColorsData);
+  }
+
   @override
   final bool goToDetail;
   @override
@@ -715,7 +739,7 @@ class _$_PokedexSearchState extends _PokedexSearchState {
 
   @override
   String toString() {
-    return 'PokedexSearchState(isLoading: $isLoading, isRefreshed: $isRefreshed, message: $message, queryResult: $queryResult, pokemonsList: $pokemonsList, goToDetail: $goToDetail, pokemonName: $pokemonName, dominantColor: $dominantColor)';
+    return 'PokedexSearchState(isLoading: $isLoading, isRefreshed: $isRefreshed, message: $message, queryResult: $queryResult, pokemonsList: $pokemonsList, dominantColorsData: $dominantColorsData, goToDetail: $goToDetail, pokemonName: $pokemonName, dominantColor: $dominantColor)';
   }
 
   @override
@@ -732,6 +756,8 @@ class _$_PokedexSearchState extends _PokedexSearchState {
                 .equals(other._queryResult, _queryResult) &&
             const DeepCollectionEquality()
                 .equals(other._pokemonsList, _pokemonsList) &&
+            const DeepCollectionEquality()
+                .equals(other._dominantColorsData, _dominantColorsData) &&
             (identical(other.goToDetail, goToDetail) ||
                 other.goToDetail == goToDetail) &&
             (identical(other.pokemonName, pokemonName) ||
@@ -748,6 +774,7 @@ class _$_PokedexSearchState extends _PokedexSearchState {
       message,
       const DeepCollectionEquality().hash(_queryResult),
       const DeepCollectionEquality().hash(_pokemonsList),
+      const DeepCollectionEquality().hash(_dominantColorsData),
       goToDetail,
       pokemonName,
       dominantColor);
@@ -767,6 +794,7 @@ abstract class _PokedexSearchState extends PokedexSearchState {
       required final String? message,
       required final List<PokemonListItemEntity> queryResult,
       required final List<PokemonListItemEntity> pokemonsList,
+      required final List<Color> dominantColorsData,
       required final bool goToDetail,
       required final String? pokemonName,
       required final Color? dominantColor}) = _$_PokedexSearchState;
@@ -782,6 +810,8 @@ abstract class _PokedexSearchState extends PokedexSearchState {
   List<PokemonListItemEntity> get queryResult;
   @override
   List<PokemonListItemEntity> get pokemonsList;
+  @override
+  List<Color> get dominantColorsData;
   @override
   bool get goToDetail;
   @override

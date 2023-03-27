@@ -133,7 +133,9 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
               dominantColor: _dominantColor,
               size: UIHelper.appBarSize(context),
               title: "Pokedex",
-              theme: theme,
+              backgroundColor: theme.colorScheme.background,
+              defaultColor: theme.colorScheme.primary,
+              titleTextStyle: theme.textTheme.titleMedium,
               actions: [
                 BlocBuilder<PokedexDetailBloc, PokedexDetailState>(
                   builder: (context, state) {
@@ -171,7 +173,6 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                             _dominantColor,
                             !state.isLoading
                                 ? theme.colorScheme.onBackground
-                                    .withOpacity(0.75)
                                 : _dominantColor,
                           ],
                           begin: Alignment.topCenter,
@@ -181,34 +182,11 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                       ),
                       child: Center(
                         child: !state.isLoading
-                            ? Image.network(
-                                "${state.pokemon?.sprites?.other?.officialArtwork?.frontDefault}",
+                            ? UIHelper.networkImageLoader(
+                                imageUrl:
+                                    "${state.pokemon?.sprites?.other?.officialArtwork?.frontDefault}",
                                 scale: 2.5,
-                                loadingBuilder:
-                                    (context, child, loadingProgress) {
-                                  if (loadingProgress == null) {
-                                    return child;
-                                  }
-
-                                  return Center(
-                                    child: CircularProgressIndicator.adaptive(
-                                      strokeWidth: 3,
-                                      value: loadingProgress
-                                              .cumulativeBytesLoaded /
-                                          (loadingProgress.expectedTotalBytes ??
-                                              1),
-                                    ),
-                                  );
-                                },
-                                errorBuilder: (context, error, stackTrace) {
-                                  return SizedBox(
-                                    width: 20,
-                                    height: 20,
-                                    child: Image.asset(
-                                      "assets/images/pikachu_placeholder_icon.png",
-                                    ),
-                                  );
-                                },
+                                useLoadingBuilder: true,
                               )
                             : UIHelper.pokeballLoading(
                                 height: 25,
@@ -230,7 +208,7 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                         : state.message != null
                             ? Center(
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(
+                                  padding: UIHelper.padSymmetric(
                                     horizontal: 32,
                                   ),
                                   child: Text(
@@ -243,7 +221,12 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                                 ),
                               )
                             : Padding(
-                                padding: const EdgeInsets.all(16.0),
+                                padding: UIHelper.padAll(
+                                  16.0,
+                                  cwTop: 16,
+                                  cwLeft: 16,
+                                  cwRight: 16,
+                                ),
                                 child: Column(
                                   children: [
                                     Text(
@@ -253,13 +236,24 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                                     const SizedBox(height: 15),
                                     PokemonTypeView(
                                       types: state.pokemon?.types,
-                                      theme: theme,
+                                      textStyle:
+                                          theme.textTheme.labelLarge?.copyWith(
+                                        color: theme.colorScheme.onBackground,
+                                      ),
                                     ),
                                     const SizedBox(height: 25),
                                     PokemonSizeView(
                                       weight: state.pokemon?.weight,
                                       height: state.pokemon?.height,
-                                      theme: theme,
+                                      valueTextStyle: theme
+                                          .textTheme.headlineSmall
+                                          ?.copyWith(
+                                        color: theme.colorScheme.onBackground,
+                                      ),
+                                      titleTextStyle:
+                                          theme.textTheme.bodySmall?.copyWith(
+                                        color: theme.colorScheme.onBackground,
+                                      ),
                                     ),
                                     const SizedBox(height: 25),
                                     Text(
@@ -272,7 +266,12 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                                     const SizedBox(height: 5),
                                     PokemonStatsView(
                                       stats: state.pokemon?.stats,
-                                      theme: theme,
+                                      statAbrTextStyle:
+                                          theme.textTheme.bodySmall,
+                                      textStyle:
+                                          theme.textTheme.labelMedium?.copyWith(
+                                        color: theme.colorScheme.onBackground,
+                                      ),
                                     ),
                                     const SizedBox(height: 15),
                                     ElevatedButton.icon(
@@ -301,8 +300,8 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
                                               );
                                         }
                                       },
-                                      icon: Image.asset(
-                                        state.isAlreadyCaught
+                                      icon: UIHelper.assetImageLoader(
+                                        assetUri: state.isAlreadyCaught
                                             ? 'assets/images/open_pokeball_icon.png'
                                             : 'assets/images/pokeball_overlay_bg_frame.png',
                                         color: theme.colorScheme.background,

@@ -17,21 +17,24 @@ void main() async {
     debugPrint = (String? message, {int? wrapWidth}) {};
   }
 
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent),
-  );
-  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-
   if (kDebugMode || kProfileMode) {
     enableLeakTracking(
         config: const LeakTrackingConfiguration(
-            stdoutLeaks: true,
-            notifyDevTools: true,
-            stackTraceCollectionConfig:
-                StackTraceCollectionConfig(collectStackTraceOnDisposal: true)));
-    MemoryAllocations.instance
-        .addListener((event) => dispatchObjectEvent(event.toMap()));
+          stdoutLeaks: true,
+          notifyDevTools: true,
+          stackTraceCollectionConfig: StackTraceCollectionConfig(
+            collectStackTraceOnDisposal: true,
+            collectStackTraceOnStart: true,
+          ),
+        ),
+        resetIfAlreadyEnabled: true);
+    MemoryAllocations.instance.addListener((event) => event.toMap());
   }
 
-  runApp(const PokedexApp());
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent),
+  );
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge).then((_) {
+    runApp(const PokedexApp());
+  });
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lottie/lottie.dart';
 import 'package:pokedex_f/app/pages/splash/bloc/splash_bloc.dart';
 import 'package:pokedex_f/app/routes/route_name.dart';
+import 'package:pokedex_f/app/widgets/ui_helper.dart';
 import 'package:pokedex_f/injection.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -26,6 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void dispose() {
     _splashBloc.close();
+    getIt<SplashBloc>().close();
     super.dispose();
   }
 
@@ -45,23 +45,19 @@ class _SplashScreenState extends State<SplashScreen> {
             }
           },
           child: Container(
-            padding: const EdgeInsets.all(16),
+            padding: UIHelper.padAll(16),
             color: theme.colorScheme.background,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(
-                  "assets/images/pokemon_logo.png",
-                  height: 250.sp,
+                UIHelper.assetImageLoader(
+                  assetUri: "assets/images/pokemon_logo.png",
+                  height: 250,
                   fit: BoxFit.cover,
                 ),
                 const SizedBox(height: 5),
-                Lottie.asset(
-                  "assets/raw/pokeball_lottie.json",
-                  height: 50.sp,
-                  width: 50.sp,
-                ),
+                UIHelper.pokeballLoading(),
               ],
             ),
           ),

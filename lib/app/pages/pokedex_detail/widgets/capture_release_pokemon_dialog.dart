@@ -78,18 +78,9 @@ class _CaptureReleasePokemonDialogState
                           begin: Offset.zero,
                           end: const Offset(0.1, 0),
                         ).animate(_animationController),
-                        child: Image.network(
-                          _imageUrl,
+                        child: UIHelper.networkImageLoader(
+                          imageUrl: _imageUrl,
                           scale: 0.5,
-                          errorBuilder: (context, error, stackTrace) {
-                            return SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: Image.asset(
-                                "assets/images/pikachu_placeholder_icon.png",
-                              ),
-                            );
-                          },
                         ),
                       ),
                     ),
@@ -97,18 +88,9 @@ class _CaptureReleasePokemonDialogState
                 if (_isCapture)
                   SizedBox(
                     height: 150,
-                    child: Image.network(
-                      _imageUrl,
+                    child: UIHelper.networkImageLoader(
+                      imageUrl: _imageUrl,
                       scale: 0.5,
-                      errorBuilder: (context, error, stackTrace) {
-                        return SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Image.asset(
-                            "assets/images/pikachu_placeholder_icon.png",
-                          ),
-                        );
-                      },
                     ),
                   ),
                 if (_isCapture)

@@ -9,6 +9,7 @@ class PokedexSearchState with _$PokedexSearchState {
     required String? message,
     required List<PokemonListItemEntity> queryResult,
     required List<PokemonListItemEntity> pokemonsList,
+    required List<Color> dominantColorsData,
     required bool goToDetail,
     required String? pokemonName,
     required Color? dominantColor,
@@ -21,6 +22,7 @@ class PokedexSearchState with _$PokedexSearchState {
         message: null,
         pokemonName: null,
         dominantColor: null,
+        dominantColorsData: [],
         queryResult: [],
         pokemonsList: [],
       );

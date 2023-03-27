@@ -27,8 +27,7 @@ class UIHelper {
       child: Center(
         child: CircularProgressIndicator(
           strokeWidth: 2.0,
-          valueColor: AlwaysStoppedAnimation<Color>(
-              color == null ? Colors.green : color),
+          valueColor: AlwaysStoppedAnimation<Color>(color ?? Colors.green),
         ),
       ),
     );
@@ -81,27 +80,6 @@ class UIHelper {
     );
   }
 
-  static Widget emptyCaseWidget(BuildContext context,
-      {required String emptyText, double? height, required ThemeData theme}) {
-    return Container(
-      padding: UIHelper.padSymmetric(vertical: 50, horizontal: 30),
-      height: height,
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              emptyText,
-              textAlign: TextAlign.center,
-              style: theme.textTheme.bodyMedium,
-            ),
-            UIHelper.verticalSpace(40),
-          ],
-        ),
-      ),
-    );
-  }
-
   static double setFont(double font) {
     return ScreenUtil().setSp(font);
   }
@@ -138,8 +116,87 @@ class UIHelper {
   static Widget pokeballLoading({double? height, double? width}) {
     return Lottie.asset(
       "assets/raw/pokeball_lottie.json",
-      height: height ?? 50.sp,
-      width: width ?? 50.sp,
+      height: height ?? setSp(50),
+      width: width ?? setSp(50),
+    );
+  }
+
+  static Image networkImageLoader({
+    required String imageUrl,
+    double? width,
+    double? height,
+    double? scale,
+    BoxFit? fit,
+    bool useLoadingBuilder = false,
+  }) {
+    try {
+      return Image.network(
+        imageUrl,
+        scale: scale ?? 1.0,
+        width: width != null ? setSp(width) : null,
+        height: height != null ? setSp(height) : null,
+        fit: fit,
+        frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+          return SizedBox(
+            width: width != null ? setSp(width) : null,
+            height: height != null ? setSp(height) : null,
+            child: child,
+          );
+        },
+        loadingBuilder: useLoadingBuilder
+            ? (context, child, loadingProgress) {
+                if (loadingProgress == null) {
+                  return child;
+                }
+
+                return Center(
+                  child: CircularProgressIndicator.adaptive(
+                    strokeWidth: 2.5,
+                    value: loadingProgress.cumulativeBytesLoaded /
+                        (loadingProgress.expectedTotalBytes ?? 1),
+                  ),
+                );
+              }
+            : null,
+        errorBuilder: (context, error, stackTrace) {
+          return SizedBox(
+            width: width != null ? setSp(width) : null,
+            height: height != null ? setSp(height) : null,
+            child: assetImageLoader(
+              assetUri: "assets/images/pikachu_placeholder_icon.png",
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      debugPrint(e.toString());
+      return assetImageLoader(
+        assetUri: "assets/images/pikachu_placeholder_icon.png",
+        height: height != null ? setSp(height) : null,
+        width: width != null ? setSp(width) : null,
+      );
+    }
+  }
+
+  static Image assetImageLoader({
+    required String assetUri,
+    Color? color,
+    double? width,
+    double? height,
+    double? scale,
+    BoxFit? fit,
+    FilterQuality? filterQuality,
+    Alignment? alignment,
+  }) {
+    return Image.asset(
+      assetUri,
+      scale: scale,
+      color: color,
+      fit: fit,
+      alignment: alignment ?? Alignment.center,
+      filterQuality: filterQuality ?? FilterQuality.low,
+      width: width != null ? setSp(width) : null,
+      height: height != null ? setSp(height) : null,
     );
   }
 }
