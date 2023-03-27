@@ -6,7 +6,7 @@ final lightTheme = ThemeData.light().copyWith(
     primary: Color(0xFFF42A28),
     onPrimary: Color(0xFF2C0C3C),
     background: Color(0xFFF0F2F6),
-    onBackground: Colors.black,
+    onBackground: Color(0xFF2C0C3C),
     surface: Color(0xFF37A5C6),
     onSurface: Color(0xFFF0F2F6),
     secondary: lightGrey,

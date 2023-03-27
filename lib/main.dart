@@ -32,8 +32,11 @@ void main() async {
   }
 
   SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent),
+    const SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.transparent,
+    ),
   );
+
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge).then((_) {
     runApp(const PokedexApp());
   });

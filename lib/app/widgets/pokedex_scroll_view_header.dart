@@ -6,11 +6,15 @@ class PokedexScrollViewHeader extends StatelessWidget {
   const PokedexScrollViewHeader({
     super.key,
     required this.bgImageUri,
+    this.bgImageUriDark,
+    this.isDarkMode = false,
     required this.backgroundColor,
   });
 
   final String bgImageUri;
+  final String? bgImageUriDark;
   final Color backgroundColor;
+  final bool isDarkMode;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +35,9 @@ class PokedexScrollViewHeader extends StatelessWidget {
                     BlendMode.darken,
                   ),
                   child: UIHelper.assetImageLoader(
-                    assetUri: bgImageUri,
+                    assetUri: isDarkMode
+                        ? (bgImageUriDark ?? bgImageUri)
+                        : bgImageUri,
                     alignment: Alignment.center,
                     height: 260,
                     fit: BoxFit.cover,

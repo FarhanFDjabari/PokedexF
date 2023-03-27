@@ -20,7 +20,10 @@ class CollapseAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AnnotatedRegion(
       value:
-          isCollapse ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
+          (isCollapse ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light)
+              .copyWith(
+        systemNavigationBarColor: Colors.transparent,
+      ),
       child: SizedBox(
         height: preferredSize.height,
         width: preferredSize.width,

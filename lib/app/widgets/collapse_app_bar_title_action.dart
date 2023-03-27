@@ -36,7 +36,10 @@ class CollapseAppBarTitleAction extends StatelessWidget
     final foregroundColor = isCollapse ? backgroundColor : Colors.white;
     return AnnotatedRegion(
       value:
-          isCollapse ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
+          (isCollapse ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light)
+              .copyWith(
+        systemNavigationBarColor: Colors.transparent,
+      ),
       child: SizedBox(
         height: preferredSize.height,
         width: preferredSize.width,

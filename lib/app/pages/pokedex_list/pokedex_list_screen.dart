@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pokedex_f/app/pages/pokeball/pokeball_screen.dart';
@@ -42,6 +43,8 @@ class _PokedexListScreenState extends State<PokedexListScreen>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    var brightness =
+        SchedulerBinding.instance.platformDispatcher.platformBrightness;
     return BlocProvider(
       create: (context) => _pokedexListBloc,
       child: Builder(builder: (context) {
@@ -53,6 +56,7 @@ class _PokedexListScreenState extends State<PokedexListScreen>
           },
           child: Scaffold(
             backgroundColor: theme.colorScheme.background,
+            primary: false,
             extendBodyBehindAppBar: true,
             appBar: CollapseAppBar(
               size: UIHelper.appBarSize(context),
@@ -66,6 +70,8 @@ class _PokedexListScreenState extends State<PokedexListScreen>
               slivers: [
                 PokedexScrollViewHeader(
                   bgImageUri: "assets/images/pokemon_field_bg.jpg",
+                  bgImageUriDark: "assets/images/pokemon_field_night_bg.png",
+                  isDarkMode: brightness == Brightness.dark,
                   backgroundColor: theme.colorScheme.background,
                 ),
                 SliverToBoxAdapter(
@@ -114,6 +120,7 @@ class _PokedexListScreenState extends State<PokedexListScreen>
                     cwLeft: 16,
                     cwRight: 16,
                     cwTop: 16,
+                    cwBottom: 32,
                   ),
                   sliver: PagePokedexGridView(
                     pokedexListBloc: _pokedexListBloc,
