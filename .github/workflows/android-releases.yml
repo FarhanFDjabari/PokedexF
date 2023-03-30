@@ -37,6 +37,9 @@ jobs:
       
       -name: Flutter doctor
         run: flutter doctor -v
+
+      -name: Flutter test
+        run: flutter test
       
       -name: Flutter build
         run: flutter build apk --release
