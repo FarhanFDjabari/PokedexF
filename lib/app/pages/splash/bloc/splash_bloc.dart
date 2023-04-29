@@ -2,12 +2,11 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
 part 'splash_event.dart';
 part 'splash_state.dart';
 
-@injectable
+// @injectable
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
   SplashBloc() : super(SplashInitial()) {
     on<SplashStart>((event, emit) {

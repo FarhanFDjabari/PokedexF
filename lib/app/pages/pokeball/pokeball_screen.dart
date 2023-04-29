@@ -6,12 +6,11 @@ import 'package:pokedex_f/app/pages/pokeball/bloc/pokeball_bloc.dart';
 import 'package:pokedex_f/app/pages/pokedex_detail/pokedex_detail_screen.dart';
 import 'package:pokedex_f/app/pages/pokedex_list/widgets/pokedex_item.dart';
 import 'package:pokedex_f/app/utils/color_mapper.dart';
-import 'package:pokedex_f/app/widgets/collapse_app_bar.dart';
 import 'package:pokedex_f/app/widgets/collapse_app_bar_title_action.dart';
 import 'package:pokedex_f/app/widgets/collapse_mixin.dart';
 import 'package:pokedex_f/app/widgets/pokedex_scroll_view_header.dart';
 import 'package:pokedex_f/app/widgets/ui_helper.dart';
-import 'package:pokedex_f/injection.dart';
+import 'package:pokedex_f/di/injection.dart';
 
 class PokeballScreen extends StatefulWidget {
   const PokeballScreen({super.key});
@@ -22,12 +21,11 @@ class PokeballScreen extends StatefulWidget {
 
 class _PokeballScreenState extends State<PokeballScreen> with CollapseMixin {
   late final ScrollController _scrollController;
-  late final PokeballBloc _pokeballBloc;
+  PokeballBloc get _pokeballBloc => Injector.resolve<PokeballBloc>();
 
   @override
   void initState() {
     super.initState();
-    _pokeballBloc = getIt<PokeballBloc>();
     _scrollController = ScrollController();
     listenCollapse(controller: _scrollController);
   }
@@ -35,7 +33,6 @@ class _PokeballScreenState extends State<PokeballScreen> with CollapseMixin {
   @override
   void dispose() {
     _scrollController.dispose();
-    _pokeballBloc.close();
     super.dispose();
   }
 
@@ -48,7 +45,17 @@ class _PokeballScreenState extends State<PokeballScreen> with CollapseMixin {
       create: (context) => _pokeballBloc..add(const PokeballEvent.initial()),
       child: Builder(builder: (context) {
         return BlocListener<PokeballBloc, PokeballState>(
-          listener: (context, state) {},
+          listener: (context, state) async {
+            if (state.isLoading &&
+                state.isRefreshed &&
+                !state.isDominantColorsRefreshed) {
+              context.read<PokeballBloc>().add(PokeballEvent.getCaughtPokemon(
+                  state.pokemons,
+                  await ColorMapper.getDominantColors(
+                    state.pokemons.map((e) => e.spriteUrl).toList(),
+                  )));
+            }
+          },
           child: Scaffold(
             backgroundColor: theme.colorScheme.background,
             primary: false,
@@ -88,7 +95,8 @@ class _PokeballScreenState extends State<PokeballScreen> with CollapseMixin {
                         ),
                       ),
                     );
-                  } else if (state.isRefreshed) {
+                  } else if (state.isRefreshed &&
+                      state.isDominantColorsRefreshed) {
                     return SliverPadding(
                       padding: UIHelper.padAll(
                         16,

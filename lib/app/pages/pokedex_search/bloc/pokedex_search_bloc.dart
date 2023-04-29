@@ -2,10 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:injectable/injectable.dart';
-import 'package:pokedex_f/app/utils/color_mapper.dart';
+import 'package:pokedex_f/data/repositories/pokedex_repository_impl.dart';
 import 'package:pokedex_f/domain/entities/pokemon_list_item_entity.dart';
-import 'package:pokedex_f/domain/usecases/get_all_pokemon.dart';
 // ignore: depend_on_referenced_packages
 import 'package:stream_transform/stream_transform.dart';
 
@@ -13,13 +11,13 @@ part 'pokedex_search_event.dart';
 part 'pokedex_search_state.dart';
 part 'pokedex_search_bloc.freezed.dart';
 
-@injectable
 class PokedexSearchBloc extends Bloc<PokedexSearchEvent, PokedexSearchState> {
-  final GetAllPokemon _getAllPokemon;
+  final PokedexRepositoryImpl _repositoryImpl;
 
-  PokedexSearchBloc(this._getAllPokemon) : super(PokedexSearchState.initial()) {
+  PokedexSearchBloc(this._repositoryImpl)
+      : super(PokedexSearchState.initial()) {
     on<_PokedexSearchEventStarted>((event, emit) async {
-      final response = await _getAllPokemon.invoke(1281, 0);
+      final response = await _repositoryImpl.getAllPokemon(1281, 0);
       response.fold(
         (l) => emit(state.copyWith(
           isLoading: false,
@@ -48,16 +46,13 @@ class PokedexSearchBloc extends Bloc<PokedexSearchEvent, PokedexSearchState> {
         final searchQuery = event.query.toLowerCase();
         // check if query is not empty
         if (searchQuery.isEmpty) {
-          emit(state.copyWith(
-            isLoading: false,
-            goToDetail: false,
-          ));
           return;
         }
         // emit loading state
         emit(state.copyWith(
           isLoading: true,
           isRefreshed: false,
+          isDominantColorsRefreshed: false,
           goToDetail: false,
         ));
         // search for query inside list of pokemons on state
@@ -66,20 +61,38 @@ class PokedexSearchBloc extends Bloc<PokedexSearchEvent, PokedexSearchState> {
               (element) => element.name.contains(searchQuery),
             )
             .toList();
-        final dominantColors = await ColorMapper.getDominantColors(
-          result.map((e) => e.spriteUrl).toList(),
-        );
         // return filtered list contained query items
         emit(state.copyWith(
           isLoading: false,
           isRefreshed: true,
+          isDominantColorsRefreshed: false,
           queryResult: result,
-          dominantColorsData: dominantColors,
         ));
       },
       transformer: (events, mapper) {
         return events
             .debounce(const Duration(milliseconds: 1000))
+            .asyncExpand(mapper);
+      },
+    );
+    on<_PokedexSearchEventSearchDominantColors>(
+      (event, emit) async {
+        emit(state.copyWith(
+          isLoading: true,
+          isRefreshed: false,
+          goToDetail: false,
+        ));
+        emit(state.copyWith(
+          isLoading: false,
+          isRefreshed: true,
+          isDominantColorsRefreshed: true,
+          queryResult: event.containedPokemons,
+          dominantColorsData: event.containedDominantColors,
+        ));
+      },
+      transformer: (events, mapper) {
+        return events
+            .debounce(const Duration(milliseconds: 500))
             .asyncExpand(mapper);
       },
     );

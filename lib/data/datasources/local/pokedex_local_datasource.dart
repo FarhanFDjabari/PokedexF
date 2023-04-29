@@ -1,8 +1,6 @@
-import 'package:injectable/injectable.dart';
 import 'package:pokedex_f/data/datasources/local/dao/pokemon_list_item_dao.dart';
 import 'package:pokedex_f/domain/entities/pokemon_list_item_entity.dart';
 
-@lazySingleton
 class PokedexLocalDatasource {
   final PokemonListItemDao _dao;
 

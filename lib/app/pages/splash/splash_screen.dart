@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pokedex_f/app/pages/splash/bloc/splash_bloc.dart';
 import 'package:pokedex_f/app/routes/route_name.dart';
 import 'package:pokedex_f/app/widgets/ui_helper.dart';
-import 'package:pokedex_f/injection.dart';
+import 'package:pokedex_f/di/injection.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,18 +14,15 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  late final SplashBloc _splashBloc;
+  SplashBloc get _splashBloc => Injector.resolve<SplashBloc>();
 
   @override
   void initState() {
-    _splashBloc = getIt<SplashBloc>();
     super.initState();
   }
 
   @override
   void dispose() {
-    _splashBloc.close();
-    getIt<SplashBloc>().close();
     super.dispose();
   }
 

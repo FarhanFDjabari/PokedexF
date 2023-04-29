@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-import 'move.dart';
 import 'version_group_detail.dart';
 
 class Move extends Equatable {

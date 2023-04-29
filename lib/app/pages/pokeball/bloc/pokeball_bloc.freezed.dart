@@ -20,25 +20,36 @@ mixin _$PokeballEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(List<PokemonListItemEntity> pokemons)
+        getDominantColors,
+    required TResult Function(
+            List<PokemonListItemEntity> pokemons, List<Color> dominantColors)
         getCaughtPokemon,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<PokemonListItemEntity> pokemons)? getCaughtPokemon,
+    TResult? Function(List<PokemonListItemEntity> pokemons)? getDominantColors,
+    TResult? Function(
+            List<PokemonListItemEntity> pokemons, List<Color> dominantColors)?
+        getCaughtPokemon,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<PokemonListItemEntity> pokemons)? getCaughtPokemon,
+    TResult Function(List<PokemonListItemEntity> pokemons)? getDominantColors,
+    TResult Function(
+            List<PokemonListItemEntity> pokemons, List<Color> dominantColors)?
+        getCaughtPokemon,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_PokeballEventInitial value) initial,
+    required TResult Function(_PokeballEventGetDominantColors value)
+        getDominantColors,
     required TResult Function(_PokeballEventGetCaughtPokemon value)
         getCaughtPokemon,
   }) =>
@@ -46,12 +57,14 @@ mixin _$PokeballEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PokeballEventInitial value)? initial,
+    TResult? Function(_PokeballEventGetDominantColors value)? getDominantColors,
     TResult? Function(_PokeballEventGetCaughtPokemon value)? getCaughtPokemon,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PokeballEventInitial value)? initial,
+    TResult Function(_PokeballEventGetDominantColors value)? getDominantColors,
     TResult Function(_PokeballEventGetCaughtPokemon value)? getCaughtPokemon,
     required TResult orElse(),
   }) =>
@@ -116,6 +129,9 @@ class _$_PokeballEventInitial implements _PokeballEventInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(List<PokemonListItemEntity> pokemons)
+        getDominantColors,
+    required TResult Function(
+            List<PokemonListItemEntity> pokemons, List<Color> dominantColors)
         getCaughtPokemon,
   }) {
     return initial();
@@ -125,7 +141,10 @@ class _$_PokeballEventInitial implements _PokeballEventInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<PokemonListItemEntity> pokemons)? getCaughtPokemon,
+    TResult? Function(List<PokemonListItemEntity> pokemons)? getDominantColors,
+    TResult? Function(
+            List<PokemonListItemEntity> pokemons, List<Color> dominantColors)?
+        getCaughtPokemon,
   }) {
     return initial?.call();
   }
@@ -134,7 +153,10 @@ class _$_PokeballEventInitial implements _PokeballEventInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<PokemonListItemEntity> pokemons)? getCaughtPokemon,
+    TResult Function(List<PokemonListItemEntity> pokemons)? getDominantColors,
+    TResult Function(
+            List<PokemonListItemEntity> pokemons, List<Color> dominantColors)?
+        getCaughtPokemon,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -147,6 +169,8 @@ class _$_PokeballEventInitial implements _PokeballEventInitial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_PokeballEventInitial value) initial,
+    required TResult Function(_PokeballEventGetDominantColors value)
+        getDominantColors,
     required TResult Function(_PokeballEventGetCaughtPokemon value)
         getCaughtPokemon,
   }) {
@@ -157,6 +181,7 @@ class _$_PokeballEventInitial implements _PokeballEventInitial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PokeballEventInitial value)? initial,
+    TResult? Function(_PokeballEventGetDominantColors value)? getDominantColors,
     TResult? Function(_PokeballEventGetCaughtPokemon value)? getCaughtPokemon,
   }) {
     return initial?.call(this);
@@ -166,6 +191,7 @@ class _$_PokeballEventInitial implements _PokeballEventInitial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PokeballEventInitial value)? initial,
+    TResult Function(_PokeballEventGetDominantColors value)? getDominantColors,
     TResult Function(_PokeballEventGetCaughtPokemon value)? getCaughtPokemon,
     required TResult orElse(),
   }) {
@@ -181,13 +207,175 @@ abstract class _PokeballEventInitial implements PokeballEvent {
 }
 
 /// @nodoc
+abstract class _$$_PokeballEventGetDominantColorsCopyWith<$Res> {
+  factory _$$_PokeballEventGetDominantColorsCopyWith(
+          _$_PokeballEventGetDominantColors value,
+          $Res Function(_$_PokeballEventGetDominantColors) then) =
+      __$$_PokeballEventGetDominantColorsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<PokemonListItemEntity> pokemons});
+}
+
+/// @nodoc
+class __$$_PokeballEventGetDominantColorsCopyWithImpl<$Res>
+    extends _$PokeballEventCopyWithImpl<$Res, _$_PokeballEventGetDominantColors>
+    implements _$$_PokeballEventGetDominantColorsCopyWith<$Res> {
+  __$$_PokeballEventGetDominantColorsCopyWithImpl(
+      _$_PokeballEventGetDominantColors _value,
+      $Res Function(_$_PokeballEventGetDominantColors) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? pokemons = null,
+  }) {
+    return _then(_$_PokeballEventGetDominantColors(
+      null == pokemons
+          ? _value._pokemons
+          : pokemons // ignore: cast_nullable_to_non_nullable
+              as List<PokemonListItemEntity>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_PokeballEventGetDominantColors
+    implements _PokeballEventGetDominantColors {
+  const _$_PokeballEventGetDominantColors(
+      final List<PokemonListItemEntity> pokemons)
+      : _pokemons = pokemons;
+
+  final List<PokemonListItemEntity> _pokemons;
+  @override
+  List<PokemonListItemEntity> get pokemons {
+    if (_pokemons is EqualUnmodifiableListView) return _pokemons;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_pokemons);
+  }
+
+  @override
+  String toString() {
+    return 'PokeballEvent.getDominantColors(pokemons: $pokemons)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PokeballEventGetDominantColors &&
+            const DeepCollectionEquality().equals(other._pokemons, _pokemons));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_pokemons));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PokeballEventGetDominantColorsCopyWith<_$_PokeballEventGetDominantColors>
+      get copyWith => __$$_PokeballEventGetDominantColorsCopyWithImpl<
+          _$_PokeballEventGetDominantColors>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(List<PokemonListItemEntity> pokemons)
+        getDominantColors,
+    required TResult Function(
+            List<PokemonListItemEntity> pokemons, List<Color> dominantColors)
+        getCaughtPokemon,
+  }) {
+    return getDominantColors(pokemons);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(List<PokemonListItemEntity> pokemons)? getDominantColors,
+    TResult? Function(
+            List<PokemonListItemEntity> pokemons, List<Color> dominantColors)?
+        getCaughtPokemon,
+  }) {
+    return getDominantColors?.call(pokemons);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<PokemonListItemEntity> pokemons)? getDominantColors,
+    TResult Function(
+            List<PokemonListItemEntity> pokemons, List<Color> dominantColors)?
+        getCaughtPokemon,
+    required TResult orElse(),
+  }) {
+    if (getDominantColors != null) {
+      return getDominantColors(pokemons);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PokeballEventInitial value) initial,
+    required TResult Function(_PokeballEventGetDominantColors value)
+        getDominantColors,
+    required TResult Function(_PokeballEventGetCaughtPokemon value)
+        getCaughtPokemon,
+  }) {
+    return getDominantColors(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PokeballEventInitial value)? initial,
+    TResult? Function(_PokeballEventGetDominantColors value)? getDominantColors,
+    TResult? Function(_PokeballEventGetCaughtPokemon value)? getCaughtPokemon,
+  }) {
+    return getDominantColors?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PokeballEventInitial value)? initial,
+    TResult Function(_PokeballEventGetDominantColors value)? getDominantColors,
+    TResult Function(_PokeballEventGetCaughtPokemon value)? getCaughtPokemon,
+    required TResult orElse(),
+  }) {
+    if (getDominantColors != null) {
+      return getDominantColors(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PokeballEventGetDominantColors implements PokeballEvent {
+  const factory _PokeballEventGetDominantColors(
+          final List<PokemonListItemEntity> pokemons) =
+      _$_PokeballEventGetDominantColors;
+
+  List<PokemonListItemEntity> get pokemons;
+  @JsonKey(ignore: true)
+  _$$_PokeballEventGetDominantColorsCopyWith<_$_PokeballEventGetDominantColors>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$$_PokeballEventGetCaughtPokemonCopyWith<$Res> {
   factory _$$_PokeballEventGetCaughtPokemonCopyWith(
           _$_PokeballEventGetCaughtPokemon value,
           $Res Function(_$_PokeballEventGetCaughtPokemon) then) =
       __$$_PokeballEventGetCaughtPokemonCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<PokemonListItemEntity> pokemons});
+  $Res call({List<PokemonListItemEntity> pokemons, List<Color> dominantColors});
 }
 
 /// @nodoc
@@ -203,12 +391,17 @@ class __$$_PokeballEventGetCaughtPokemonCopyWithImpl<$Res>
   @override
   $Res call({
     Object? pokemons = null,
+    Object? dominantColors = null,
   }) {
     return _then(_$_PokeballEventGetCaughtPokemon(
       null == pokemons
           ? _value._pokemons
           : pokemons // ignore: cast_nullable_to_non_nullable
               as List<PokemonListItemEntity>,
+      null == dominantColors
+          ? _value._dominantColors
+          : dominantColors // ignore: cast_nullable_to_non_nullable
+              as List<Color>,
     ));
   }
 }
@@ -218,8 +411,10 @@ class __$$_PokeballEventGetCaughtPokemonCopyWithImpl<$Res>
 class _$_PokeballEventGetCaughtPokemon
     implements _PokeballEventGetCaughtPokemon {
   const _$_PokeballEventGetCaughtPokemon(
-      final List<PokemonListItemEntity> pokemons)
-      : _pokemons = pokemons;
+      final List<PokemonListItemEntity> pokemons,
+      final List<Color> dominantColors)
+      : _pokemons = pokemons,
+        _dominantColors = dominantColors;
 
   final List<PokemonListItemEntity> _pokemons;
   @override
@@ -229,9 +424,17 @@ class _$_PokeballEventGetCaughtPokemon
     return EqualUnmodifiableListView(_pokemons);
   }
 
+  final List<Color> _dominantColors;
+  @override
+  List<Color> get dominantColors {
+    if (_dominantColors is EqualUnmodifiableListView) return _dominantColors;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_dominantColors);
+  }
+
   @override
   String toString() {
-    return 'PokeballEvent.getCaughtPokemon(pokemons: $pokemons)';
+    return 'PokeballEvent.getCaughtPokemon(pokemons: $pokemons, dominantColors: $dominantColors)';
   }
 
   @override
@@ -239,12 +442,16 @@ class _$_PokeballEventGetCaughtPokemon
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PokeballEventGetCaughtPokemon &&
-            const DeepCollectionEquality().equals(other._pokemons, _pokemons));
+            const DeepCollectionEquality().equals(other._pokemons, _pokemons) &&
+            const DeepCollectionEquality()
+                .equals(other._dominantColors, _dominantColors));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_pokemons));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_pokemons),
+      const DeepCollectionEquality().hash(_dominantColors));
 
   @JsonKey(ignore: true)
   @override
@@ -258,29 +465,38 @@ class _$_PokeballEventGetCaughtPokemon
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(List<PokemonListItemEntity> pokemons)
+        getDominantColors,
+    required TResult Function(
+            List<PokemonListItemEntity> pokemons, List<Color> dominantColors)
         getCaughtPokemon,
   }) {
-    return getCaughtPokemon(pokemons);
+    return getCaughtPokemon(pokemons, dominantColors);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<PokemonListItemEntity> pokemons)? getCaughtPokemon,
+    TResult? Function(List<PokemonListItemEntity> pokemons)? getDominantColors,
+    TResult? Function(
+            List<PokemonListItemEntity> pokemons, List<Color> dominantColors)?
+        getCaughtPokemon,
   }) {
-    return getCaughtPokemon?.call(pokemons);
+    return getCaughtPokemon?.call(pokemons, dominantColors);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<PokemonListItemEntity> pokemons)? getCaughtPokemon,
+    TResult Function(List<PokemonListItemEntity> pokemons)? getDominantColors,
+    TResult Function(
+            List<PokemonListItemEntity> pokemons, List<Color> dominantColors)?
+        getCaughtPokemon,
     required TResult orElse(),
   }) {
     if (getCaughtPokemon != null) {
-      return getCaughtPokemon(pokemons);
+      return getCaughtPokemon(pokemons, dominantColors);
     }
     return orElse();
   }
@@ -289,6 +505,8 @@ class _$_PokeballEventGetCaughtPokemon
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_PokeballEventInitial value) initial,
+    required TResult Function(_PokeballEventGetDominantColors value)
+        getDominantColors,
     required TResult Function(_PokeballEventGetCaughtPokemon value)
         getCaughtPokemon,
   }) {
@@ -299,6 +517,7 @@ class _$_PokeballEventGetCaughtPokemon
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PokeballEventInitial value)? initial,
+    TResult? Function(_PokeballEventGetDominantColors value)? getDominantColors,
     TResult? Function(_PokeballEventGetCaughtPokemon value)? getCaughtPokemon,
   }) {
     return getCaughtPokemon?.call(this);
@@ -308,6 +527,7 @@ class _$_PokeballEventGetCaughtPokemon
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PokeballEventInitial value)? initial,
+    TResult Function(_PokeballEventGetDominantColors value)? getDominantColors,
     TResult Function(_PokeballEventGetCaughtPokemon value)? getCaughtPokemon,
     required TResult orElse(),
   }) {
@@ -320,10 +540,11 @@ class _$_PokeballEventGetCaughtPokemon
 
 abstract class _PokeballEventGetCaughtPokemon implements PokeballEvent {
   const factory _PokeballEventGetCaughtPokemon(
-          final List<PokemonListItemEntity> pokemons) =
-      _$_PokeballEventGetCaughtPokemon;
+      final List<PokemonListItemEntity> pokemons,
+      final List<Color> dominantColors) = _$_PokeballEventGetCaughtPokemon;
 
   List<PokemonListItemEntity> get pokemons;
+  List<Color> get dominantColors;
   @JsonKey(ignore: true)
   _$$_PokeballEventGetCaughtPokemonCopyWith<_$_PokeballEventGetCaughtPokemon>
       get copyWith => throw _privateConstructorUsedError;
@@ -333,6 +554,7 @@ abstract class _PokeballEventGetCaughtPokemon implements PokeballEvent {
 mixin _$PokeballState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isRefreshed => throw _privateConstructorUsedError;
+  bool get isDominantColorsRefreshed => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
   List<PokemonListItemEntity> get pokemons =>
       throw _privateConstructorUsedError;
@@ -352,6 +574,7 @@ abstract class $PokeballStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool isRefreshed,
+      bool isDominantColorsRefreshed,
       String? message,
       List<PokemonListItemEntity> pokemons,
       List<Color> dominantColors});
@@ -372,6 +595,7 @@ class _$PokeballStateCopyWithImpl<$Res, $Val extends PokeballState>
   $Res call({
     Object? isLoading = null,
     Object? isRefreshed = null,
+    Object? isDominantColorsRefreshed = null,
     Object? message = freezed,
     Object? pokemons = null,
     Object? dominantColors = null,
@@ -384,6 +608,10 @@ class _$PokeballStateCopyWithImpl<$Res, $Val extends PokeballState>
       isRefreshed: null == isRefreshed
           ? _value.isRefreshed
           : isRefreshed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDominantColorsRefreshed: null == isDominantColorsRefreshed
+          ? _value.isDominantColorsRefreshed
+          : isDominantColorsRefreshed // ignore: cast_nullable_to_non_nullable
               as bool,
       message: freezed == message
           ? _value.message
@@ -412,6 +640,7 @@ abstract class _$$_PokeballStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool isRefreshed,
+      bool isDominantColorsRefreshed,
       String? message,
       List<PokemonListItemEntity> pokemons,
       List<Color> dominantColors});
@@ -430,6 +659,7 @@ class __$$_PokeballStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? isRefreshed = null,
+    Object? isDominantColorsRefreshed = null,
     Object? message = freezed,
     Object? pokemons = null,
     Object? dominantColors = null,
@@ -442,6 +672,10 @@ class __$$_PokeballStateCopyWithImpl<$Res>
       isRefreshed: null == isRefreshed
           ? _value.isRefreshed
           : isRefreshed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDominantColorsRefreshed: null == isDominantColorsRefreshed
+          ? _value.isDominantColorsRefreshed
+          : isDominantColorsRefreshed // ignore: cast_nullable_to_non_nullable
               as bool,
       message: freezed == message
           ? _value.message
@@ -465,6 +699,7 @@ class _$_PokeballState extends _PokeballState {
   const _$_PokeballState(
       {required this.isLoading,
       required this.isRefreshed,
+      required this.isDominantColorsRefreshed,
       required this.message,
       required final List<PokemonListItemEntity> pokemons,
       required final List<Color> dominantColors})
@@ -476,6 +711,8 @@ class _$_PokeballState extends _PokeballState {
   final bool isLoading;
   @override
   final bool isRefreshed;
+  @override
+  final bool isDominantColorsRefreshed;
   @override
   final String? message;
   final List<PokemonListItemEntity> _pokemons;
@@ -496,7 +733,7 @@ class _$_PokeballState extends _PokeballState {
 
   @override
   String toString() {
-    return 'PokeballState(isLoading: $isLoading, isRefreshed: $isRefreshed, message: $message, pokemons: $pokemons, dominantColors: $dominantColors)';
+    return 'PokeballState(isLoading: $isLoading, isRefreshed: $isRefreshed, isDominantColorsRefreshed: $isDominantColorsRefreshed, message: $message, pokemons: $pokemons, dominantColors: $dominantColors)';
   }
 
   @override
@@ -508,6 +745,9 @@ class _$_PokeballState extends _PokeballState {
                 other.isLoading == isLoading) &&
             (identical(other.isRefreshed, isRefreshed) ||
                 other.isRefreshed == isRefreshed) &&
+            (identical(other.isDominantColorsRefreshed,
+                    isDominantColorsRefreshed) ||
+                other.isDominantColorsRefreshed == isDominantColorsRefreshed) &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality().equals(other._pokemons, _pokemons) &&
             const DeepCollectionEquality()
@@ -519,6 +759,7 @@ class _$_PokeballState extends _PokeballState {
       runtimeType,
       isLoading,
       isRefreshed,
+      isDominantColorsRefreshed,
       message,
       const DeepCollectionEquality().hash(_pokemons),
       const DeepCollectionEquality().hash(_dominantColors));
@@ -534,6 +775,7 @@ abstract class _PokeballState extends PokeballState {
   const factory _PokeballState(
       {required final bool isLoading,
       required final bool isRefreshed,
+      required final bool isDominantColorsRefreshed,
       required final String? message,
       required final List<PokemonListItemEntity> pokemons,
       required final List<Color> dominantColors}) = _$_PokeballState;
@@ -543,6 +785,8 @@ abstract class _PokeballState extends PokeballState {
   bool get isLoading;
   @override
   bool get isRefreshed;
+  @override
+  bool get isDominantColorsRefreshed;
   @override
   String? get message;
   @override

@@ -6,8 +6,9 @@ import 'package:pokedex_f/app/pages/pokedex_search/widgets/pokedex_search_result
 import 'package:pokedex_f/app/pages/pokedex_search/widgets/pokedex_search_result_tile.dart';
 import 'package:pokedex_f/app/routes/route_path.dart';
 import 'package:pokedex_f/app/styles/colors.dart';
+import 'package:pokedex_f/app/utils/color_mapper.dart';
 import 'package:pokedex_f/app/widgets/ui_helper.dart';
-import 'package:pokedex_f/injection.dart';
+import 'package:pokedex_f/di/injection.dart';
 
 class PokedexSearchScreen extends StatefulWidget {
   const PokedexSearchScreen({super.key});
@@ -17,19 +18,18 @@ class PokedexSearchScreen extends StatefulWidget {
 }
 
 class _PokedexSearchScreenState extends State<PokedexSearchScreen> {
-  late final PokedexSearchBloc _pokedexSearchBloc;
+  PokedexSearchBloc get _pokedexSearchBloc =>
+      Injector.resolve<PokedexSearchBloc>();
   late final TextEditingController _queryController;
 
   @override
   void initState() {
     _queryController = TextEditingController();
-    _pokedexSearchBloc = getIt<PokedexSearchBloc>();
     super.initState();
   }
 
   @override
   void dispose() {
-    _pokedexSearchBloc.close();
     _queryController.dispose();
     super.dispose();
   }
@@ -42,12 +42,21 @@ class _PokedexSearchScreenState extends State<PokedexSearchScreen> {
           _pokedexSearchBloc..add(const PokedexSearchEvent.started()),
       child: Builder(builder: (context) {
         return BlocListener<PokedexSearchBloc, PokedexSearchState>(
-          listener: (context, state) {
+          listener: (context, state) async {
             if (state.goToDetail) {
               context.push(
                 "${RoutePath.pokedexScreen}/pokemon/${state.pokemonName}",
                 extra: state.dominantColor,
               );
+            } else if (state.isRefreshed && !state.isDominantColorsRefreshed) {
+              context.read<PokedexSearchBloc>().add(
+                    PokedexSearchEvent.searchDominantColors(
+                      state.queryResult,
+                      await ColorMapper.getDominantColors(
+                        state.queryResult.map((e) => e.spriteUrl).toList(),
+                      ),
+                    ),
+                  );
             }
           },
           child: Scaffold(
@@ -90,7 +99,7 @@ class _PokedexSearchScreenState extends State<PokedexSearchScreen> {
                           ),
                         ),
                         const Divider(thickness: 1),
-                        if (state.isLoading)
+                        if (state.isLoading || !state.isDominantColorsRefreshed)
                           Expanded(
                             child: Center(
                               child: UIHelper.pokeballLoading(
@@ -99,7 +108,9 @@ class _PokedexSearchScreenState extends State<PokedexSearchScreen> {
                               ),
                             ),
                           ),
-                        if (!state.isLoading && state.isRefreshed)
+                        if (!state.isLoading &&
+                            state.isRefreshed &&
+                            state.isDominantColorsRefreshed)
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

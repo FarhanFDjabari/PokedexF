@@ -22,15 +22,14 @@ Application that shows pokemon list from PokeApi built with Flutter that demonst
   <img src="previews/preview.png" alt="screenshot"/>
 </p>
 
-<img src="previews/preview.gif" align="right" width="250" alt="app-preview"/>
+<img src="previews/preview.gif" align="right" width="320" alt="app-preview"/>
 
 ## Open Source Libraries
 
 - Minimum SDK level 16
 - Architecture
   - [BLoC](https://bloclibrary.dev/) (Business Logic Component)
-  - [Injectable](https://pub.dev/packages/injectable): Convenient code generator for get_it.
-  - [GetIt](https://pub.dev/packages/get_it): Simple direct Service Locator to decouple interfaces and access the implementation from everywhere.
+  - [Kiwi](https://pub.dev/packages/kiwi): A simple yet efficient dependency injection container for Dart and Flutter.
   - Repository pattern
 - [Retrofit](https://pub.dev/packages/retrofit): Retrofit is an dio client generator to generate api services module.
 - [Dio](https://pub.dev/packages/dio): A powerful HTTP package for Dart/Flutter

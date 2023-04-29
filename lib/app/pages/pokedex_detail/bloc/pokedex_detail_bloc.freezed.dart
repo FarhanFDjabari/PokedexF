@@ -21,6 +21,7 @@ mixin _$PokedexDetailEvent {
     required TResult Function() initial,
     required TResult Function(String name) getPokemon,
     required TResult Function(PokemonEntity? pokemon) catchPokemon,
+    required TResult Function(PokemonEntity? pokemon) recatchPokemon,
     required TResult Function(PokemonEntity? pokemon) releasePokemon,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,6 +30,7 @@ mixin _$PokedexDetailEvent {
     TResult? Function()? initial,
     TResult? Function(String name)? getPokemon,
     TResult? Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult? Function(PokemonEntity? pokemon)? recatchPokemon,
     TResult? Function(PokemonEntity? pokemon)? releasePokemon,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,6 +39,7 @@ mixin _$PokedexDetailEvent {
     TResult Function()? initial,
     TResult Function(String name)? getPokemon,
     TResult Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult Function(PokemonEntity? pokemon)? recatchPokemon,
     TResult Function(PokemonEntity? pokemon)? releasePokemon,
     required TResult orElse(),
   }) =>
@@ -47,6 +50,8 @@ mixin _$PokedexDetailEvent {
     required TResult Function(_PokedexDetailEventGetPokemon value) getPokemon,
     required TResult Function(_PokedexDetailEventCatchPokemon value)
         catchPokemon,
+    required TResult Function(_PokedexDetailEventRecatchPokemon value)
+        recatchPokemon,
     required TResult Function(_PokedexDetailEventReleasePokemon value)
         releasePokemon,
   }) =>
@@ -56,6 +61,7 @@ mixin _$PokedexDetailEvent {
     TResult? Function(_PokedexDetailEventInitial value)? initial,
     TResult? Function(_PokedexDetailEventGetPokemon value)? getPokemon,
     TResult? Function(_PokedexDetailEventCatchPokemon value)? catchPokemon,
+    TResult? Function(_PokedexDetailEventRecatchPokemon value)? recatchPokemon,
     TResult? Function(_PokedexDetailEventReleasePokemon value)? releasePokemon,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +70,7 @@ mixin _$PokedexDetailEvent {
     TResult Function(_PokedexDetailEventInitial value)? initial,
     TResult Function(_PokedexDetailEventGetPokemon value)? getPokemon,
     TResult Function(_PokedexDetailEventCatchPokemon value)? catchPokemon,
+    TResult Function(_PokedexDetailEventRecatchPokemon value)? recatchPokemon,
     TResult Function(_PokedexDetailEventReleasePokemon value)? releasePokemon,
     required TResult orElse(),
   }) =>
@@ -132,6 +139,7 @@ class _$_PokedexDetailEventInitial implements _PokedexDetailEventInitial {
     required TResult Function() initial,
     required TResult Function(String name) getPokemon,
     required TResult Function(PokemonEntity? pokemon) catchPokemon,
+    required TResult Function(PokemonEntity? pokemon) recatchPokemon,
     required TResult Function(PokemonEntity? pokemon) releasePokemon,
   }) {
     return initial();
@@ -143,6 +151,7 @@ class _$_PokedexDetailEventInitial implements _PokedexDetailEventInitial {
     TResult? Function()? initial,
     TResult? Function(String name)? getPokemon,
     TResult? Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult? Function(PokemonEntity? pokemon)? recatchPokemon,
     TResult? Function(PokemonEntity? pokemon)? releasePokemon,
   }) {
     return initial?.call();
@@ -154,6 +163,7 @@ class _$_PokedexDetailEventInitial implements _PokedexDetailEventInitial {
     TResult Function()? initial,
     TResult Function(String name)? getPokemon,
     TResult Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult Function(PokemonEntity? pokemon)? recatchPokemon,
     TResult Function(PokemonEntity? pokemon)? releasePokemon,
     required TResult orElse(),
   }) {
@@ -170,6 +180,8 @@ class _$_PokedexDetailEventInitial implements _PokedexDetailEventInitial {
     required TResult Function(_PokedexDetailEventGetPokemon value) getPokemon,
     required TResult Function(_PokedexDetailEventCatchPokemon value)
         catchPokemon,
+    required TResult Function(_PokedexDetailEventRecatchPokemon value)
+        recatchPokemon,
     required TResult Function(_PokedexDetailEventReleasePokemon value)
         releasePokemon,
   }) {
@@ -182,6 +194,7 @@ class _$_PokedexDetailEventInitial implements _PokedexDetailEventInitial {
     TResult? Function(_PokedexDetailEventInitial value)? initial,
     TResult? Function(_PokedexDetailEventGetPokemon value)? getPokemon,
     TResult? Function(_PokedexDetailEventCatchPokemon value)? catchPokemon,
+    TResult? Function(_PokedexDetailEventRecatchPokemon value)? recatchPokemon,
     TResult? Function(_PokedexDetailEventReleasePokemon value)? releasePokemon,
   }) {
     return initial?.call(this);
@@ -193,6 +206,7 @@ class _$_PokedexDetailEventInitial implements _PokedexDetailEventInitial {
     TResult Function(_PokedexDetailEventInitial value)? initial,
     TResult Function(_PokedexDetailEventGetPokemon value)? getPokemon,
     TResult Function(_PokedexDetailEventCatchPokemon value)? catchPokemon,
+    TResult Function(_PokedexDetailEventRecatchPokemon value)? recatchPokemon,
     TResult Function(_PokedexDetailEventReleasePokemon value)? releasePokemon,
     required TResult orElse(),
   }) {
@@ -278,6 +292,7 @@ class _$_PokedexDetailEventGetPokemon implements _PokedexDetailEventGetPokemon {
     required TResult Function() initial,
     required TResult Function(String name) getPokemon,
     required TResult Function(PokemonEntity? pokemon) catchPokemon,
+    required TResult Function(PokemonEntity? pokemon) recatchPokemon,
     required TResult Function(PokemonEntity? pokemon) releasePokemon,
   }) {
     return getPokemon(name);
@@ -289,6 +304,7 @@ class _$_PokedexDetailEventGetPokemon implements _PokedexDetailEventGetPokemon {
     TResult? Function()? initial,
     TResult? Function(String name)? getPokemon,
     TResult? Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult? Function(PokemonEntity? pokemon)? recatchPokemon,
     TResult? Function(PokemonEntity? pokemon)? releasePokemon,
   }) {
     return getPokemon?.call(name);
@@ -300,6 +316,7 @@ class _$_PokedexDetailEventGetPokemon implements _PokedexDetailEventGetPokemon {
     TResult Function()? initial,
     TResult Function(String name)? getPokemon,
     TResult Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult Function(PokemonEntity? pokemon)? recatchPokemon,
     TResult Function(PokemonEntity? pokemon)? releasePokemon,
     required TResult orElse(),
   }) {
@@ -316,6 +333,8 @@ class _$_PokedexDetailEventGetPokemon implements _PokedexDetailEventGetPokemon {
     required TResult Function(_PokedexDetailEventGetPokemon value) getPokemon,
     required TResult Function(_PokedexDetailEventCatchPokemon value)
         catchPokemon,
+    required TResult Function(_PokedexDetailEventRecatchPokemon value)
+        recatchPokemon,
     required TResult Function(_PokedexDetailEventReleasePokemon value)
         releasePokemon,
   }) {
@@ -328,6 +347,7 @@ class _$_PokedexDetailEventGetPokemon implements _PokedexDetailEventGetPokemon {
     TResult? Function(_PokedexDetailEventInitial value)? initial,
     TResult? Function(_PokedexDetailEventGetPokemon value)? getPokemon,
     TResult? Function(_PokedexDetailEventCatchPokemon value)? catchPokemon,
+    TResult? Function(_PokedexDetailEventRecatchPokemon value)? recatchPokemon,
     TResult? Function(_PokedexDetailEventReleasePokemon value)? releasePokemon,
   }) {
     return getPokemon?.call(this);
@@ -339,6 +359,7 @@ class _$_PokedexDetailEventGetPokemon implements _PokedexDetailEventGetPokemon {
     TResult Function(_PokedexDetailEventInitial value)? initial,
     TResult Function(_PokedexDetailEventGetPokemon value)? getPokemon,
     TResult Function(_PokedexDetailEventCatchPokemon value)? catchPokemon,
+    TResult Function(_PokedexDetailEventRecatchPokemon value)? recatchPokemon,
     TResult Function(_PokedexDetailEventReleasePokemon value)? releasePokemon,
     required TResult orElse(),
   }) {
@@ -431,6 +452,7 @@ class _$_PokedexDetailEventCatchPokemon
     required TResult Function() initial,
     required TResult Function(String name) getPokemon,
     required TResult Function(PokemonEntity? pokemon) catchPokemon,
+    required TResult Function(PokemonEntity? pokemon) recatchPokemon,
     required TResult Function(PokemonEntity? pokemon) releasePokemon,
   }) {
     return catchPokemon(pokemon);
@@ -442,6 +464,7 @@ class _$_PokedexDetailEventCatchPokemon
     TResult? Function()? initial,
     TResult? Function(String name)? getPokemon,
     TResult? Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult? Function(PokemonEntity? pokemon)? recatchPokemon,
     TResult? Function(PokemonEntity? pokemon)? releasePokemon,
   }) {
     return catchPokemon?.call(pokemon);
@@ -453,6 +476,7 @@ class _$_PokedexDetailEventCatchPokemon
     TResult Function()? initial,
     TResult Function(String name)? getPokemon,
     TResult Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult Function(PokemonEntity? pokemon)? recatchPokemon,
     TResult Function(PokemonEntity? pokemon)? releasePokemon,
     required TResult orElse(),
   }) {
@@ -469,6 +493,8 @@ class _$_PokedexDetailEventCatchPokemon
     required TResult Function(_PokedexDetailEventGetPokemon value) getPokemon,
     required TResult Function(_PokedexDetailEventCatchPokemon value)
         catchPokemon,
+    required TResult Function(_PokedexDetailEventRecatchPokemon value)
+        recatchPokemon,
     required TResult Function(_PokedexDetailEventReleasePokemon value)
         releasePokemon,
   }) {
@@ -481,6 +507,7 @@ class _$_PokedexDetailEventCatchPokemon
     TResult? Function(_PokedexDetailEventInitial value)? initial,
     TResult? Function(_PokedexDetailEventGetPokemon value)? getPokemon,
     TResult? Function(_PokedexDetailEventCatchPokemon value)? catchPokemon,
+    TResult? Function(_PokedexDetailEventRecatchPokemon value)? recatchPokemon,
     TResult? Function(_PokedexDetailEventReleasePokemon value)? releasePokemon,
   }) {
     return catchPokemon?.call(this);
@@ -492,6 +519,7 @@ class _$_PokedexDetailEventCatchPokemon
     TResult Function(_PokedexDetailEventInitial value)? initial,
     TResult Function(_PokedexDetailEventGetPokemon value)? getPokemon,
     TResult Function(_PokedexDetailEventCatchPokemon value)? catchPokemon,
+    TResult Function(_PokedexDetailEventRecatchPokemon value)? recatchPokemon,
     TResult Function(_PokedexDetailEventReleasePokemon value)? releasePokemon,
     required TResult orElse(),
   }) {
@@ -509,6 +537,168 @@ abstract class _PokedexDetailEventCatchPokemon implements PokedexDetailEvent {
   PokemonEntity? get pokemon;
   @JsonKey(ignore: true)
   _$$_PokedexDetailEventCatchPokemonCopyWith<_$_PokedexDetailEventCatchPokemon>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_PokedexDetailEventRecatchPokemonCopyWith<$Res> {
+  factory _$$_PokedexDetailEventRecatchPokemonCopyWith(
+          _$_PokedexDetailEventRecatchPokemon value,
+          $Res Function(_$_PokedexDetailEventRecatchPokemon) then) =
+      __$$_PokedexDetailEventRecatchPokemonCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PokemonEntity? pokemon});
+}
+
+/// @nodoc
+class __$$_PokedexDetailEventRecatchPokemonCopyWithImpl<$Res>
+    extends _$PokedexDetailEventCopyWithImpl<$Res,
+        _$_PokedexDetailEventRecatchPokemon>
+    implements _$$_PokedexDetailEventRecatchPokemonCopyWith<$Res> {
+  __$$_PokedexDetailEventRecatchPokemonCopyWithImpl(
+      _$_PokedexDetailEventRecatchPokemon _value,
+      $Res Function(_$_PokedexDetailEventRecatchPokemon) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? pokemon = freezed,
+  }) {
+    return _then(_$_PokedexDetailEventRecatchPokemon(
+      freezed == pokemon
+          ? _value.pokemon
+          : pokemon // ignore: cast_nullable_to_non_nullable
+              as PokemonEntity?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_PokedexDetailEventRecatchPokemon
+    implements _PokedexDetailEventRecatchPokemon {
+  const _$_PokedexDetailEventRecatchPokemon(this.pokemon);
+
+  @override
+  final PokemonEntity? pokemon;
+
+  @override
+  String toString() {
+    return 'PokedexDetailEvent.recatchPokemon(pokemon: $pokemon)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PokedexDetailEventRecatchPokemon &&
+            (identical(other.pokemon, pokemon) || other.pokemon == pokemon));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, pokemon);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PokedexDetailEventRecatchPokemonCopyWith<
+          _$_PokedexDetailEventRecatchPokemon>
+      get copyWith => __$$_PokedexDetailEventRecatchPokemonCopyWithImpl<
+          _$_PokedexDetailEventRecatchPokemon>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(String name) getPokemon,
+    required TResult Function(PokemonEntity? pokemon) catchPokemon,
+    required TResult Function(PokemonEntity? pokemon) recatchPokemon,
+    required TResult Function(PokemonEntity? pokemon) releasePokemon,
+  }) {
+    return recatchPokemon(pokemon);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(String name)? getPokemon,
+    TResult? Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult? Function(PokemonEntity? pokemon)? recatchPokemon,
+    TResult? Function(PokemonEntity? pokemon)? releasePokemon,
+  }) {
+    return recatchPokemon?.call(pokemon);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(String name)? getPokemon,
+    TResult Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult Function(PokemonEntity? pokemon)? recatchPokemon,
+    TResult Function(PokemonEntity? pokemon)? releasePokemon,
+    required TResult orElse(),
+  }) {
+    if (recatchPokemon != null) {
+      return recatchPokemon(pokemon);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PokedexDetailEventInitial value) initial,
+    required TResult Function(_PokedexDetailEventGetPokemon value) getPokemon,
+    required TResult Function(_PokedexDetailEventCatchPokemon value)
+        catchPokemon,
+    required TResult Function(_PokedexDetailEventRecatchPokemon value)
+        recatchPokemon,
+    required TResult Function(_PokedexDetailEventReleasePokemon value)
+        releasePokemon,
+  }) {
+    return recatchPokemon(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PokedexDetailEventInitial value)? initial,
+    TResult? Function(_PokedexDetailEventGetPokemon value)? getPokemon,
+    TResult? Function(_PokedexDetailEventCatchPokemon value)? catchPokemon,
+    TResult? Function(_PokedexDetailEventRecatchPokemon value)? recatchPokemon,
+    TResult? Function(_PokedexDetailEventReleasePokemon value)? releasePokemon,
+  }) {
+    return recatchPokemon?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PokedexDetailEventInitial value)? initial,
+    TResult Function(_PokedexDetailEventGetPokemon value)? getPokemon,
+    TResult Function(_PokedexDetailEventCatchPokemon value)? catchPokemon,
+    TResult Function(_PokedexDetailEventRecatchPokemon value)? recatchPokemon,
+    TResult Function(_PokedexDetailEventReleasePokemon value)? releasePokemon,
+    required TResult orElse(),
+  }) {
+    if (recatchPokemon != null) {
+      return recatchPokemon(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PokedexDetailEventRecatchPokemon implements PokedexDetailEvent {
+  const factory _PokedexDetailEventRecatchPokemon(
+      final PokemonEntity? pokemon) = _$_PokedexDetailEventRecatchPokemon;
+
+  PokemonEntity? get pokemon;
+  @JsonKey(ignore: true)
+  _$$_PokedexDetailEventRecatchPokemonCopyWith<
+          _$_PokedexDetailEventRecatchPokemon>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -585,6 +775,7 @@ class _$_PokedexDetailEventReleasePokemon
     required TResult Function() initial,
     required TResult Function(String name) getPokemon,
     required TResult Function(PokemonEntity? pokemon) catchPokemon,
+    required TResult Function(PokemonEntity? pokemon) recatchPokemon,
     required TResult Function(PokemonEntity? pokemon) releasePokemon,
   }) {
     return releasePokemon(pokemon);
@@ -596,6 +787,7 @@ class _$_PokedexDetailEventReleasePokemon
     TResult? Function()? initial,
     TResult? Function(String name)? getPokemon,
     TResult? Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult? Function(PokemonEntity? pokemon)? recatchPokemon,
     TResult? Function(PokemonEntity? pokemon)? releasePokemon,
   }) {
     return releasePokemon?.call(pokemon);
@@ -607,6 +799,7 @@ class _$_PokedexDetailEventReleasePokemon
     TResult Function()? initial,
     TResult Function(String name)? getPokemon,
     TResult Function(PokemonEntity? pokemon)? catchPokemon,
+    TResult Function(PokemonEntity? pokemon)? recatchPokemon,
     TResult Function(PokemonEntity? pokemon)? releasePokemon,
     required TResult orElse(),
   }) {
@@ -623,6 +816,8 @@ class _$_PokedexDetailEventReleasePokemon
     required TResult Function(_PokedexDetailEventGetPokemon value) getPokemon,
     required TResult Function(_PokedexDetailEventCatchPokemon value)
         catchPokemon,
+    required TResult Function(_PokedexDetailEventRecatchPokemon value)
+        recatchPokemon,
     required TResult Function(_PokedexDetailEventReleasePokemon value)
         releasePokemon,
   }) {
@@ -635,6 +830,7 @@ class _$_PokedexDetailEventReleasePokemon
     TResult? Function(_PokedexDetailEventInitial value)? initial,
     TResult? Function(_PokedexDetailEventGetPokemon value)? getPokemon,
     TResult? Function(_PokedexDetailEventCatchPokemon value)? catchPokemon,
+    TResult? Function(_PokedexDetailEventRecatchPokemon value)? recatchPokemon,
     TResult? Function(_PokedexDetailEventReleasePokemon value)? releasePokemon,
   }) {
     return releasePokemon?.call(this);
@@ -646,6 +842,7 @@ class _$_PokedexDetailEventReleasePokemon
     TResult Function(_PokedexDetailEventInitial value)? initial,
     TResult Function(_PokedexDetailEventGetPokemon value)? getPokemon,
     TResult Function(_PokedexDetailEventCatchPokemon value)? catchPokemon,
+    TResult Function(_PokedexDetailEventRecatchPokemon value)? recatchPokemon,
     TResult Function(_PokedexDetailEventReleasePokemon value)? releasePokemon,
     required TResult orElse(),
   }) {

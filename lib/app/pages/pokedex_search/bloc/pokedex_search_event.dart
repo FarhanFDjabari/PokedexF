@@ -7,4 +7,8 @@ class PokedexSearchEvent with _$PokedexSearchEvent {
       _PokedexSearchEventSearchPokemon;
   const factory PokedexSearchEvent.toDetail(
       String pokemonName, Color dominantColor) = _PokedexSearchEventToDetail;
+  const factory PokedexSearchEvent.searchDominantColors(
+          List<PokemonListItemEntity> containedPokemons,
+          List<Color> containedDominantColors) =
+      _PokedexSearchEventSearchDominantColors;
 }

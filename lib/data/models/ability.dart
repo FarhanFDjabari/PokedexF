@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-import 'ability.dart';
-
 class Ability extends Equatable {
   final Ability? ability;
   final bool? isHidden;

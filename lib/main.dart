@@ -4,14 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex_f/app/app.dart';
 import 'package:pokedex_f/helper/pokedex_bloc_observer.dart';
-import 'package:pokedex_f/injection.dart';
+import 'package:pokedex_f/di/injection.dart';
 import 'package:leak_tracker/leak_tracker.dart';
 
 void main() async {
   Bloc.observer = PokedexBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
 
-  await configureDependencies();
+  await Injector.setup();
 
   if (kReleaseMode) {
     debugPrint = (String? message, {int? wrapWidth}) {};

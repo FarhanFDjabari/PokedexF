@@ -11,7 +11,7 @@ import 'package:pokedex_f/app/widgets/collapse_app_bar.dart';
 import 'package:pokedex_f/app/widgets/collapse_mixin.dart';
 import 'package:pokedex_f/app/widgets/pokedex_scroll_view_header.dart';
 import 'package:pokedex_f/app/widgets/ui_helper.dart';
-import 'package:pokedex_f/injection.dart';
+import 'package:pokedex_f/di/injection.dart';
 
 class PokedexListScreen extends StatefulWidget {
   const PokedexListScreen({super.key});
@@ -23,12 +23,11 @@ class PokedexListScreen extends StatefulWidget {
 class _PokedexListScreenState extends State<PokedexListScreen>
     with CollapseMixin {
   late final ScrollController _scrollController;
-  late final PokedexListBloc _pokedexListBloc;
+  final PokedexListBloc _pokedexListBloc = Injector.resolve<PokedexListBloc>();
 
   @override
   void initState() {
     super.initState();
-    _pokedexListBloc = getIt<PokedexListBloc>();
     _scrollController = ScrollController();
     listenCollapse(controller: _scrollController);
   }
@@ -36,7 +35,6 @@ class _PokedexListScreenState extends State<PokedexListScreen>
   @override
   void dispose() {
     _scrollController.dispose();
-    _pokedexListBloc.close();
     super.dispose();
   }
 

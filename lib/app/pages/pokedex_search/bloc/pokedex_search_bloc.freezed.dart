@@ -21,6 +21,9 @@ mixin _$PokedexSearchEvent {
     required TResult Function() started,
     required TResult Function(String query) searchPokemon,
     required TResult Function(String pokemonName, Color dominantColor) toDetail,
+    required TResult Function(List<PokemonListItemEntity> containedPokemons,
+            List<Color> containedDominantColors)
+        searchDominantColors,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +31,9 @@ mixin _$PokedexSearchEvent {
     TResult? Function()? started,
     TResult? Function(String query)? searchPokemon,
     TResult? Function(String pokemonName, Color dominantColor)? toDetail,
+    TResult? Function(List<PokemonListItemEntity> containedPokemons,
+            List<Color> containedDominantColors)?
+        searchDominantColors,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +41,9 @@ mixin _$PokedexSearchEvent {
     TResult Function()? started,
     TResult Function(String query)? searchPokemon,
     TResult Function(String pokemonName, Color dominantColor)? toDetail,
+    TResult Function(List<PokemonListItemEntity> containedPokemons,
+            List<Color> containedDominantColors)?
+        searchDominantColors,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -44,6 +53,8 @@ mixin _$PokedexSearchEvent {
     required TResult Function(_PokedexSearchEventSearchPokemon value)
         searchPokemon,
     required TResult Function(_PokedexSearchEventToDetail value) toDetail,
+    required TResult Function(_PokedexSearchEventSearchDominantColors value)
+        searchDominantColors,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,6 +62,8 @@ mixin _$PokedexSearchEvent {
     TResult? Function(_PokedexSearchEventStarted value)? started,
     TResult? Function(_PokedexSearchEventSearchPokemon value)? searchPokemon,
     TResult? Function(_PokedexSearchEventToDetail value)? toDetail,
+    TResult? Function(_PokedexSearchEventSearchDominantColors value)?
+        searchDominantColors,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,6 +71,8 @@ mixin _$PokedexSearchEvent {
     TResult Function(_PokedexSearchEventStarted value)? started,
     TResult Function(_PokedexSearchEventSearchPokemon value)? searchPokemon,
     TResult Function(_PokedexSearchEventToDetail value)? toDetail,
+    TResult Function(_PokedexSearchEventSearchDominantColors value)?
+        searchDominantColors,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,6 +140,9 @@ class _$_PokedexSearchEventStarted implements _PokedexSearchEventStarted {
     required TResult Function() started,
     required TResult Function(String query) searchPokemon,
     required TResult Function(String pokemonName, Color dominantColor) toDetail,
+    required TResult Function(List<PokemonListItemEntity> containedPokemons,
+            List<Color> containedDominantColors)
+        searchDominantColors,
   }) {
     return started();
   }
@@ -135,6 +153,9 @@ class _$_PokedexSearchEventStarted implements _PokedexSearchEventStarted {
     TResult? Function()? started,
     TResult? Function(String query)? searchPokemon,
     TResult? Function(String pokemonName, Color dominantColor)? toDetail,
+    TResult? Function(List<PokemonListItemEntity> containedPokemons,
+            List<Color> containedDominantColors)?
+        searchDominantColors,
   }) {
     return started?.call();
   }
@@ -145,6 +166,9 @@ class _$_PokedexSearchEventStarted implements _PokedexSearchEventStarted {
     TResult Function()? started,
     TResult Function(String query)? searchPokemon,
     TResult Function(String pokemonName, Color dominantColor)? toDetail,
+    TResult Function(List<PokemonListItemEntity> containedPokemons,
+            List<Color> containedDominantColors)?
+        searchDominantColors,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -160,6 +184,8 @@ class _$_PokedexSearchEventStarted implements _PokedexSearchEventStarted {
     required TResult Function(_PokedexSearchEventSearchPokemon value)
         searchPokemon,
     required TResult Function(_PokedexSearchEventToDetail value) toDetail,
+    required TResult Function(_PokedexSearchEventSearchDominantColors value)
+        searchDominantColors,
   }) {
     return started(this);
   }
@@ -170,6 +196,8 @@ class _$_PokedexSearchEventStarted implements _PokedexSearchEventStarted {
     TResult? Function(_PokedexSearchEventStarted value)? started,
     TResult? Function(_PokedexSearchEventSearchPokemon value)? searchPokemon,
     TResult? Function(_PokedexSearchEventToDetail value)? toDetail,
+    TResult? Function(_PokedexSearchEventSearchDominantColors value)?
+        searchDominantColors,
   }) {
     return started?.call(this);
   }
@@ -180,6 +208,8 @@ class _$_PokedexSearchEventStarted implements _PokedexSearchEventStarted {
     TResult Function(_PokedexSearchEventStarted value)? started,
     TResult Function(_PokedexSearchEventSearchPokemon value)? searchPokemon,
     TResult Function(_PokedexSearchEventToDetail value)? toDetail,
+    TResult Function(_PokedexSearchEventSearchDominantColors value)?
+        searchDominantColors,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -266,6 +296,9 @@ class _$_PokedexSearchEventSearchPokemon
     required TResult Function() started,
     required TResult Function(String query) searchPokemon,
     required TResult Function(String pokemonName, Color dominantColor) toDetail,
+    required TResult Function(List<PokemonListItemEntity> containedPokemons,
+            List<Color> containedDominantColors)
+        searchDominantColors,
   }) {
     return searchPokemon(query);
   }
@@ -276,6 +309,9 @@ class _$_PokedexSearchEventSearchPokemon
     TResult? Function()? started,
     TResult? Function(String query)? searchPokemon,
     TResult? Function(String pokemonName, Color dominantColor)? toDetail,
+    TResult? Function(List<PokemonListItemEntity> containedPokemons,
+            List<Color> containedDominantColors)?
+        searchDominantColors,
   }) {
     return searchPokemon?.call(query);
   }
@@ -286,6 +322,9 @@ class _$_PokedexSearchEventSearchPokemon
     TResult Function()? started,
     TResult Function(String query)? searchPokemon,
     TResult Function(String pokemonName, Color dominantColor)? toDetail,
+    TResult Function(List<PokemonListItemEntity> containedPokemons,
+            List<Color> containedDominantColors)?
+        searchDominantColors,
     required TResult orElse(),
   }) {
     if (searchPokemon != null) {
@@ -301,6 +340,8 @@ class _$_PokedexSearchEventSearchPokemon
     required TResult Function(_PokedexSearchEventSearchPokemon value)
         searchPokemon,
     required TResult Function(_PokedexSearchEventToDetail value) toDetail,
+    required TResult Function(_PokedexSearchEventSearchDominantColors value)
+        searchDominantColors,
   }) {
     return searchPokemon(this);
   }
@@ -311,6 +352,8 @@ class _$_PokedexSearchEventSearchPokemon
     TResult? Function(_PokedexSearchEventStarted value)? started,
     TResult? Function(_PokedexSearchEventSearchPokemon value)? searchPokemon,
     TResult? Function(_PokedexSearchEventToDetail value)? toDetail,
+    TResult? Function(_PokedexSearchEventSearchDominantColors value)?
+        searchDominantColors,
   }) {
     return searchPokemon?.call(this);
   }
@@ -321,6 +364,8 @@ class _$_PokedexSearchEventSearchPokemon
     TResult Function(_PokedexSearchEventStarted value)? started,
     TResult Function(_PokedexSearchEventSearchPokemon value)? searchPokemon,
     TResult Function(_PokedexSearchEventToDetail value)? toDetail,
+    TResult Function(_PokedexSearchEventSearchDominantColors value)?
+        searchDominantColors,
     required TResult orElse(),
   }) {
     if (searchPokemon != null) {
@@ -422,6 +467,9 @@ class _$_PokedexSearchEventToDetail implements _PokedexSearchEventToDetail {
     required TResult Function() started,
     required TResult Function(String query) searchPokemon,
     required TResult Function(String pokemonName, Color dominantColor) toDetail,
+    required TResult Function(List<PokemonListItemEntity> containedPokemons,
+            List<Color> containedDominantColors)
+        searchDominantColors,
   }) {
     return toDetail(pokemonName, dominantColor);
   }
@@ -432,6 +480,9 @@ class _$_PokedexSearchEventToDetail implements _PokedexSearchEventToDetail {
     TResult? Function()? started,
     TResult? Function(String query)? searchPokemon,
     TResult? Function(String pokemonName, Color dominantColor)? toDetail,
+    TResult? Function(List<PokemonListItemEntity> containedPokemons,
+            List<Color> containedDominantColors)?
+        searchDominantColors,
   }) {
     return toDetail?.call(pokemonName, dominantColor);
   }
@@ -442,6 +493,9 @@ class _$_PokedexSearchEventToDetail implements _PokedexSearchEventToDetail {
     TResult Function()? started,
     TResult Function(String query)? searchPokemon,
     TResult Function(String pokemonName, Color dominantColor)? toDetail,
+    TResult Function(List<PokemonListItemEntity> containedPokemons,
+            List<Color> containedDominantColors)?
+        searchDominantColors,
     required TResult orElse(),
   }) {
     if (toDetail != null) {
@@ -457,6 +511,8 @@ class _$_PokedexSearchEventToDetail implements _PokedexSearchEventToDetail {
     required TResult Function(_PokedexSearchEventSearchPokemon value)
         searchPokemon,
     required TResult Function(_PokedexSearchEventToDetail value) toDetail,
+    required TResult Function(_PokedexSearchEventSearchDominantColors value)
+        searchDominantColors,
   }) {
     return toDetail(this);
   }
@@ -467,6 +523,8 @@ class _$_PokedexSearchEventToDetail implements _PokedexSearchEventToDetail {
     TResult? Function(_PokedexSearchEventStarted value)? started,
     TResult? Function(_PokedexSearchEventSearchPokemon value)? searchPokemon,
     TResult? Function(_PokedexSearchEventToDetail value)? toDetail,
+    TResult? Function(_PokedexSearchEventSearchDominantColors value)?
+        searchDominantColors,
   }) {
     return toDetail?.call(this);
   }
@@ -477,6 +535,8 @@ class _$_PokedexSearchEventToDetail implements _PokedexSearchEventToDetail {
     TResult Function(_PokedexSearchEventStarted value)? started,
     TResult Function(_PokedexSearchEventSearchPokemon value)? searchPokemon,
     TResult Function(_PokedexSearchEventToDetail value)? toDetail,
+    TResult Function(_PokedexSearchEventSearchDominantColors value)?
+        searchDominantColors,
     required TResult orElse(),
   }) {
     if (toDetail != null) {
@@ -499,9 +559,210 @@ abstract class _PokedexSearchEventToDetail implements PokedexSearchEvent {
 }
 
 /// @nodoc
+abstract class _$$_PokedexSearchEventSearchDominantColorsCopyWith<$Res> {
+  factory _$$_PokedexSearchEventSearchDominantColorsCopyWith(
+          _$_PokedexSearchEventSearchDominantColors value,
+          $Res Function(_$_PokedexSearchEventSearchDominantColors) then) =
+      __$$_PokedexSearchEventSearchDominantColorsCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {List<PokemonListItemEntity> containedPokemons,
+      List<Color> containedDominantColors});
+}
+
+/// @nodoc
+class __$$_PokedexSearchEventSearchDominantColorsCopyWithImpl<$Res>
+    extends _$PokedexSearchEventCopyWithImpl<$Res,
+        _$_PokedexSearchEventSearchDominantColors>
+    implements _$$_PokedexSearchEventSearchDominantColorsCopyWith<$Res> {
+  __$$_PokedexSearchEventSearchDominantColorsCopyWithImpl(
+      _$_PokedexSearchEventSearchDominantColors _value,
+      $Res Function(_$_PokedexSearchEventSearchDominantColors) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? containedPokemons = null,
+    Object? containedDominantColors = null,
+  }) {
+    return _then(_$_PokedexSearchEventSearchDominantColors(
+      null == containedPokemons
+          ? _value._containedPokemons
+          : containedPokemons // ignore: cast_nullable_to_non_nullable
+              as List<PokemonListItemEntity>,
+      null == containedDominantColors
+          ? _value._containedDominantColors
+          : containedDominantColors // ignore: cast_nullable_to_non_nullable
+              as List<Color>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_PokedexSearchEventSearchDominantColors
+    implements _PokedexSearchEventSearchDominantColors {
+  const _$_PokedexSearchEventSearchDominantColors(
+      final List<PokemonListItemEntity> containedPokemons,
+      final List<Color> containedDominantColors)
+      : _containedPokemons = containedPokemons,
+        _containedDominantColors = containedDominantColors;
+
+  final List<PokemonListItemEntity> _containedPokemons;
+  @override
+  List<PokemonListItemEntity> get containedPokemons {
+    if (_containedPokemons is EqualUnmodifiableListView)
+      return _containedPokemons;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_containedPokemons);
+  }
+
+  final List<Color> _containedDominantColors;
+  @override
+  List<Color> get containedDominantColors {
+    if (_containedDominantColors is EqualUnmodifiableListView)
+      return _containedDominantColors;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_containedDominantColors);
+  }
+
+  @override
+  String toString() {
+    return 'PokedexSearchEvent.searchDominantColors(containedPokemons: $containedPokemons, containedDominantColors: $containedDominantColors)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PokedexSearchEventSearchDominantColors &&
+            const DeepCollectionEquality()
+                .equals(other._containedPokemons, _containedPokemons) &&
+            const DeepCollectionEquality().equals(
+                other._containedDominantColors, _containedDominantColors));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_containedPokemons),
+      const DeepCollectionEquality().hash(_containedDominantColors));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PokedexSearchEventSearchDominantColorsCopyWith<
+          _$_PokedexSearchEventSearchDominantColors>
+      get copyWith => __$$_PokedexSearchEventSearchDominantColorsCopyWithImpl<
+          _$_PokedexSearchEventSearchDominantColors>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String query) searchPokemon,
+    required TResult Function(String pokemonName, Color dominantColor) toDetail,
+    required TResult Function(List<PokemonListItemEntity> containedPokemons,
+            List<Color> containedDominantColors)
+        searchDominantColors,
+  }) {
+    return searchDominantColors(containedPokemons, containedDominantColors);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String query)? searchPokemon,
+    TResult? Function(String pokemonName, Color dominantColor)? toDetail,
+    TResult? Function(List<PokemonListItemEntity> containedPokemons,
+            List<Color> containedDominantColors)?
+        searchDominantColors,
+  }) {
+    return searchDominantColors?.call(
+        containedPokemons, containedDominantColors);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String query)? searchPokemon,
+    TResult Function(String pokemonName, Color dominantColor)? toDetail,
+    TResult Function(List<PokemonListItemEntity> containedPokemons,
+            List<Color> containedDominantColors)?
+        searchDominantColors,
+    required TResult orElse(),
+  }) {
+    if (searchDominantColors != null) {
+      return searchDominantColors(containedPokemons, containedDominantColors);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PokedexSearchEventStarted value) started,
+    required TResult Function(_PokedexSearchEventSearchPokemon value)
+        searchPokemon,
+    required TResult Function(_PokedexSearchEventToDetail value) toDetail,
+    required TResult Function(_PokedexSearchEventSearchDominantColors value)
+        searchDominantColors,
+  }) {
+    return searchDominantColors(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PokedexSearchEventStarted value)? started,
+    TResult? Function(_PokedexSearchEventSearchPokemon value)? searchPokemon,
+    TResult? Function(_PokedexSearchEventToDetail value)? toDetail,
+    TResult? Function(_PokedexSearchEventSearchDominantColors value)?
+        searchDominantColors,
+  }) {
+    return searchDominantColors?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PokedexSearchEventStarted value)? started,
+    TResult Function(_PokedexSearchEventSearchPokemon value)? searchPokemon,
+    TResult Function(_PokedexSearchEventToDetail value)? toDetail,
+    TResult Function(_PokedexSearchEventSearchDominantColors value)?
+        searchDominantColors,
+    required TResult orElse(),
+  }) {
+    if (searchDominantColors != null) {
+      return searchDominantColors(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PokedexSearchEventSearchDominantColors
+    implements PokedexSearchEvent {
+  const factory _PokedexSearchEventSearchDominantColors(
+          final List<PokemonListItemEntity> containedPokemons,
+          final List<Color> containedDominantColors) =
+      _$_PokedexSearchEventSearchDominantColors;
+
+  List<PokemonListItemEntity> get containedPokemons;
+  List<Color> get containedDominantColors;
+  @JsonKey(ignore: true)
+  _$$_PokedexSearchEventSearchDominantColorsCopyWith<
+          _$_PokedexSearchEventSearchDominantColors>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$PokedexSearchState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isRefreshed => throw _privateConstructorUsedError;
+  bool get isDominantColorsRefreshed => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
   List<PokemonListItemEntity> get queryResult =>
       throw _privateConstructorUsedError;
@@ -526,6 +787,7 @@ abstract class $PokedexSearchStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool isRefreshed,
+      bool isDominantColorsRefreshed,
       String? message,
       List<PokemonListItemEntity> queryResult,
       List<PokemonListItemEntity> pokemonsList,
@@ -550,6 +812,7 @@ class _$PokedexSearchStateCopyWithImpl<$Res, $Val extends PokedexSearchState>
   $Res call({
     Object? isLoading = null,
     Object? isRefreshed = null,
+    Object? isDominantColorsRefreshed = null,
     Object? message = freezed,
     Object? queryResult = null,
     Object? pokemonsList = null,
@@ -566,6 +829,10 @@ class _$PokedexSearchStateCopyWithImpl<$Res, $Val extends PokedexSearchState>
       isRefreshed: null == isRefreshed
           ? _value.isRefreshed
           : isRefreshed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDominantColorsRefreshed: null == isDominantColorsRefreshed
+          ? _value.isDominantColorsRefreshed
+          : isDominantColorsRefreshed // ignore: cast_nullable_to_non_nullable
               as bool,
       message: freezed == message
           ? _value.message
@@ -610,6 +877,7 @@ abstract class _$$_PokedexSearchStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool isRefreshed,
+      bool isDominantColorsRefreshed,
       String? message,
       List<PokemonListItemEntity> queryResult,
       List<PokemonListItemEntity> pokemonsList,
@@ -632,6 +900,7 @@ class __$$_PokedexSearchStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? isRefreshed = null,
+    Object? isDominantColorsRefreshed = null,
     Object? message = freezed,
     Object? queryResult = null,
     Object? pokemonsList = null,
@@ -648,6 +917,10 @@ class __$$_PokedexSearchStateCopyWithImpl<$Res>
       isRefreshed: null == isRefreshed
           ? _value.isRefreshed
           : isRefreshed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDominantColorsRefreshed: null == isDominantColorsRefreshed
+          ? _value.isDominantColorsRefreshed
+          : isDominantColorsRefreshed // ignore: cast_nullable_to_non_nullable
               as bool,
       message: freezed == message
           ? _value.message
@@ -687,6 +960,7 @@ class _$_PokedexSearchState extends _PokedexSearchState {
   const _$_PokedexSearchState(
       {required this.isLoading,
       required this.isRefreshed,
+      required this.isDominantColorsRefreshed,
       required this.message,
       required final List<PokemonListItemEntity> queryResult,
       required final List<PokemonListItemEntity> pokemonsList,
@@ -703,6 +977,8 @@ class _$_PokedexSearchState extends _PokedexSearchState {
   final bool isLoading;
   @override
   final bool isRefreshed;
+  @override
+  final bool isDominantColorsRefreshed;
   @override
   final String? message;
   final List<PokemonListItemEntity> _queryResult;
@@ -739,7 +1015,7 @@ class _$_PokedexSearchState extends _PokedexSearchState {
 
   @override
   String toString() {
-    return 'PokedexSearchState(isLoading: $isLoading, isRefreshed: $isRefreshed, message: $message, queryResult: $queryResult, pokemonsList: $pokemonsList, dominantColorsData: $dominantColorsData, goToDetail: $goToDetail, pokemonName: $pokemonName, dominantColor: $dominantColor)';
+    return 'PokedexSearchState(isLoading: $isLoading, isRefreshed: $isRefreshed, isDominantColorsRefreshed: $isDominantColorsRefreshed, message: $message, queryResult: $queryResult, pokemonsList: $pokemonsList, dominantColorsData: $dominantColorsData, goToDetail: $goToDetail, pokemonName: $pokemonName, dominantColor: $dominantColor)';
   }
 
   @override
@@ -751,6 +1027,9 @@ class _$_PokedexSearchState extends _PokedexSearchState {
                 other.isLoading == isLoading) &&
             (identical(other.isRefreshed, isRefreshed) ||
                 other.isRefreshed == isRefreshed) &&
+            (identical(other.isDominantColorsRefreshed,
+                    isDominantColorsRefreshed) ||
+                other.isDominantColorsRefreshed == isDominantColorsRefreshed) &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality()
                 .equals(other._queryResult, _queryResult) &&
@@ -771,6 +1050,7 @@ class _$_PokedexSearchState extends _PokedexSearchState {
       runtimeType,
       isLoading,
       isRefreshed,
+      isDominantColorsRefreshed,
       message,
       const DeepCollectionEquality().hash(_queryResult),
       const DeepCollectionEquality().hash(_pokemonsList),
@@ -791,6 +1071,7 @@ abstract class _PokedexSearchState extends PokedexSearchState {
   const factory _PokedexSearchState(
       {required final bool isLoading,
       required final bool isRefreshed,
+      required final bool isDominantColorsRefreshed,
       required final String? message,
       required final List<PokemonListItemEntity> queryResult,
       required final List<PokemonListItemEntity> pokemonsList,
@@ -804,6 +1085,8 @@ abstract class _PokedexSearchState extends PokedexSearchState {
   bool get isLoading;
   @override
   bool get isRefreshed;
+  @override
+  bool get isDominantColorsRefreshed;
   @override
   String? get message;
   @override

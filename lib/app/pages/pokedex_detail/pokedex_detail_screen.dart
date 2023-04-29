@@ -12,7 +12,7 @@ import 'package:pokedex_f/app/widgets/collapse_app_bar_title_action.dart';
 import 'package:pokedex_f/app/widgets/collapse_mixin.dart';
 import 'package:pokedex_f/app/widgets/ui_helper.dart';
 import 'package:pokedex_f/domain/entities/pokemon_entity.dart';
-import 'package:pokedex_f/injection.dart';
+import 'package:pokedex_f/di/injection.dart';
 import 'package:sprintf/sprintf.dart';
 
 class PokedexDetailScreen extends StatefulWidget {
@@ -31,21 +31,20 @@ class PokedexDetailScreen extends StatefulWidget {
 class _PokedexDetailScreenState extends State<PokedexDetailScreen>
     with CollapseMixin {
   late final ScrollController _scrollController;
-  late final PokedexDetailBloc _pokedexDetailBloc;
+  PokedexDetailBloc get _pokedexDetailBloc =>
+      Injector.resolve<PokedexDetailBloc>();
   Color get _dominantColor => widget.dominantColor;
   String get _pokemonName => widget.pokemonName;
 
   @override
   void initState() {
     super.initState();
-    _pokedexDetailBloc = getIt<PokedexDetailBloc>();
     _scrollController = ScrollController();
     listenCollapse(controller: _scrollController);
   }
 
   @override
   void dispose() {
-    _pokedexDetailBloc.close();
     _scrollController.dispose();
     super.dispose();
   }
@@ -83,6 +82,16 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen>
             ],
           ),
         ),
+        action: !isAlreadyCaught
+            ? SnackBarAction(
+                label: 'Undo',
+                textColor: _dominantColor.darken(0.4),
+                onPressed: () {
+                  _pokedexDetailBloc
+                      .add(PokedexDetailEvent.recatchPokemon(pokemon));
+                },
+              )
+            : null,
         backgroundColor: theme.colorScheme.background,
         behavior: SnackBarBehavior.floating,
       ),

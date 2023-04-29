@@ -3,23 +3,24 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
+import 'dart:async' as _i8;
 
-import 'package:dartz/dartz.dart' as _i2;
+import 'package:dartz/dartz.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:pokedex_f/data/datasources/local/dao/pokemon_list_item_dao.dart'
-    as _i9;
-import 'package:pokedex_f/data/datasources/local/pokedex_local_datasource.dart'
     as _i11;
+import 'package:pokedex_f/data/datasources/local/pokedex_local_datasource.dart'
+    as _i3;
 import 'package:pokedex_f/data/datasources/remote/api/api_services.dart'
-    as _i10;
-import 'package:pokedex_f/data/datasources/remote/pokedex_remote_datasource.dart'
     as _i12;
-import 'package:pokedex_f/data/models/pokemon.dart' as _i4;
-import 'package:pokedex_f/data/models/pokemon_list.dart' as _i3;
-import 'package:pokedex_f/domain/entities/pokemon_entity.dart' as _i7;
-import 'package:pokedex_f/domain/entities/pokemon_list_item_entity.dart' as _i8;
-import 'package:pokedex_f/domain/repositories/pokedex_repository.dart' as _i5;
+import 'package:pokedex_f/data/datasources/remote/pokedex_remote_datasource.dart'
+    as _i2;
+import 'package:pokedex_f/data/models/pokemon.dart' as _i6;
+import 'package:pokedex_f/data/models/pokemon_list.dart' as _i5;
+import 'package:pokedex_f/data/repositories/pokedex_repository_impl.dart'
+    as _i7;
+import 'package:pokedex_f/domain/entities/pokemon_entity.dart' as _i10;
+import 'package:pokedex_f/domain/entities/pokemon_list_item_entity.dart' as _i9;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -32,8 +33,9 @@ import 'package:pokedex_f/domain/repositories/pokedex_repository.dart' as _i5;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
-  _FakeEither_0(
+class _FakePokedexRemoteDatasource_0 extends _i1.SmartFake
+    implements _i2.PokedexRemoteDatasource {
+  _FakePokedexRemoteDatasource_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -42,8 +44,9 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
         );
 }
 
-class _FakePokemonList_1 extends _i1.SmartFake implements _i3.PokemonList {
-  _FakePokemonList_1(
+class _FakePokedexLocalDatasource_1 extends _i1.SmartFake
+    implements _i3.PokedexLocalDatasource {
+  _FakePokedexLocalDatasource_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -52,8 +55,8 @@ class _FakePokemonList_1 extends _i1.SmartFake implements _i3.PokemonList {
         );
 }
 
-class _FakePokemon_2 extends _i1.SmartFake implements _i4.Pokemon {
-  _FakePokemon_2(
+class _FakeEither_2<L, R> extends _i1.SmartFake implements _i4.Either<L, R> {
+  _FakeEither_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -62,16 +65,70 @@ class _FakePokemon_2 extends _i1.SmartFake implements _i4.Pokemon {
         );
 }
 
-/// A class which mocks [PokedexRepository].
+class _FakePokemonList_3 extends _i1.SmartFake implements _i5.PokemonList {
+  _FakePokemonList_3(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakePokemon_4 extends _i1.SmartFake implements _i6.Pokemon {
+  _FakePokemon_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+/// A class which mocks [PokedexRepositoryImpl].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPokedexRepository extends _i1.Mock implements _i5.PokedexRepository {
-  MockPokedexRepository() {
+class MockPokedexRepositoryImpl extends _i1.Mock
+    implements _i7.PokedexRepositoryImpl {
+  MockPokedexRepositoryImpl() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i2.Either<String, _i3.PokemonList>> getAllPokemon(
+  _i2.PokedexRemoteDatasource get remoteDatasource => (super.noSuchMethod(
+        Invocation.getter(#remoteDatasource),
+        returnValue: _FakePokedexRemoteDatasource_0(
+          this,
+          Invocation.getter(#remoteDatasource),
+        ),
+      ) as _i2.PokedexRemoteDatasource);
+  @override
+  _i3.PokedexLocalDatasource get localDatasource => (super.noSuchMethod(
+        Invocation.getter(#localDatasource),
+        returnValue: _FakePokedexLocalDatasource_1(
+          this,
+          Invocation.getter(#localDatasource),
+        ),
+      ) as _i3.PokedexLocalDatasource);
+  @override
+  _i8.Future<_i4.Either<String, String>> catchPokemon(
+          _i9.PokemonListItemEntity? pokemon) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #catchPokemon,
+          [pokemon],
+        ),
+        returnValue: _i8.Future<_i4.Either<String, String>>.value(
+            _FakeEither_2<String, String>(
+          this,
+          Invocation.method(
+            #catchPokemon,
+            [pokemon],
+          ),
+        )),
+      ) as _i8.Future<_i4.Either<String, String>>);
+  @override
+  _i8.Future<_i4.Either<String, _i5.PokemonList>> getAllPokemon(
     int? limit,
     int? offset,
   ) =>
@@ -83,8 +140,8 @@ class MockPokedexRepository extends _i1.Mock implements _i5.PokedexRepository {
             offset,
           ],
         ),
-        returnValue: _i6.Future<_i2.Either<String, _i3.PokemonList>>.value(
-            _FakeEither_0<String, _i3.PokemonList>(
+        returnValue: _i8.Future<_i4.Either<String, _i5.PokemonList>>.value(
+            _FakeEither_2<String, _i5.PokemonList>(
           this,
           Invocation.method(
             #getAllPokemon,
@@ -94,36 +151,53 @@ class MockPokedexRepository extends _i1.Mock implements _i5.PokedexRepository {
             ],
           ),
         )),
-      ) as _i6.Future<_i2.Either<String, _i3.PokemonList>>);
+      ) as _i8.Future<_i4.Either<String, _i5.PokemonList>>);
   @override
-  _i6.Future<_i2.Either<String, _i7.PokemonEntity>> getPokemonByName(
+  _i8.Stream<List<_i9.PokemonListItemEntity>> getCapturedPokemon() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCapturedPokemon,
+          [],
+        ),
+        returnValue: _i8.Stream<List<_i9.PokemonListItemEntity>>.empty(),
+      ) as _i8.Stream<List<_i9.PokemonListItemEntity>>);
+  @override
+  _i8.Future<_i4.Either<String, _i10.PokemonEntity>> getPokemonByName(
           String? pokemonName) =>
       (super.noSuchMethod(
         Invocation.method(
           #getPokemonByName,
           [pokemonName],
         ),
-        returnValue: _i6.Future<_i2.Either<String, _i7.PokemonEntity>>.value(
-            _FakeEither_0<String, _i7.PokemonEntity>(
+        returnValue: _i8.Future<_i4.Either<String, _i10.PokemonEntity>>.value(
+            _FakeEither_2<String, _i10.PokemonEntity>(
           this,
           Invocation.method(
             #getPokemonByName,
             [pokemonName],
           ),
         )),
-      ) as _i6.Future<_i2.Either<String, _i7.PokemonEntity>>);
+      ) as _i8.Future<_i4.Either<String, _i10.PokemonEntity>>);
   @override
-  _i6.Stream<List<_i8.PokemonListItemEntity>> getCapturedPokemon() =>
+  _i8.Future<_i4.Either<String, String>> releasePokemon(
+          _i9.PokemonListItemEntity? pokemon) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getCapturedPokemon,
-          [],
+          #releasePokemon,
+          [pokemon],
         ),
-        returnValue: _i6.Stream<List<_i8.PokemonListItemEntity>>.empty(),
-      ) as _i6.Stream<List<_i8.PokemonListItemEntity>>);
+        returnValue: _i8.Future<_i4.Either<String, String>>.value(
+            _FakeEither_2<String, String>(
+          this,
+          Invocation.method(
+            #releasePokemon,
+            [pokemon],
+          ),
+        )),
+      ) as _i8.Future<_i4.Either<String, String>>);
   @override
-  _i6.Future<
-      _i2.Either<String, _i8.PokemonListItemEntity?>> getCapturedPokemonByName(
+  _i8.Future<
+      _i4.Either<String, _i9.PokemonListItemEntity?>> getCapturedPokemonByName(
           String? name) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -131,110 +205,76 @@ class MockPokedexRepository extends _i1.Mock implements _i5.PokedexRepository {
           [name],
         ),
         returnValue:
-            _i6.Future<_i2.Either<String, _i8.PokemonListItemEntity?>>.value(
-                _FakeEither_0<String, _i8.PokemonListItemEntity?>(
+            _i8.Future<_i4.Either<String, _i9.PokemonListItemEntity?>>.value(
+                _FakeEither_2<String, _i9.PokemonListItemEntity?>(
           this,
           Invocation.method(
             #getCapturedPokemonByName,
             [name],
           ),
         )),
-      ) as _i6.Future<_i2.Either<String, _i8.PokemonListItemEntity?>>);
-  @override
-  _i6.Future<_i2.Either<String, String>> catchPokemon(
-          _i8.PokemonListItemEntity? pokemon) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #catchPokemon,
-          [pokemon],
-        ),
-        returnValue: _i6.Future<_i2.Either<String, String>>.value(
-            _FakeEither_0<String, String>(
-          this,
-          Invocation.method(
-            #catchPokemon,
-            [pokemon],
-          ),
-        )),
-      ) as _i6.Future<_i2.Either<String, String>>);
-  @override
-  _i6.Future<_i2.Either<String, String>> releasePokemon(
-          _i8.PokemonListItemEntity? pokemon) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #releasePokemon,
-          [pokemon],
-        ),
-        returnValue: _i6.Future<_i2.Either<String, String>>.value(
-            _FakeEither_0<String, String>(
-          this,
-          Invocation.method(
-            #releasePokemon,
-            [pokemon],
-          ),
-        )),
-      ) as _i6.Future<_i2.Either<String, String>>);
+      ) as _i8.Future<_i4.Either<String, _i9.PokemonListItemEntity?>>);
 }
 
 /// A class which mocks [PokemonListItemDao].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPokemonListItemDao extends _i1.Mock
-    implements _i9.PokemonListItemDao {
+    implements _i11.PokemonListItemDao {
   MockPokemonListItemDao() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Stream<List<_i8.PokemonListItemEntity>> findAllPokemon() =>
+  _i8.Stream<List<_i9.PokemonListItemEntity>> findAllPokemon() =>
       (super.noSuchMethod(
         Invocation.method(
           #findAllPokemon,
           [],
         ),
-        returnValue: _i6.Stream<List<_i8.PokemonListItemEntity>>.empty(),
-      ) as _i6.Stream<List<_i8.PokemonListItemEntity>>);
+        returnValue: _i8.Stream<List<_i9.PokemonListItemEntity>>.empty(),
+      ) as _i8.Stream<List<_i9.PokemonListItemEntity>>);
   @override
-  _i6.Future<_i8.PokemonListItemEntity?> findPokemonByName(String? name) =>
+  _i8.Future<_i9.PokemonListItemEntity?> findPokemonByName(String? name) =>
       (super.noSuchMethod(
         Invocation.method(
           #findPokemonByName,
           [name],
         ),
-        returnValue: _i6.Future<_i8.PokemonListItemEntity?>.value(),
-      ) as _i6.Future<_i8.PokemonListItemEntity?>);
+        returnValue: _i8.Future<_i9.PokemonListItemEntity?>.value(),
+      ) as _i8.Future<_i9.PokemonListItemEntity?>);
   @override
-  _i6.Future<void> catchPokemon(_i8.PokemonListItemEntity? pokemon) =>
+  _i8.Future<void> catchPokemon(_i9.PokemonListItemEntity? pokemon) =>
       (super.noSuchMethod(
         Invocation.method(
           #catchPokemon,
           [pokemon],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
   @override
-  _i6.Future<void> releasePokemon(_i8.PokemonListItemEntity? pokemon) =>
+  _i8.Future<void> releasePokemon(_i9.PokemonListItemEntity? pokemon) =>
       (super.noSuchMethod(
         Invocation.method(
           #releasePokemon,
           [pokemon],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 }
 
 /// A class which mocks [ApiServices].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockApiServices extends _i1.Mock implements _i10.ApiServices {
+class MockApiServices extends _i1.Mock implements _i12.ApiServices {
   MockApiServices() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i3.PokemonList> getAllPokemon({
+  _i8.Future<_i5.PokemonList> getAllPokemon({
     int? limit = 20,
     int? offset = 20,
   }) =>
@@ -247,7 +287,7 @@ class MockApiServices extends _i1.Mock implements _i10.ApiServices {
             #offset: offset,
           },
         ),
-        returnValue: _i6.Future<_i3.PokemonList>.value(_FakePokemonList_1(
+        returnValue: _i8.Future<_i5.PokemonList>.value(_FakePokemonList_3(
           this,
           Invocation.method(
             #getAllPokemon,
@@ -258,16 +298,16 @@ class MockApiServices extends _i1.Mock implements _i10.ApiServices {
             },
           ),
         )),
-      ) as _i6.Future<_i3.PokemonList>);
+      ) as _i8.Future<_i5.PokemonList>);
   @override
-  _i6.Future<_i4.Pokemon> getPokemonByName({required String? pokemonName}) =>
+  _i8.Future<_i6.Pokemon> getPokemonByName({required String? pokemonName}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getPokemonByName,
           [],
           {#pokemonName: pokemonName},
         ),
-        returnValue: _i6.Future<_i4.Pokemon>.value(_FakePokemon_2(
+        returnValue: _i8.Future<_i6.Pokemon>.value(_FakePokemon_4(
           this,
           Invocation.method(
             #getPokemonByName,
@@ -275,73 +315,73 @@ class MockApiServices extends _i1.Mock implements _i10.ApiServices {
             {#pokemonName: pokemonName},
           ),
         )),
-      ) as _i6.Future<_i4.Pokemon>);
+      ) as _i8.Future<_i6.Pokemon>);
 }
 
 /// A class which mocks [PokedexLocalDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPokedexLocalDatasource extends _i1.Mock
-    implements _i11.PokedexLocalDatasource {
+    implements _i3.PokedexLocalDatasource {
   MockPokedexLocalDatasource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Stream<List<_i8.PokemonListItemEntity>> getCaughtPokemon() =>
+  _i8.Stream<List<_i9.PokemonListItemEntity>> getCaughtPokemon() =>
       (super.noSuchMethod(
         Invocation.method(
           #getCaughtPokemon,
           [],
         ),
-        returnValue: _i6.Stream<List<_i8.PokemonListItemEntity>>.empty(),
-      ) as _i6.Stream<List<_i8.PokemonListItemEntity>>);
+        returnValue: _i8.Stream<List<_i9.PokemonListItemEntity>>.empty(),
+      ) as _i8.Stream<List<_i9.PokemonListItemEntity>>);
   @override
-  _i6.Future<_i8.PokemonListItemEntity?> getCaughtPokemonByName(String? name) =>
+  _i8.Future<_i9.PokemonListItemEntity?> getCaughtPokemonByName(String? name) =>
       (super.noSuchMethod(
         Invocation.method(
           #getCaughtPokemonByName,
           [name],
         ),
-        returnValue: _i6.Future<_i8.PokemonListItemEntity?>.value(),
-      ) as _i6.Future<_i8.PokemonListItemEntity?>);
+        returnValue: _i8.Future<_i9.PokemonListItemEntity?>.value(),
+      ) as _i8.Future<_i9.PokemonListItemEntity?>);
   @override
-  _i6.Future<void> catchPokemon(
-          {required _i8.PokemonListItemEntity? pokemon}) =>
+  _i8.Future<void> catchPokemon(
+          {required _i9.PokemonListItemEntity? pokemon}) =>
       (super.noSuchMethod(
         Invocation.method(
           #catchPokemon,
           [],
           {#pokemon: pokemon},
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
   @override
-  _i6.Future<void> releasePokemon(
-          {required _i8.PokemonListItemEntity? pokemon}) =>
+  _i8.Future<void> releasePokemon(
+          {required _i9.PokemonListItemEntity? pokemon}) =>
       (super.noSuchMethod(
         Invocation.method(
           #releasePokemon,
           [],
           {#pokemon: pokemon},
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 }
 
 /// A class which mocks [PokedexRemoteDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPokedexRemoteDatasource extends _i1.Mock
-    implements _i12.PokedexRemoteDatasource {
+    implements _i2.PokedexRemoteDatasource {
   MockPokedexRemoteDatasource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i3.PokemonList> getAllPokemon({
+  _i8.Future<_i5.PokemonList> getAllPokemon({
     int? limit = 20,
     int? offset = 20,
   }) =>
@@ -354,7 +394,7 @@ class MockPokedexRemoteDatasource extends _i1.Mock
             #offset: offset,
           },
         ),
-        returnValue: _i6.Future<_i3.PokemonList>.value(_FakePokemonList_1(
+        returnValue: _i8.Future<_i5.PokemonList>.value(_FakePokemonList_3(
           this,
           Invocation.method(
             #getAllPokemon,
@@ -365,16 +405,16 @@ class MockPokedexRemoteDatasource extends _i1.Mock
             },
           ),
         )),
-      ) as _i6.Future<_i3.PokemonList>);
+      ) as _i8.Future<_i5.PokemonList>);
   @override
-  _i6.Future<_i4.Pokemon> getPokemonByName({required String? pokemonName}) =>
+  _i8.Future<_i6.Pokemon> getPokemonByName({required String? pokemonName}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getPokemonByName,
           [],
           {#pokemonName: pokemonName},
         ),
-        returnValue: _i6.Future<_i4.Pokemon>.value(_FakePokemon_2(
+        returnValue: _i8.Future<_i6.Pokemon>.value(_FakePokemon_4(
           this,
           Invocation.method(
             #getPokemonByName,
@@ -382,5 +422,5 @@ class MockPokedexRemoteDatasource extends _i1.Mock
             {#pokemonName: pokemonName},
           ),
         )),
-      ) as _i6.Future<_i4.Pokemon>);
+      ) as _i8.Future<_i6.Pokemon>);
 }
