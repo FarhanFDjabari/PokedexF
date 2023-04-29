@@ -1,9 +1,7 @@
-import 'package:injectable/injectable.dart';
 import 'package:pokedex_f/data/datasources/remote/api/api_services.dart';
 import 'package:pokedex_f/data/models/pokemon.dart';
 import 'package:pokedex_f/data/models/pokemon_list.dart';
 
-@lazySingleton
 class PokedexRemoteDatasource {
   final ApiServices _api;
 

@@ -30,7 +30,7 @@ class PokemonEntity extends Equatable {
   final List<Type>? types;
   final double? weight;
 
-  const PokemonEntity(
+  const PokemonEntity({
     this.abilities,
     this.baseExperience,
     this.forms,
@@ -49,7 +49,7 @@ class PokemonEntity extends Equatable {
     this.stats,
     this.types,
     this.weight,
-  );
+  });
 
   PokemonListItemEntity toItemListEntity() {
     return PokemonListItemEntity(

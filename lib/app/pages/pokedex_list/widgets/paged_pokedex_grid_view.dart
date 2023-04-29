@@ -5,6 +5,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:pokedex_f/app/pages/pokedex_detail/pokedex_detail_screen.dart';
 import 'package:pokedex_f/app/pages/pokedex_list/bloc/pokedex_list_bloc.dart';
 import 'package:pokedex_f/app/pages/pokedex_list/widgets/pokedex_item.dart';
+import 'package:pokedex_f/app/utils/color_mapper.dart';
 import 'package:pokedex_f/app/widgets/exception_indicator.dart';
 import 'package:pokedex_f/app/widgets/ui_helper.dart';
 import 'package:pokedex_f/domain/entities/pokemon_list_item_entity.dart';
@@ -30,7 +31,7 @@ class PagePokedexGridView extends StatefulWidget {
 }
 
 class _PagePokedexGridViewState extends State<PagePokedexGridView> {
-  PokedexListBloc get _pokedexListBloc => widget.pokedexListBloc;
+  late final PokedexListBloc _pokedexListBloc;
   Color get _defaultColor => widget.defaultColor;
   Color get _backgroundColor => widget.backgroundColor;
   TextStyle? get _buttonTextStyle => widget.buttonTextStyle;
@@ -45,6 +46,7 @@ class _PagePokedexGridViewState extends State<PagePokedexGridView> {
   @override
   void initState() {
     super.initState();
+    _pokedexListBloc = widget.pokedexListBloc;
     _pagingController.addPageRequestListener((pageKey) {
       _getNextPage(pageKey);
     });
@@ -66,10 +68,11 @@ class _PagePokedexGridViewState extends State<PagePokedexGridView> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<PokedexListBloc, PokedexListState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (!state.isLoading &&
             state.isRefreshed &&
-            state.isDominantColorsRefreshed) {
+            state.isDominantColorsRefreshed &&
+            !state.goToSearch) {
           _dominantColors.addAll(state.dominantColors);
           if (state.isLastPage) {
             _pagingController.appendLastPage(state.pokemons);
@@ -77,10 +80,15 @@ class _PagePokedexGridViewState extends State<PagePokedexGridView> {
             final nextPageKey = state.currentPage + 1;
             _pagingController.appendPage(state.pokemons, nextPageKey);
           }
-        } else if (state.isRefreshed && !state.isDominantColorsRefreshed) {
+        } else if (state.isRefreshed &&
+            !state.isDominantColorsRefreshed &&
+            !state.goToSearch) {
+          final colors = await ColorMapper.getDominantColors(
+            state.pokemons.map((e) => e.spriteUrl).toList(),
+          );
           _pokedexListBloc.add(PokedexListEvent.getDominantColors(
             state.pokemons,
-            state.dominantColors,
+            colors,
           ));
         } else if (state.message != null) {
           _pagingController.error = state.message;

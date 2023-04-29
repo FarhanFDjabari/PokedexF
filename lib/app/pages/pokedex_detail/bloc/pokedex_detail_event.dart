@@ -7,6 +7,8 @@ class PokedexDetailEvent with _$PokedexDetailEvent {
       _PokedexDetailEventGetPokemon;
   const factory PokedexDetailEvent.catchPokemon(PokemonEntity? pokemon) =
       _PokedexDetailEventCatchPokemon;
+  const factory PokedexDetailEvent.recatchPokemon(PokemonEntity? pokemon) =
+      _PokedexDetailEventRecatchPokemon;
   const factory PokedexDetailEvent.releasePokemon(PokemonEntity? pokemon) =
       _PokedexDetailEventReleasePokemon;
 }

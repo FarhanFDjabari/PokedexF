@@ -6,6 +6,7 @@ class PokedexSearchState with _$PokedexSearchState {
   const factory PokedexSearchState({
     required bool isLoading,
     required bool isRefreshed,
+    required bool isDominantColorsRefreshed,
     required String? message,
     required List<PokemonListItemEntity> queryResult,
     required List<PokemonListItemEntity> pokemonsList,
@@ -18,6 +19,7 @@ class PokedexSearchState with _$PokedexSearchState {
   factory PokedexSearchState.initial() => const PokedexSearchState(
         isLoading: true,
         isRefreshed: false,
+        isDominantColorsRefreshed: false,
         goToDetail: false,
         message: null,
         pokemonName: null,
